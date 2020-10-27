@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>compress and tar commands - 夏日竹下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content=".tar (僅打包，無壓縮)套件名稱：tar。打包：[ jonny@linux ~ ]$ tar cvf FileName.tar DirName解包：[ jonny@linux ~ ]$ tar xvf FileName.tar
+.gz套件名稱：gzip。壓縮[ jonny@linux ~ ]$ gzip FileName解壓縮 1：[ jonny@linux ~ ]$ gunzip FileN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="compress and tar commands">
+<meta property="og:url" content="http://zhengda.github.io/2017/07/07/compress-and-tar-commands/index.html">
+<meta property="og:site_name" content="夏日竹下">
+<meta property="og:description" content=".tar (僅打包，無壓縮)套件名稱：tar。打包：[ jonny@linux ~ ]$ tar cvf FileName.tar DirName解包：[ jonny@linux ~ ]$ tar xvf FileName.tar
+.gz套件名稱：gzip。壓縮[ jonny@linux ~ ]$ gzip FileName解壓縮 1：[ jonny@linux ~ ]$ gunzip FileN">
+<meta property="og:updated_time" content="2017-07-07T10:40:54.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="compress and tar commands">
+<meta name="twitter:description" content=".tar (僅打包，無壓縮)套件名稱：tar。打包：[ jonny@linux ~ ]$ tar cvf FileName.tar DirName解包：[ jonny@linux ~ ]$ tar xvf FileName.tar
+.gz套件名稱：gzip。壓縮[ jonny@linux ~ ]$ gzip FileName解壓縮 1：[ jonny@linux ~ ]$ gunzip FileN">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-663898-12', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhengda.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-compress-and-tar-commands" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      compress and tar commands
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/07/07/compress-and-tar-commands/" class="article-date">
+  <time datetime="2017-07-07T10:40:09.000Z" itemprop="datePublished">2017-07-07</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="-tar_(僅打包，無壓縮)">.tar (僅打包，無壓縮)</h3><p>套件名稱：tar。<br>打包：<br>[ jonny@linux ~ ]<br>$ tar cvf FileName.tar DirName<br>解包：<br>[ jonny@linux ~ ]<br>$ tar xvf FileName.tar</p>
+<h3 id="-gz">.gz</h3><p>套件名稱：gzip。<br>壓縮<br>[ jonny@linux ~ ]<br>$ gzip FileName<br>解壓縮 1：<br>[ jonny@linux ~ ]<br>$ gunzip FileName.gz<br>解壓縮 2：<br>[ jonny@linux ~ ]<br>$ gzip -d FileName.gz</p>
+<h3 id="-tar-gz">.tar.gz</h3><p>套件名稱：gzip。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ tar zcvf FileName.tar.gz DirName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar zxvf FileName.tar.gz</p>
+<p>bz<br>壓縮：unkown。<br>解壓縮 1：<br>[ jonny@linux ~ ]<br>$ bzip2 -d FileName.bz<br>解壓縮 2：<br>[ jonny@linux ~ ]<br>$ bunzip2 FileName.bz</p>
+<h3 id="-tar-bz">.tar.bz</h3><p>壓縮：unkown。<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar jxvf FileName.tar.bz</p>
+<h3 id="-bz2">.bz2</h3><p>套件名稱：bzip2。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ bzip2 -z FileName<br>解壓縮 1：<br>[ jonny@linux ~ ]<br>$ bzip2 -d FileName.bz2<br>解壓縮 2：<br>[ jonny@linux ~ ]<br>$ bunzip2 FileName.bz2</p>
+<h3 id="-tar-bz2">.tar.bz2</h3><p>套件名稱：bzip2。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ tar jcvf FileName.tar.bz2 DirName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar jxvf FileName.tar.bz2</p>
+<h3 id="-xz">.xz</h3><p>套件名稱：xz-utils。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ xz -z FileName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ xz -d FileName.xz</p>
+<h3 id="-tar-xz">.tar.xz</h3><p>套件名稱：xz-utils。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ tar Jcvf FileName.tar.xz DirName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar Jxvf FileName.tar.xz</p>
+<h3 id="-Z">.Z</h3><p>壓縮：compress FileName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ uncompress FileName.Z</p>
+<h3 id="-tar-Z">.tar.Z</h3><p>壓縮：<br>[ jonny@linux ~ ]<br>$ tar Zcvf FileName.tar.Z DirName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar Zxvf FileName.tar.Z</p>
+<h3 id="-tgz">.tgz</h3><p>套件名稱：gzip。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ tar zcvf FileName.tgz FileName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar zxvf FileName.tgz</p>
+<h3 id="-tar-tgz">.tar.tgz</h3><p>套件名稱：gzip。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ tar zcvf FileName.tar.tgz FileName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar zxvf FileName.tar.tgz</p>
+<h3 id="-7z">.7z</h3><p>套件名稱：p7zip-full。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ 7z a FileName.7z FileName<br>使用密碼 (PASSWORD) 壓縮：<br>[ jonny@linux ~ ]<br>$ 7z a FileName.7z FileName -pPASSWORD<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ 7z x FileName.7z</p>
+<h3 id="-zip">.zip</h3><p>套件名稱：zip。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ zip FileName.zip DirName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ unzip FileName.zip</p>
+<h3 id="-rar">.rar</h3><p>套件名稱：rar, unrar。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ rar a FileName.rar DirName<br>解壓縮 1：<br>[ jonny@linux ~ ]<br>$ rar e FileName.rar<br>解壓縮 2：<br>[ jonny@linux ~ ]<br>$ unrar e FileName.rar<br>解壓縮 3：在指定目錄內解壓縮。<br>[ jonny@linux ~ ]<br>$ rar x FileName.rar DirName</p>
+<h3 id="-lha">.lha</h3><p>套件名稱：lha。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ lha -a FileName.lha FileName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ lha -e FileName.lha</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/07/maven3-and-sbt0-13-on-ubuntu/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          maven3 and sbt0.13 on ubuntu
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/07/install-eclipse-on-ubuntu/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">install eclipse on ubuntu&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhengda
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

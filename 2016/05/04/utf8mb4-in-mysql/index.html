@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>utf8mb4 in mysql - 夏日竹下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱在爬一些比較潮的網頁時難免會抓到emoji字元。這在寫入mysql時會發生問題，因為mysql預設是使用utf8，必須改成utf8mb4才能避免寫入emoji時的錯誤。1java.sql.SQLException: Incorrect string value: &apos;\xF0\x9F\x91\xBD\xF0\x9F…
+mysql.ini12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="utf8mb4 in mysql">
+<meta property="og:url" content="http://zhengda.github.io/2016/05/04/utf8mb4-in-mysql/index.html">
+<meta property="og:site_name" content="夏日竹下">
+<meta property="og:description" content="🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱在爬一些比較潮的網頁時難免會抓到emoji字元。這在寫入mysql時會發生問題，因為mysql預設是使用utf8，必須改成utf8mb4才能避免寫入emoji時的錯誤。1java.sql.SQLException: Incorrect string value: &apos;\xF0\x9F\x91\xBD\xF0\x9F…
+mysql.ini12">
+<meta property="og:updated_time" content="2016-05-04T15:51:21.797Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="utf8mb4 in mysql">
+<meta name="twitter:description" content="🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱在爬一些比較潮的網頁時難免會抓到emoji字元。這在寫入mysql時會發生問題，因為mysql預設是使用utf8，必須改成utf8mb4才能避免寫入emoji時的錯誤。1java.sql.SQLException: Incorrect string value: &apos;\xF0\x9F\x91\xBD\xF0\x9F…
+mysql.ini12">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-663898-12', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhengda.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-utf8mb4-in-mysql" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      utf8mb4 in mysql
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/04/utf8mb4-in-mysql/" class="article-date">
+  <time datetime="2016-05-04T15:13:31.000Z" itemprop="datePublished">2016-05-04</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱">🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱</h3><p>在爬一些比較潮的網頁時難免會抓到emoji字元。<br>這在寫入mysql時會發生問題，因為mysql預設是使用utf8，必須改成utf8mb4才能避免寫入emoji時的錯誤。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.sql.SQLException: Incorrect string value: <span class="string">'\xF0\x9F\x91\xBD\xF0\x9F…</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="mysql-ini">mysql.ini</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[client]</span></span><br><span class="line"><span class="setting">default-character-set=<span class="value">utf8mb4</span></span></span><br><span class="line"></span><br><span class="line"><span class="title">[mysql]</span></span><br><span class="line"><span class="setting">default-character-set=<span class="value">utf8mb4</span></span></span><br><span class="line"></span><br><span class="line"><span class="title">[mysqld]</span></span><br><span class="line"><span class="setting">character-set-client-handshake=<span class="value"><span class="keyword">FALSE</span></span></span></span><br><span class="line"><span class="setting">character-set-server=<span class="value">utf8mb4</span></span></span><br><span class="line"><span class="setting">collation-server=<span class="value">utf8mb4_unicode_ci</span></span></span><br><span class="line"><span class="setting">init_connect=<span class="value">'SET NAMES utf8mb4'</span></span></span><br></pre></td></tr></table></figure>
+<p>restart mysql後，沒意外可以看到相關的character-set都變成utf8mb4<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select version();</span><br><span class="line">+------------+</span><br><span class="line">| version()  |</span><br><span class="line">+------------+</span><br><span class="line">| 5.6.19-log |</span><br><span class="line">+------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; show variables where variable_name like 'character%' or variable_name like 'collation%';</span><br><span class="line">+--------------------------+---------------------------------------------------------+</span><br><span class="line">| Variable_name            | Value                                                   |</span><br><span class="line">+--------------------------+---------------------------------------------------------+</span><br><span class="line">| character_set_client     | utf8mb4                                                 |</span><br><span class="line">| character_set_connection | utf8mb4                                                 |</span><br><span class="line">| character_set_database   | utf8                                                    |</span><br><span class="line">| character_set_filesystem | binary                                                  |</span><br><span class="line">| character_set_results    | utf8mb4                                                 |</span><br><span class="line">| character_set_server     | utf8mb4                                                 |</span><br><span class="line">| character_set_system     | utf8                                                    |</span><br><span class="line">| character_sets_dir       | C:\Program Files\MySQL\MySQL Server 5.6\share\charsets\ |</span><br><span class="line">| collation_connection     | utf8mb4_unicode_ci                                      |</span><br><span class="line">| collation_database       | utf8_general_ci                                         |</span><br><span class="line">| collation_server         | utf8mb4_unicode_ci                                      |</span><br><span class="line">+--------------------------+---------------------------------------------------------+</span><br><span class="line">11 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<h4 id="database/table_schema">database/table schema</h4><p>舊的schema可以繼續保持CHARACTER SET=utf8，而針對需要寫入emoji的庫/表/欄alter成CHARACTER SET=utf8mb4。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> database_name <span class="built_in">CHARACTER</span> <span class="keyword">SET</span>=utf8mb4 <span class="keyword">COLLATE</span>=utf8mb4_unicode_ci;</span></span><br><span class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">CONVERT</span> <span class="keyword">TO</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_unicode_ci;</span></span><br><span class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">CHANGE</span> column_name <span class="built_in">VARCHAR</span>(<span class="number">191</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_unicode_ci;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="java_JDBC_connector">java JDBC connector</h4><ol>
+<li>使用mysql提供的JDBC driver，要確保mysql connector的版本高於5.1.13才支援utf8mb4。</li>
+<li>以往在jdbc.uri裡加入的characterEncoding=utf8，<strong>一定要去除</strong>。<strong>※重要※</strong></li>
+</ol>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/05/git-puttykeyfile-兩三事/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          git puttykeyfile 兩三事
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/28/mockup/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mockup&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhengda
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Archlinux Installation - 夏日竹下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="preparation開VM指定archlinux installation DVD disk12345678cgdisk /dev/sda	primary /dev/sda1 bootable 83 linux	primary /dev/sda2   82 swapmkswap /dev/sda2mkfs.ext4 /dev/sda1mount /dev/sda1 /mntnano /etc/p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Archlinux Installation">
+<meta property="og:url" content="http://zhengda.github.io/2015/05/29/Archlinux-Installation/index.html">
+<meta property="og:site_name" content="夏日竹下">
+<meta property="og:description" content="preparation開VM指定archlinux installation DVD disk12345678cgdisk /dev/sda	primary /dev/sda1 bootable 83 linux	primary /dev/sda2   82 swapmkswap /dev/sda2mkfs.ext4 /dev/sda1mount /dev/sda1 /mntnano /etc/p">
+<meta property="og:updated_time" content="2015-10-15T22:41:25.532Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Archlinux Installation">
+<meta name="twitter:description" content="preparation開VM指定archlinux installation DVD disk12345678cgdisk /dev/sda	primary /dev/sda1 bootable 83 linux	primary /dev/sda2   82 swapmkswap /dev/sda2mkfs.ext4 /dev/sda1mount /dev/sda1 /mntnano /etc/p">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-663898-12', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhengda.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-Archlinux-Installation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Archlinux Installation
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2015/05/29/Archlinux-Installation/" class="article-date">
+  <time datetime="2015-05-28T20:03:45.000Z" itemprop="datePublished">2015-05-29</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="preparation">preparation</h2><p>開VM<br>指定archlinux installation DVD disk<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cgdisk /dev/sda</span><br><span class="line">	primary /dev/sda1 bootable <span class="number">83</span> linux</span><br><span class="line">	primary /dev/sda2   <span class="number">82</span> swap</span><br><span class="line">mkswap /dev/sda2</span><br><span class="line">mkfs.ext4 /dev/sda1</span><br><span class="line">mount /dev/sda1 /mnt</span><br><span class="line">nano /etc/pacman.d/mirrorlit</span><br><span class="line">	最前加上 Server=http://archlinux.cs.nctu.edu.tw/<span class="variable">$repo</span>/os/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="installation">installation</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~~pacstrap /mnt base base-devel brub~~</span><br><span class="line">pacstrap /mnt base</span><br><span class="line">genfstab -p -U /mnt &gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+<h2 id="setup">setup</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"archserver"</span> &gt; /etc/hostname</span><br><span class="line">ln <span class="operator">-s</span> /usr/share/zoneinfo/Asia/Taipei /etc/localtime</span><br></pre></td></tr></table></figure>
+<h2 id="lang">lang</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/locale.gen</span><br><span class="line">	en_us.UTF-<span class="number">8</span> UTF-<span class="number">8</span></span><br><span class="line">	zh_TW.UTF-<span class="number">8</span> UTF-<span class="number">8</span></span><br><span class="line">	zh_CN.UTF-<span class="number">8</span> UTF-<span class="number">8</span> </span><br><span class="line">vi /etc/locale.conf</span><br><span class="line">	LANG=<span class="string">"en_us.UTF-8</span></span><br></pre></td></tr></table></figure>
+<h2 id="make_boot_image">make boot image</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkinitcpio -p linux</span><br></pre></td></tr></table></figure>
+<h2 id="setup_brub">setup brub</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub-bios</span><br><span class="line">modprobe dm-mod</span><br><span class="line">grub -install --recheck /dev/sda</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<h2 id="setup-1">setup</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+<h2 id="finalize_&amp;_reboot">finalize &amp; reboot</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br><span class="line">umount -R /mnt</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<h2 id="after_reboot_check_swap">after reboot check swap</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/swaps</span><br><span class="line">~~swapoff <span class="operator">-a</span>; swapon /dev/sda2~~</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"/dev/sda2 none swap default 0 0"</span> &gt;&gt; /etc/fstab</span><br></pre></td></tr></table></figure>
+<h2 id="install_X11">install X11</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pacman -S xorg-twm xorg-xclock xterm</span><br><span class="line">~~xinit~~</span><br><span class="line">startx</span><br></pre></td></tr></table></figure>
+<h2 id="install_KDE">install KDE</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~~pacman -S kde~~</span><br><span class="line"><span class="comment">#pacman -S kde-meta-* 要查一下</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/29/Git-Installation-Usage/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Git Installation &amp; Usage
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/29/Hexo-Installation-Usage/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hexo Installation &amp; Usage&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhengda
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

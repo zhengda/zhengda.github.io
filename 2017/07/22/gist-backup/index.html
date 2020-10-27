@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>gist backup - 夏日竹下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="github官方並沒有提供gist的備份方式，不過提供了功能充份的API，目前已經到了v3。https://developer.github.com/v3/guides/getting-started/https://developer.github.com/v3/auth/
+backup public gists這裡使用v1版的API即可，v1當時也沒有功能能備份private gists。但也">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gist backup">
+<meta property="og:url" content="http://zhengda.github.io/2017/07/22/gist-backup/index.html">
+<meta property="og:site_name" content="夏日竹下">
+<meta property="og:description" content="github官方並沒有提供gist的備份方式，不過提供了功能充份的API，目前已經到了v3。https://developer.github.com/v3/guides/getting-started/https://developer.github.com/v3/auth/
+backup public gists這裡使用v1版的API即可，v1當時也沒有功能能備份private gists。但也">
+<meta property="og:image" content="http://zhengda.github.io/img/2017-07-22_200323.png">
+<meta property="og:image" content="http://zhengda.github.io/img/2017-07-22_200408.png">
+<meta property="og:updated_time" content="2017-07-22T12:33:00.606Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gist backup">
+<meta name="twitter:description" content="github官方並沒有提供gist的備份方式，不過提供了功能充份的API，目前已經到了v3。https://developer.github.com/v3/guides/getting-started/https://developer.github.com/v3/auth/
+backup public gists這裡使用v1版的API即可，v1當時也沒有功能能備份private gists。但也">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-663898-12', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhengda.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-gist-backup" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gist backup
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/07/22/gist-backup/" class="article-date">
+  <time datetime="2017-07-22T11:43:45.000Z" itemprop="datePublished">2017-07-22</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>github官方並沒有提供gist的備份方式，不過提供了功能充份的API，目前已經到了v3。<br><a href="https://developer.github.com/v3/guides/getting-started/" target="_blank" rel="external">https://developer.github.com/v3/guides/getting-started/</a><br><a href="https://developer.github.com/v3/auth/" target="_blank" rel="external">https://developer.github.com/v3/auth/</a></p>
+<h2 id="backup_public_gists">backup public gists</h2><p>這裡使用v1版的API即可，v1當時也沒有功能能備份private gists。<br>但也就是說你只要知道github帳號就可以備份任意人的public gists。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># @see https://stackoverflow.com/questions/6724490/pull-all-gists-from-github</span></span><br><span class="line"><span class="comment"># Clone or update all a user's gists</span></span><br><span class="line"><span class="comment"># curl -ks https://gist.githubusercontent.com/fedir/5466075/raw/gist-backup.py | USER=fedir python</span></span><br><span class="line"><span class="comment"># USER=fedir python gist-backup.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> call</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">USER = os.environ[<span class="string">'USER'</span>]</span><br><span class="line"></span><br><span class="line">perpage=<span class="number">30.0</span></span><br><span class="line">userurl = urlopen(<span class="string">'https://api.github.com/users/'</span> + USER)</span><br><span class="line">public_gists = json.load(userurl)</span><br><span class="line">gistcount = public_gists[<span class="string">'public_gists'</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Found gists : "</span> + str(gistcount)</span><br><span class="line">pages = int(math.ceil(float(gistcount)/perpage))</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Found pages : "</span> + str(pages)</span><br><span class="line"></span><br><span class="line">f=open(<span class="string">'./contents.txt'</span>, <span class="string">'w+'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> page <span class="keyword">in</span> range(pages):</span><br><span class="line">	pageNumber = str(page + <span class="number">1</span>)</span><br><span class="line">	<span class="keyword">print</span> <span class="string">"Processing page number "</span> + pageNumber</span><br><span class="line">	pageUrl = <span class="string">'https://api.github.com/users/'</span> + USER  + <span class="string">'/gists?page='</span> + pageNumber + <span class="string">'&amp;per_page='</span> + str(int(perpage))</span><br><span class="line">	u = urlopen (pageUrl)</span><br><span class="line">	gists = json.load(u)</span><br><span class="line">	startd = os.getcwd()</span><br><span class="line">	<span class="keyword">for</span> gist <span class="keyword">in</span> gists:</span><br><span class="line">		gistd = gist[<span class="string">'id'</span>]</span><br><span class="line">		gistUrl = <span class="string">'git://gist.github.com/'</span> + gistd + <span class="string">'.git'</span>	</span><br><span class="line">		<span class="keyword">if</span> os.path.isdir(gistd):</span><br><span class="line">			os.chdir(gistd)</span><br><span class="line">			call([<span class="string">'git'</span>, <span class="string">'pull'</span>, gistUrl])</span><br><span class="line">			os.chdir(startd)</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			call([<span class="string">'git'</span>, <span class="string">'clone'</span>, gistUrl])</span><br><span class="line">		<span class="keyword">if</span> gist[<span class="string">'description'</span>] == <span class="keyword">None</span>:</span><br><span class="line">			description = <span class="string">''</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			description = gist[<span class="string">'description'</span>].encode(<span class="string">'utf8'</span>).replace(<span class="string">"\r"</span>,<span class="string">' '</span>).replace(<span class="string">"\n"</span>,<span class="string">' '</span>)</span><br><span class="line">		<span class="keyword">print</span> &gt;&gt; f, gist[<span class="string">'id'</span>], gistUrl, description</span><br></pre></td></tr></table></figure>
+<h2 id="backup_private_and_public_gists">backup private and public gists</h2><p>在備份個人gist資料時，當然是希望pirvate和public都可以一起備份。這個就比較複雜點，必需要使用v3的API走過OAuth來取得授權TOKEN。</p>
+<p><a href="https://github.com/aprescott/gist-backup/blob/master/gist-backup" target="_blank" rel="external">https://github.com/aprescott/gist-backup/blob/master/gist-backup</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/usr/bin/env bash</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># gist-backup</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Backs up all your public and private gists</span></span><br><span class="line"><span class="comment"># to the given directory.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Example:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   gist-backup ~/gist-backups</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># In addition to your own gists you can also backup your starred gists</span></span><br><span class="line"><span class="comment"># or (public) gists of a defined user by putting the gists url in an </span></span><br><span class="line"><span class="comment"># environment variable.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Example:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   GIST_URL=https://api.github.com/gists/starred gist-backup ~/gist-backups/starred</span></span><br><span class="line"><span class="comment">#   GIST_URL=https://api.github.com/users/aprescott/gists gist-backup ~/gist-backups/aprescott</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line">token=$(git config --get github.gist.oauth.token)</span><br><span class="line">url=<span class="variable">$&#123;GIST_URL:-https://api.github.com/gists&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">usage</span></span>() &#123;</span><br><span class="line">cat &lt;&lt;END_USAGE</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"></span><br><span class="line">  gist-backup DIRECTORY</span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line"></span><br><span class="line">  gist-backup ~/gist-backups</span><br><span class="line"></span><br><span class="line">END_USAGE</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="variable">$token</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"></span><br><span class="line">cat &lt;&lt;END_USAGE_NOTE</span><br><span class="line">NOTE:</span><br><span class="line"></span><br><span class="line">  In order <span class="keyword">for</span> this to work, you<span class="string">'re going to need</span><br><span class="line">  an OAuth token set in your git config under</span><br><span class="line">  </span><br><span class="line">    github.gist.oauth.token</span><br><span class="line">  </span><br><span class="line">  This is because the API token for your account</span><br><span class="line">  cannot be used as authentication/authorization</span><br><span class="line">  in version 3 of GitHub'</span>s API.</span><br><span class="line"></span><br><span class="line">END_USAGE_NOTE</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="variable">$token</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"No OAuth token found in github.gist.oauth.token git config."</span></span><br><span class="line">  <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># if no backup directory has been given</span></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$1</span>"</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"No backup directory given."</span></span><br><span class="line">  usage</span><br><span class="line">  <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># if the given directory doesn't exist, create it</span></span><br><span class="line"><span class="keyword">if</span> [ ! <span class="operator">-e</span> <span class="string">"<span class="variable">$1</span>"</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">  mkdir -p <span class="variable">$1</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># go into the given backup directory</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># if we failed to cd for some reason, abort</span></span><br><span class="line"><span class="keyword">if</span> [ $? <span class="operator">-gt</span> <span class="number">0</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">  <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Take's a git remote URI and clones it into</span></span><br><span class="line"><span class="comment"># the backup directory. If that directory</span></span><br><span class="line"><span class="comment"># exists already, cd's into it and does a</span></span><br><span class="line"><span class="comment"># git pull.</span></span><br><span class="line"><span class="function"><span class="title">backup</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Backing up <span class="variable">$1</span>"</span></span><br><span class="line">  <span class="built_in">local</span> dir=$(<span class="built_in">echo</span> <span class="string">"<span class="variable">$1</span>"</span> | cut <span class="operator">-d</span> / <span class="operator">-f</span> <span class="number">4</span> | cut <span class="operator">-d</span> . <span class="operator">-f</span> <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [ <span class="operator">-e</span> <span class="variable">$dir</span> ]</span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"  Already cloned at <span class="variable">$PWD</span>/<span class="variable">$dir</span>. Pulling."</span></span><br><span class="line">    <span class="built_in">cd</span> <span class="variable">$dir</span></span><br><span class="line">    git pull -q</span><br><span class="line">    <span class="built_in">cd</span> <span class="variable">$OLDPWD</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    git <span class="built_in">clone</span> -q <span class="variable">$1</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">page=<span class="number">1</span></span><br><span class="line">retries=<span class="number">0</span></span><br><span class="line">MAX_RETRIES=<span class="number">5</span></span><br><span class="line"><span class="keyword">while</span> [ <span class="variable">$retries</span> <span class="operator">-lt</span> <span class="variable">$MAX_RETRIES</span> ]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Requesting Gist page: <span class="variable">$page</span> from <span class="variable">$url</span>"</span></span><br><span class="line"></span><br><span class="line">  gists=$(</span><br><span class="line">  curl <span class="operator">-s</span> -H <span class="string">"Authorization: token <span class="variable">$token</span>"</span> <span class="operator">-d</span> <span class="string">"page=<span class="variable">$page</span>"</span> -G <span class="variable">$url</span> |</span><br><span class="line">  sed -n <span class="string">'s/.*git_pull_url": "\(.*\)",/\1/p'</span></span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$gists</span>"</span> ]</span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"No gists found on this page. Trying again."</span></span><br><span class="line">    retries=$(( retries + <span class="number">1</span> ))</span><br><span class="line">    <span class="built_in">continue</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> gist <span class="keyword">in</span> <span class="variable">$gists</span></span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">    backup <span class="variable">$gist</span></span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  page=$(( page + <span class="number">1</span> ))</span><br><span class="line">  retries=<span class="number">0</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"No gists found (anymore). Not trying again."</span></span><br><span class="line"><span class="built_in">exit</span> <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p>script部份使用aprescott寫的gist-backup，但在之前要先得到Token塞到git設定裡。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ curl -u github-user-name:github-password \</span><br><span class="line">  -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  -X POST \</span><br><span class="line">  <span class="operator">-d</span> <span class="string">'&#123;"scopes":["gist"], "note": "gist backup"&#125;'</span> \</span><br><span class="line">  https://api.github.com/authorizations</span><br></pre></td></tr></table></figure></p>
+<h3 id="OTP">OTP</h3><p>如果你的github帳號有設定較安全的2FA，這時光靠username和password是不夠的，github會要你再提供2FA的OTP。<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">message</span>": <span class="value"><span class="string">"Must specify two-factor authentication OTP code."</span></span>,</span><br><span class="line">  "<span class="attribute">documentation_url</span>": <span class="value"><span class="string">"https://developer.github.com/v3/auth#working-with-two-factor-authentication"</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>就照文件說明在header裡多塞一個X-GitHub-OTP<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ curl -u github-user-name:github-password \</span><br><span class="line">  -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  -H <span class="string">"X-GitHub-OTP:012345"</span> \</span><br><span class="line">  -X POST \</span><br><span class="line">  <span class="operator">-d</span> <span class="string">'&#123;"scopes":["gist"], "note": "gist backup"&#125;'</span> \</span><br><span class="line">  https://api.github.com/authorizations</span><br></pre></td></tr></table></figure></p>
+<p>一切正常，則返回的一串json裡會有個叫token的欄位，把該欄位的資料複製下<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global github.gist.oauth.token TOKEN</span><br></pre></td></tr></table></figure></p>
+<p>進到 <a href="https://github.com/settings/tokens/" target="_blank" rel="external">https://github.com/settings/tokens/</a> 也可以看到有產生一個授權存取gist資料的personal access token。<br><img src="/img/2017-07-22_200323.png" alt=""><br><img src="/img/2017-07-22_200408.png" alt=""></p>
+<p>全部準備完了，就可以直接跑gist-backup sciript把全部資料都爬下來。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/aprescott/gist-backup/master/gist-backup</span><br><span class="line">chmod <span class="number">755</span> gist-backup</span><br><span class="line">mkdir gist-backup-folder</span><br><span class="line">./gist-backup ./gist-backup-folder</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gist/">gist</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/24/docker-installation-updated/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          docker installation (updated)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/21/thunderbird-experiences/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">thunderbird experiences&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhengda
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

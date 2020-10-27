@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>夏日竹下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="夏日竹下">
+<meta property="og:url" content="http://zhengda.github.io/page/4/index.html">
+<meta property="og:site_name" content="夏日竹下">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="夏日竹下">
+<meta name="twitter:description">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-663898-12', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhengda.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer">
+      <article id="post-ubuntu16-04" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/25/ubuntu16-04/">ubuntu16.04</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/25/ubuntu16-04/" class="article-date">
+  <time datetime="2016-05-25T13:24:39.000Z" itemprop="datePublished">2016-05-25</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="使用universal_usb_installer制作usb開機碟">使用universal usb installer制作usb開機碟</h4><p>注意插入abit an-m2後要開後機看到usb磁碟，然後把usb-hdd的開機順序移到最前面。<br>Advanced BIOS Features &gt; Hard Disk Boot priority &gt; 選USB-HDD?<br>若看不到就試著重開機讓機器能抓到USB-HDD。也可能是USB碟沒建好，機器認不出來。</p>
+<h4 id="script">script</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get <span class="operator"><span class="keyword">update</span></span><br><span class="line">sudo apt-<span class="keyword">get</span> <span class="keyword">upgrade</span></span><br><span class="line">sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> htop iftop iotop</span><br><span class="line">sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> unzip p7zip p7zip-<span class="keyword">full</span> p7zip-rar rar unrar</span><br><span class="line">sudo apt-<span class="keyword">get</span> <span class="keyword">install</span> openssh-<span class="keyword">server</span> openssh-client</span></span><br></pre></td></tr></table></figure>
+<h4 id="apt-get_update_或_apt-get_upgrade_時會去找cdrom…">apt-get update 或 apt-get upgrade 時會去找cdrom…</h4><p>nano /etc/apt/sources.list #移除cdrom部份</p>
+<h3 id="hostname">hostname</h3><p>nano /etc/hostname #內容改為自己要的名字<br>nano /etc/hosts #這邊最好也要改，免得有些 service 會出錯<br>/etc/init.d/hostname.sh #重新啟動<br>hostname #驗證是否已經修改完畢。</p>
+<h4 id="Software_&amp;_Updates&gt;Additional_Drivers">Software &amp; Updates&gt;Additional Drivers</h4><p>預設的driver怪怪的，畫面lag；有時會黑畫面。abit an-m2(C68 GeForce7025/nForce 630a)選一下nvidia的driver後就比較順了。</p>
+<p>ctrl-alt-f1~f6可以切換到console的tty1~6。xwindow使用tty7。</p>
+<h4 id="ssh">ssh</h4><p>這一版的ssh比較嚴格 ，使用pietty去連會得到 Couldn’t agree a client-to-server cipher 的error。<br>使用較新版0.6以上的putty就ok。</p>
+<h4 id="在abit_an-m2上xwindow還是跟14-04一樣有跑久當掉連累整個網路停止的問題">在abit an-m2上xwindow還是跟14.04一樣有跑久當掉連累整個網路停止的問題</h4><h4 id="stop/start_xwindow">stop/start xwindow</h4><figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="keyword">service</span> lightdm <span class="literal">stop</span></span><br><span class="line">sudo <span class="keyword">service</span> lightdm <span class="literal">start</span></span><br></pre></td></tr></table></figure>
+<h4 id="memory_info">memory info</h4><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat /<span class="keyword">proc</span>/meminfo</span><br><span class="line">grep <span class="type">MemTotal</span> /<span class="keyword">proc</span>/meminfo</span><br><span class="line">free -m</span><br><span class="line">vmstat</span><br></pre></td></tr></table></figure>
+<h4 id="memory_test">memory test</h4><p>sudo apt-get install memtester<br>sudo memtester 1024 5     #allocate 1024MB of memory, and repeat the test 5 times.</p>
+<h4 id="vi的方向鍵失常問題">vi的方向鍵失常問題</h4><p>~/.vimrc內容加入<br>set nocompatible<br>set backspace=2 </p>
+<h4 id="ftp">ftp</h4><figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install vsftpd</span><br><span class="line">sudo vi /etc/vsftpd.conf</span><br><span class="line">	write_enable=<span class="constant">Y</span>ES <span class="comment">#防寫要uncomment掉</span></span><br><span class="line">sudo <span class="keyword">service</span> vsftpd <span class="literal">restart</span></span><br><span class="line">sudo <span class="keyword">service</span> vsftpd <span class="literal">status</span></span><br></pre></td></tr></table></figure>
+<h4 id="other">other</h4><p><strong>gnome-session-fallback不管用了。據說july會有能支援的gnome desktop出來。let’s see</strong></p>
+<h4 id="harddisk_smart_information">harddisk smart information</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install smartmontools</span><br><span class="line">sudo smartctl -<span class="tag">a</span> /dev/sda    <span class="id">#print</span> all info</span><br><span class="line">sudo smartctl -<span class="tag">i</span> /dev/sda    <span class="id">#print</span> info</span><br><span class="line">sudo smartctl -H /dev/sda    <span class="id">#check</span> health</span><br></pre></td></tr></table></figure>
+<h4 id="hardware_information">hardware information</h4><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lshw<span class="string">|less</span></span><br><span class="line">dmidecode<span class="string">|less</span></span><br><span class="line">dmidecode  <span class="string">| grep -A4 '^Base Board Information'</span></span><br></pre></td></tr></table></figure>
+<h3 id="upload_file_in_command_line_with_scp">upload file in command line with scp</h3><p>scp 052b1cebf73e0b31c502341e0e3cc916a3da2a25.png leon:asdfasdfiloveada@10.0.0.102:~</p>
+<h3 id="ftp_upload_in_command_line_with_curl">ftp upload in command line with curl</h3><p>curl -T localfile -u name:passwd ftp://upload_site:port/path/</p>
+<h3 id="History_Size">History Size</h3><p>vi ~/.bashrc #HISTSIZE ,HISTFILESIZE</p>
+<h3 id="enable_ssh">enable ssh</h3><p>sudo apt-get install ssh<br>sudo apt-get install openssh-server<br>sudo service ssh status<br>sudo service ssh restart</p>
+<h3 id="adjust_timezone">adjust timezone</h3><p>date<br>sudo vi /etc/default/rcS<br>UTC=no<br>sudo tzselect<br>sudo cp /usr/share/zoneinfo/Aisa/Taipei /etc/localtime<br>sudo vi /etc/timezone<br>Asia/Taipei</p>
+<h3 id="ntp">ntp</h3><p>sudo apt-get isntall ntpdate<br>sudo ntpdate time.stdtime.gov.tw<br>sudo hwclock -w<br>date<br>sudo crontab -e<br>@daily /usr/sbin/ntpdate -u time.stdtime.gov.tw &gt; /dev/null</p>
+<p>sudo apt-get install ntp<br>service ntp status</p>
+<p>vi /etc/ntp.conf<br>server tock.stdtime.gov.tw prefer<br>server tick.stdtime.gov.tw<br>server time.stdtime.gov.tw<br>restrict tock.stdtime.gov.tw<br>restrict tick.stdtime.gov.tw<br>restrict time.stdtime.gov.tw</p>
+<p>service ntp restart</p>
+<p>sudo apt-get install ntpstat<br>ntpstat<br>synchronised to NTP server (211.22.103.157) at stratum 3<br>   time correct to within 104 ms<br>   polling server every 64 s</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-food" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/21/food/">food</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/21/food/" class="article-date">
+  <time datetime="2016-05-21T10:17:28.000Z" itemprop="datePublished">2016-05-21</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>糖醋<br>椒麻<br>三杯<br>宮保<br>魚香<br>京醬<br>照燒<br>塔香<br>橙汁 </p>
+<p>花鵰<br>燒酒</p>
+<p>蒜泥<br>醬爆<br>打拋<br>蔥爆<br>酸菜<br>黑胡椒<br>辣子<br>橙醋<br>酸辣<br>桔醬<br>沙茶<br>紅燒<br>蔥油<br>紹子<br>豆豉<br>金沙<br>蜜汁<br>咖哩<br>鹽水<br>酥炸<br>鐵板<br>蒲燒<br>香烤<br>香酥<br>脆皮<br>咔啦<br>乾煎<br>乾燒<br>清蒸<br>醋溜<br>麻婆<br>蝦皮<br>薑絲<br>醬滷<br>滑蛋<br>椒鹽<br>紹興<br>孜然<br>花雕<br>香菇<br>茄汁<br>蠔油<br>紅糟<br>蕃茄<br>芝麻<br>薑汁<br>紅油<br>腐乳<br>蝦醬<br>紅醬<br>綠醬<br>白醬<br>菜脯<br>烏龍<br>梅菜<br>檸香<br>迷迭香烤<br>啤酒<br>紅酒<br>皮蛋<br>椰香<br>怪味<br>味噌<br>雪菜<br>泡菜<br>蝦仁<br>蟹肉<br>蔭豉<br>蒜蓉<br>銀芽炒<br>鳳梨<br>黃酒<br>可樂<br>涼拌<br>梅漬<br>葱油<br>五香<br>洋蔥<br>韭香<br>香椿</p>
+<p>brownie<br>chocolate butter walnut<br>重起司cheese cake<br>king cake<br>西班牙海鮮飯 spanish seafood risotto<br>香菇雞<br>烤pizza<br>toast<br>椒麻<br>烤小羊排<br>沙茶羊肉/牛肉/空心菜<br>宮保雞丁<br>歐式免揉麵包</p>
+<p>魯肉<br>紅酒燉牛肉 beef stew with red wine</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/food/">food</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-windows-batch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/21/windows-batch/">windows batch</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/21/windows-batch/" class="article-date">
+  <time datetime="2016-05-21T07:13:57.000Z" itemprop="datePublished">2016-05-21</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="批次檔中迴圈的錯誤偵測及跳出">批次檔中迴圈的錯誤偵測及跳出</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setlocal enabledelayedexpansion</span><br><span class="line"><span class="keyword">for</span> %%f <span class="keyword">in</span> (C:\Windows\*) <span class="keyword">do</span> (</span><br><span class="line">    runsomeapplication.exe /with <span class="string">"parameters"</span></span><br><span class="line">    <span class="keyword">if</span> !errorlevel! neq <span class="number">0</span> <span class="built_in">exit</span> /b !errorlevel!</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="改檔名串接日期時間格式">改檔名串接日期時間格式</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> %date%</span><br><span class="line"><span class="built_in">echo</span> %date:~<span class="number">0</span>,<span class="number">4</span>%%date:~<span class="number">5</span>,<span class="number">2</span>%%date:~<span class="number">8</span>,<span class="number">2</span>%</span><br><span class="line"><span class="built_in">echo</span> %time%</span><br><span class="line"><span class="built_in">echo</span> %time:~<span class="number">0</span>,<span class="number">5</span>%</span><br><span class="line"><span class="built_in">echo</span> %time:~<span class="number">0</span>,<span class="number">2</span>%%time:~<span class="number">2</span>,<span class="number">2</span>%</span><br><span class="line"><span class="built_in">echo</span> %time:~<span class="number">0</span>,<span class="number">2</span>%%time:~<span class="number">3</span>,<span class="number">2</span>%</span><br><span class="line">ren snapshot.csv snapshot.%date:~<span class="number">0</span>,<span class="number">4</span>%%date:~<span class="number">5</span>,<span class="number">2</span>%%date:~<span class="number">8</span>,<span class="number">2</span>%.csv</span><br></pre></td></tr></table></figure>
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/batch/">batch</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/">windows</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-cassandra-on-ubuntu" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/21/cassandra-on-ubuntu/">cassandra on ubuntu</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/21/cassandra-on-ubuntu/" class="article-date">
+  <time datetime="2016-05-21T06:58:56.000Z" itemprop="datePublished">2016-05-21</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="cssandra_3-4_on_ubuntu_14-04_with_oracle_java8">cssandra 3.4 on ubuntu 14.04 with oracle java8</h3><h4 id="install_oracle_java8_virtual_machine">install oracle java8 virtual machine</h4><p>sudo add-apt-repository ppa:webupd8team/java<br>sudo apt-get update<br>sudo apt-get install oracle-java8-set-default<br>java -version</p>
+<h4 id="install_cassandra_34x">install cassandra 34x</h4><p>echo “deb <a href="http://www.apache.org/dist/cassandra/debian" target="_blank" rel="external">http://www.apache.org/dist/cassandra/debian</a> 34x main” | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list<br>echo “deb-src <a href="http://www.apache.org/dist/cassandra/debian" target="_blank" rel="external">http://www.apache.org/dist/cassandra/debian</a> 34x main” | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list</p>
+<h5 id="add_3_public_keys_from_the_Apache_Software_Foundation_associated_withe_the_package_repositories">add 3 public keys from the Apache Software Foundation associated withe the package repositories</h5><p>gpg —keyserver pgp.mit.edu —recv-keys F758CE318D77295D<br>gpg —export —armor F758CE318D77295D | sudo apt-key add -</p>
+<p>gpg —keyserver pgp.mit.edu —recv-keys 2B5C1B00<br>gpg —export —armor 2B5C1B00 | sudo apt-key add -</p>
+<p>gpg —keyserver pgp.mit.edu —recv-keys 0353B12C<br>gpg —export —armor 0353B12C | sudo apt-key add -</p>
+<h5 id="update_package_database_again">update package database again</h5><p>sudo apt-get update</p>
+<h5 id="install_cassandra">install cassandra</h5><p>sudo apt-get install cassandra</p>
+<h5 id="now_cassandra_is_installed_and_running">now cassandra is installed and running</h5><p>sudo service cassandra status<br>nodetool status<br>nodetool info<br>cqlsh</p>
+<h4 id="tune_jvm_options">tune jvm options</h4><p>sudo vi /usr/bin/cassandra</p>
+<h4 id="adjust_timezone_of_log">adjust timezone of log</h4><p>sudo vi /etc/cassandra/logback.xml<br>    ,Asia/Taipei</p>
+<h4 id="allow_bulk_insert_via_cqlsh">allow bulk insert via cqlsh</h4><p>sudo vi /etc/cassandra/cassandra.yaml<br>    batch_size_warn_threshold_in_kb: 5000<br>    batch_size_fail_threshold_in_kb: 50000</p>
+<h4 id="allowing_others_connect_cassandra">allowing others connect cassandra</h4><p>sudo vi /etc/cassandra/cassandra.yaml<br>    listen_address<br>    rpc_address:<br>    broadcast_address:</p>
+<pre><code><span class="tag">-</span> <span class="rule"><span class="attribute">seeds</span>:<span class="value"> <span class="string">"127.0.0.1,&lt;ip&gt;"</span></span></span>
+</code></pre><h4 id="where_is_the_log">where is the log</h4><p>tail -f /var/log/cassandra/system.log</p>
+<h4 id="where_is_the_data">where is the data</h4><p>/var/lib/cassandra</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cassandra/">cassandra</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-spark" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/12/spark/">spark</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/12/spark/" class="article-date">
+  <time datetime="2016-05-12T11:14:28.000Z" itemprop="datePublished">2016-05-12</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="download_and_install_spark_1-6-1_with_hadoop">download and install spark 1.6.1 with hadoop</h4><p>spark-1.6.1-bin-hadoop2.6.tgz</p>
+<h4 id="run">run</h4><p>%SPARK_HOME%\bin\spark-shell</p>
+<h4 id="error_on_windows7_x64">error on windows7 x64</h4><p>@see <a href="https://blogs.msdn.microsoft.com/arsen/2016/02/09/resolving-spark-1-6-0-java-lang-nullpointerexception-not-found-value-sqlcontext-error-when-running-spark-shell-on-windows-10-64-bit/" target="_blank" rel="external">https://blogs.msdn.microsoft.com/arsen/2016/02/09/resolving-spark-1-6-0-java-lang-nullpointerexception-not-found-value-sqlcontext-error-when-running-spark-shell-on-windows-10-64-bit/</a><br>java.lang.RuntimeException: java.lang.NullPointerException<br>        at     org.apache.hadoop.hive.ql.session.SessionState.start(SessionState.java:522)<br>        at org.apache.spark.sql.hive.client.ClientWrapper.<init>    (ClientWrapper.scala:171)</init></p>
+<h4 id="winutils-exe_support">winutils.exe support</h4><p>download link <a href="https://github.com/steveloughran/winutils/raw/master/hadoop-2.6.0/bin/winutils.exe" target="_blank" rel="external">https://github.com/steveloughran/winutils/raw/master/hadoop-2.6.0/bin/winutils.exe</a> to %HADOOP_HOME%\bin\winutils.exe<br>download link <a href="https://github.com/steveloughran/winutils/raw/master/hadoop-2.6.0/bin/hadoop.dll" target="_blank" rel="external">https://github.com/steveloughran/winutils/raw/master/hadoop-2.6.0/bin/hadoop.dll</a> to %HADOOP_HOME%\bin\hadoop.dll</p>
+<h4 id="無法啟動此程序，因為計算機中丟失_MSVCR100-dll">無法啟動此程序，因為計算機中丟失 MSVCR100.dll</h4><p>delete c:\windows\system32\msvcr100.dll<br>delete c:\windows\system32\msvcr100_clr0400.dll<br>delete c:\windows\sysWOW64\msvcr100.dll<br>delete c:\windows\sysWOW64\msvcr100_clr0400.dll</p>
+<h5 id="應用程序無法正常啟動(0xc000007b)">應用程序無法正常啟動(0xc000007b)</h5><p><strong> windows7 x64要使用這個喔 </strong><br><a href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=14632" target="_blank" rel="external">https://www.microsoft.com/en-us/download/confirmation.aspx?id=14632</a><br>vcredist_x64.exe</p>
+<p><a href="https://www.microsoft.com/en-us/download/confirmation.aspx?id=5555" target="_blank" rel="external">https://www.microsoft.com/en-us/download/confirmation.aspx?id=5555</a><br>vcredist_x86.exe</p>
+<h4 id="check_msvcr100-dll_exists">check msvcr100.dll exists</h4><p>dir c:\windows\system32\msvcr100.dll</p>
+<h4 id="java-lang-RuntimeException:_java-lang-RuntimeException:_Error_while_running_command_to_get_file_permissions_:_ExitCodeException_exitCode=-1073741701:">java.lang.RuntimeException: java.lang.RuntimeException: Error while running command to get file permissions : ExitCodeException exitCode=-1073741701:</h4><p>e:<br>cd\<br>cd spark-1.6.1-bin-hadoop2.6<br>set<br>set HADOOP_HOME=e:\hadoop<br>set tmp=e:\tmp<br>mkdir %tmp%<br>dir %tmp%<br>%HADOOP_HOME%\bin\winutils.exe ls \tmp\hive<br>%HADOOP_HOME%\bin\winutils.exe chmod 777 \tmp\hive<br>%HADOOP_HOME%\bin\winutils.exe chmod 777 \tmp<br>%HADOOP_HOME%\bin\winutils.exe ls \tmp\hive<br>bin\spark-shell</p>
+<p>……<br>scala&gt; sc.parallelize(1 to 1000).count()<br>……<br>res0: Long = 1000</p>
+<p>scala&gt; val textFile = sc.textFile(“README.md”)<br>……<br>scala&gt; textFile.count() // Number of items in this RDD<br>res1: Long = 98</p>
+<h2 id="#">#</h2><p>scala&gt; val textFile5 = sc.textFile(“file:///e:/spark-1.6.1-bin-hadoop2.6/README.md”);textFile5.count<br>textFile5: org.apache.spark.rdd.RDD[String] = file:///e:/spark-1.6.1-bin-hadoop2.6/README.md MapPartitionsRDD[10] at textFile at <console>:21<br>res5: Long = 95</console></p>
+<h2 id="on_docker">on docker</h2><p>docker run -i -t -h sandbox sequenceiq/spark:1.6.0 bash<br>#bash-4.1# spark-shell —master yarn-client —driver-memory 1g —executor-memory 1g —executor-cores 1<br>bash-4.1# spark-shell<br>……<br>scala&gt; sc.parallelize(1 to 1000).count()<br>……<br>res0: Long = 1000</p>
+<p>#這裡會產生找不到README.md。<br>scala&gt; val textFile = sc.textFile(“README.md”)<br>org.apache.hadoop.mapred.InvalidInputException: Input path does not exist: hdfs://sandbox:9000/user/root/README.md</p>
+<h4 id="指定使用localstorage上的README-md">指定使用localstorage上的README.md</h4><p>scala&gt; val textFile = sc.textFile(“file:///usr/local/spark/README.md”)<br>textFile: org.apache.spark.rdd.RDD[String] = file:///usr/local/spark/README.md MapPartitionsRDD[3] at textFile at <console>:21<br>scala&gt; textFile.count()<br>res1: Long = 98</console></p>
+<h4 id="把README-md放到hadoop上">把README.md放到hadoop上</h4><p>bash-4.1# hadoop fs -put /usr/local/spark/README.md README.md<br>bash-4.1# spark-shell<br>…<br>scala&gt; val textFile = sc.textFile(“README.md”)<br>textFile: org.apache.spark.rdd.RDD[String] = README.md MapPartitionsRDD[1] at textFile at <console>:21<br>scala&gt; textFile.count()<br>res0: Long = 98</console></p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark/">spark</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-hadoop" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/12/hadoop/">hadoop</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/12/hadoop/" class="article-date">
+  <time datetime="2016-05-12T11:14:21.000Z" itemprop="datePublished">2016-05-12</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop/">hadoop</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-taskkill" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/06/taskkill/">taskkill</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/06/taskkill/" class="article-date">
+  <time datetime="2016-05-05T23:03:16.000Z" itemprop="datePublished">2016-05-06</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有時eclipse跑久了，就出error的白色dialog自殺了。<br>但這時用它帶起的java process倒還是繼續在跑。<br>一個一個手動砍比較慢，可以用taskkill整組砍掉。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">taskkill /f /im java*</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tip/">tip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/">windows</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-git-puttykeyfile-兩三事" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/05/git-puttykeyfile-兩三事/">git puttykeyfile 兩三事</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/05/git-puttykeyfile-兩三事/" class="article-date">
+  <time datetime="2016-05-05T12:45:39.000Z" itemprop="datePublished">2016-05-05</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在windows下使用git，通常是安裝tortoiseGit和msysGit。<br>前者提供了GUI介面透過自帶的putty以plink介面帶出pageant提供ssh授權。<br>後者提供了command line介面讓你能以下指令方式操作git。</p>
+<h4 id="產生ssh需要的private/public_key有兩種方式。">產生ssh需要的private/public key有兩種方式。</h4><ol>
+<li>使用puttygen產生private/public ppk檔案，使用時需要pageant工具作為authentication agent。</li>
+<li>在command line下使用ssh-keygen產生~/ .ssh/id_rsa 和 ~/.ssh/id_rsa.pub。<br> ssh-keygen產生的格式跟ppk不一樣，但可以透過puttygen載入再另存成ppk格式。</li>
+</ol>
+<h4 id="兩種方式設定git需要的ssl">兩種方式設定git需要的ssl</h4><p>一般而言使用puttygen產生的ppk檔配合pageant就能正常使用了。</p>
+<ol>
+<li><p>tortoiseGit: 只要使用GUI介面裡的 setting &gt; Git &gt; Remote - choose origin &gt; Putty Key: 選擇要使用的 private ppk 檔。<br> 這時在.git/config裡[remote “origin”]區會增加一筆puttykeyfile = c:\git.privatekey.ppk記錄<br> 當然也能透過 git config —local remote.origin.puttykeyfile c:\git.privatekey.ppk 來加入。<br> 這筆記錄能在使用tortoiseGit做remote push/pull時，若”Autoload Putty Key”有被勾選，則透過plink自動帶出載入指定ppk的pageant。</p>
+<p> 然而若你使用tortoiseGit時不勾選”Autoload Putty Key”，也不手動啟動pageant並載入適當的ppk。在對remote進行操作時就會發生error。</p>
+<p> 類似的情況在command line裡下git指令對remote做push操作也一樣；必需先手動啟動pageant並載入適當的ppk。</p>
+</li>
+<li><p>使用 ssh-keygen會產生~/.ssh目錄，並在目錄內放ssh相關的資訊和產生的key。<br> 使用ssh-keygen產生private/public key pair供免密碼ssh安全登入很常見。<br> 如前面所提，~/.ssh/id_rsa是可以透過puttygen轉成ppk格式供putty/tortoiseGit使用的。</p>
+<p> 特別的是若使用ssh-keygen的方式產生了~/.ssh裡的private/public key pair，接下來就可以不需要pageant這類的authentication agent了。<br> 此時直接使用tortoiseGit或command line下使用git指令，都會直接使用~/.ssh/id_rsa。<br> 就像在unix下使用ssh的方式，方便很多。</p>
+<p> 值得一提的是，這時啟動pageant載入ppk還是有效果的。<br> remote.origin.puttykeyfile c:\git.privatekey.ppk在使用tortoiseGit時勾選”Autoload Putty Key”自動帶出載入指定ppk的pageant時一樣有用。手動啟動pageant並載入適合的ppk也一樣有效。</p>
+</li>
+</ol>
+<h4 id="用bat檔寫好script來啟動pageant帶上ppk檔，是比操作視窗加ppk檔方便得多的方式。">用bat檔寫好script來啟動pageant帶上ppk檔，是比操作視窗加ppk檔方便得多的方式。</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start /d <span class="string">"c:\Program Files\TortoiseGit\bin"</span> pageant.exe c:\git.privatekey.ppk c:\git.privatekey.repo2.ppk</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-utf8mb4-in-mysql" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/04/utf8mb4-in-mysql/">utf8mb4 in mysql</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/04/utf8mb4-in-mysql/" class="article-date">
+  <time datetime="2016-05-04T15:13:31.000Z" itemprop="datePublished">2016-05-04</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱">🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱🐱</h3><p>在爬一些比較潮的網頁時難免會抓到emoji字元。<br>這在寫入mysql時會發生問題，因為mysql預設是使用utf8，必須改成utf8mb4才能避免寫入emoji時的錯誤。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.sql.SQLException: Incorrect string value: <span class="string">'\xF0\x9F\x91\xBD\xF0\x9F…</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="mysql-ini">mysql.ini</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[client]</span></span><br><span class="line"><span class="setting">default-character-set=<span class="value">utf8mb4</span></span></span><br><span class="line"></span><br><span class="line"><span class="title">[mysql]</span></span><br><span class="line"><span class="setting">default-character-set=<span class="value">utf8mb4</span></span></span><br><span class="line"></span><br><span class="line"><span class="title">[mysqld]</span></span><br><span class="line"><span class="setting">character-set-client-handshake=<span class="value"><span class="keyword">FALSE</span></span></span></span><br><span class="line"><span class="setting">character-set-server=<span class="value">utf8mb4</span></span></span><br><span class="line"><span class="setting">collation-server=<span class="value">utf8mb4_unicode_ci</span></span></span><br><span class="line"><span class="setting">init_connect=<span class="value">'SET NAMES utf8mb4'</span></span></span><br></pre></td></tr></table></figure>
+<p>restart mysql後，沒意外可以看到相關的character-set都變成utf8mb4<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select version();</span><br><span class="line">+------------+</span><br><span class="line">| version()  |</span><br><span class="line">+------------+</span><br><span class="line">| 5.6.19-log |</span><br><span class="line">+------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; show variables where variable_name like 'character%' or variable_name like 'collation%';</span><br><span class="line">+--------------------------+---------------------------------------------------------+</span><br><span class="line">| Variable_name            | Value                                                   |</span><br><span class="line">+--------------------------+---------------------------------------------------------+</span><br><span class="line">| character_set_client     | utf8mb4                                                 |</span><br><span class="line">| character_set_connection | utf8mb4                                                 |</span><br><span class="line">| character_set_database   | utf8                                                    |</span><br><span class="line">| character_set_filesystem | binary                                                  |</span><br><span class="line">| character_set_results    | utf8mb4                                                 |</span><br><span class="line">| character_set_server     | utf8mb4                                                 |</span><br><span class="line">| character_set_system     | utf8                                                    |</span><br><span class="line">| character_sets_dir       | C:\Program Files\MySQL\MySQL Server 5.6\share\charsets\ |</span><br><span class="line">| collation_connection     | utf8mb4_unicode_ci                                      |</span><br><span class="line">| collation_database       | utf8_general_ci                                         |</span><br><span class="line">| collation_server         | utf8mb4_unicode_ci                                      |</span><br><span class="line">+--------------------------+---------------------------------------------------------+</span><br><span class="line">11 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<h4 id="database/table_schema">database/table schema</h4><p>舊的schema可以繼續保持CHARACTER SET=utf8，而針對需要寫入emoji的庫/表/欄alter成CHARACTER SET=utf8mb4。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> database_name <span class="built_in">CHARACTER</span> <span class="keyword">SET</span>=utf8mb4 <span class="keyword">COLLATE</span>=utf8mb4_unicode_ci;</span></span><br><span class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">CONVERT</span> <span class="keyword">TO</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_unicode_ci;</span></span><br><span class="line"><span class="operator"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">CHANGE</span> column_name <span class="built_in">VARCHAR</span>(<span class="number">191</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_unicode_ci;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="java_JDBC_connector">java JDBC connector</h4><ol>
+<li>使用mysql提供的JDBC driver，要確保mysql connector的版本高於5.1.13才支援utf8mb4。</li>
+<li>以往在jdbc.uri裡加入的characterEncoding=utf8，<strong>一定要去除</strong>。<strong>※重要※</strong></li>
+</ol>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-mockup" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/28/mockup/">mockup</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/04/28/mockup/" class="article-date">
+  <time datetime="2016-04-27T18:51:04.000Z" itemprop="datePublished">2016-04-28</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="guideline">guideline</h4><h4 id="wireframe">wireframe</h4><p>fireworks<br>sketch<br>xara<br>axure<br>balsamiq<br>moqups<br>wireframe.cc</p>
+<h4 id="mockup_tool">mockup tool</h4><p>invision<br>marvelapp.com<br>mockplus.com<br>fluidui.com<br>placeit.net<br>lucidchart.com<br>cacoo<br>lumzy<br>pencil<br>gliffy<br>mockflow<br>mockup designer</p>
+
+      
+    </div>
+  
+  </div>
+  
+</article>
+
+
+    
+      <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      </nav>
+    </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhengda
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

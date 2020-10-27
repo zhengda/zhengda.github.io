@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>docker installation (updated) - 夏日竹下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Past1curl -sSL https://get.docker.com/ | sudo sh
+還是可以用，但官方文件沒有推薦這種做法。
+Present https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/1234567891011121314151617sudo apt-get -y remove docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker installation (updated)">
+<meta property="og:url" content="http://zhengda.github.io/2017/07/24/docker-installation-updated/index.html">
+<meta property="og:site_name" content="夏日竹下">
+<meta property="og:description" content="Past1curl -sSL https://get.docker.com/ | sudo sh
+還是可以用，但官方文件沒有推薦這種做法。
+Present https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/1234567891011121314151617sudo apt-get -y remove docker">
+<meta property="og:updated_time" content="2017-09-12T12:37:06.732Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker installation (updated)">
+<meta name="twitter:description" content="Past1curl -sSL https://get.docker.com/ | sudo sh
+還是可以用，但官方文件沒有推薦這種做法。
+Present https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/1234567891011121314151617sudo apt-get -y remove docker">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-663898-12', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhengda.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-docker-installation-updated" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      docker installation (updated)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/07/24/docker-installation-updated/" class="article-date">
+  <time datetime="2017-07-24T09:25:22.000Z" itemprop="datePublished">2017-07-24</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Past">Past</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="operator">-s</span>SL https://get.docker.com/ | sudo sh</span><br></pre></td></tr></table></figure>
+<p>還是可以用，但官方文件沒有推薦這種做法。</p>
+<h1 id="Present_https://docs-docker-com/engine/installation/linux/docker-ce/ubuntu/">Present <a href="https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/" target="_blank" rel="external">https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/</a></h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y remove docker docker-engine docker.io docker-ce</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt -y install apt-transport-https ca-certificates curl software-properties-common</span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line">sudo apt-key fingerprint <span class="number">0</span>EBFCD88 \<span class="comment">#9dc8 5822 9fc7 dd38 854a e2d8 8d81 803c 0ebf CD88</span></span><br><span class="line">sudo add-apt-repository \</span><br><span class="line">    <span class="string">"deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span><br><span class="line">    <span class="variable">$(lsb_release -cs)</span> \</span><br><span class="line">    stable"</span></span><br><span class="line">sudo apt-get update <span class="number">1</span>&gt; /dev/null</span><br><span class="line">sudo apt -y install  install docker-ce</span><br><span class="line"></span><br><span class="line">apt-cache madison docker-ce</span><br><span class="line">sudo systemctl docker status</span><br><span class="line">docker run hello-world</span><br><span class="line">docker version</span><br><span class="line">docker info</span><br></pre></td></tr></table></figure>
+<h4 id="stable/edge/test">stable/edge/test</h4><p>依release的穩定度可以有三種選擇。</p>
+<h2 id="Uninstall">Uninstall</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge docker-ce</span><br><span class="line">sudo rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
+<h2 id="EE_https://docs-docker-com/engine/installation/linux/docker-ee/ubuntu/">EE <a href="https://docs.docker.com/engine/installation/linux/docker-ee/ubuntu/" target="_blank" rel="external">https://docs.docker.com/engine/installation/linux/docker-ee/ubuntu/</a></h2><h3 id="建立_Docker_用戶組">建立 Docker 用戶組</h3><p>默認情況下，docker 命令會使用 Unix socket 與 Docker 引擎通訊。而只有 root 用戶和 docker 組的用戶才可以訪問 Docker 引擎的 Unix socket。因此，將需要使用 docker 的用戶加入 docker 用戶組。</p>
+<p>建立 docker 用戶組：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">sudo</span> groupadd docker</span><br></pre></td></tr></table></figure></p>
+<p>將當前用戶加入 docker 組：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod <span class="operator">-a</span>G docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="測試">測試</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="command">run</span> hello_world</span><br></pre></td></tr></table></figure>
+<h2 id="Docker_Compose_https://docs-docker-com/compose/install/">Docker Compose <a href="https://docs.docker.com/compose/install/" target="_blank" rel="external">https://docs.docker.com/compose/install/</a></h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/<span class="variable">$dockerComposeVersion</span>/docker-compose-`uname <span class="operator">-s</span>`-`uname -m` &gt; /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+<h3 id="alternative">alternative</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -L --fail https://github.com/docker/compose/releases/download/<span class="number">1.14</span>.<span class="number">0</span>/run.sh &gt; /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">docker-compose version</span><br></pre></td></tr></table></figure>
+<h3 id="Uninstall_Docker_Compose">Uninstall Docker Compose</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">\<span class="comment">#sudo rm $(which docker-compose)</span></span><br></pre></td></tr></table></figure>
+<h2 id="Docker_Machine_https://docs-docker-com/machine/install-machine/">Docker Machine <a href="https://docs.docker.com/machine/install-machine/" target="_blank" rel="external">https://docs.docker.com/machine/install-machine/</a></h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://github.com/docker/machine/releases/download/v0.<span class="number">12.1</span>/docker-machine-`uname <span class="operator">-s</span>`-`uname -m` &gt;/usr/<span class="built_in">local</span>/bin/docker-machine</span><br><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-machine</span><br><span class="line">docker-machine version</span><br></pre></td></tr></table></figure>
+<h3 id="Uninstall_Docker_Machine">Uninstall Docker Machine</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-machine rm <span class="operator">-f</span> $(docker-machine ls -q)</span><br><span class="line">sudo rm $(<span class="built_in">which</span> docker-machine)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/28/basic-mysql-configuration-on-ubuntu16-04/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          basic mysql configuration on ubuntu16.04
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/22/gist-backup/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">gist backup&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhengda
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

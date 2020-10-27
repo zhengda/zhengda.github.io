@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>夏日竹下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="夏日竹下">
+<meta property="og:url" content="http://zhengda.github.io/page/3/index.html">
+<meta property="og:site_name" content="夏日竹下">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="夏日竹下">
+<meta name="twitter:description">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-663898-12', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhengda.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer">
+      <article id="post-pppoe-on-ubuntu" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/18/pppoe-on-ubuntu/">pppoe on ubuntu</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/18/pppoe-on-ubuntu/" class="article-date">
+  <time datetime="2016-08-18T07:24:10.000Z" itemprop="datePublished">2016-08-18</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong> ubuntu16.04 amd64 </strong><br><strong> (ok under i7pc, fail under i7tp </strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="operator">-s</span></span><br><span class="line">apt-get install pppoeconf traceroute curl wget</span><br><span class="line">pppoeconf  <span class="comment"># xxxxxxxx@hient.net  aaaaaaaa  (fixed ip in hinet: xxxxxxxx@ip.hinet.net</span></span><br><span class="line">poff	<span class="comment"># poff -a (if encounter any error</span></span><br><span class="line">pon dsl-provider</span><br><span class="line">plog</span><br><span class="line">ifconfig</span><br><span class="line"><span class="comment">#traceroute ptt.cc</span></span><br><span class="line"><span class="comment">#nano /etc/network/interfaces</span></span><br><span class="line">route add default dev ppp0  <span class="comment"># set as default routing.</span></span><br><span class="line">curl ipinfo.io <span class="comment"># confirm the default routing works</span></span><br><span class="line">ifconfig ppp0 &amp;&amp; poff &amp;&amp; pon dsl-provider &amp;&amp; ifconfig ppp0 <span class="comment"># force renewing pppoe ip</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/network/">network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-docker-trial" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/17/docker-trial/">docker trial</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/17/docker-trial/" class="article-date">
+  <time datetime="2016-08-16T18:06:17.000Z" itemprop="datePublished">2016-08-17</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="preparation">preparation</h4><p><strong> ★ubuntu i386版本無法裝docker，一定要amd64版本才能裝docker。 </strong></p>
+<p>sudo -s<br>apt-get install htop iftop iotop unzip p7zip p7zip-full rar unrar openssh-server openssh-client<br>service sshd status<br>reboot</p>
+<p><strong> ★under ubuntu16.04 amd64</strong><br>sudo -s<br>uname -a<br>cat /etc/lsb-release<br>apt-get update<br>apt-get upgrade</p>
+<h4 id="install_docker">install docker</h4><p>curl -sSL <a href="https://get.docker.com/" target="_blank" rel="external">https://get.docker.com/</a> | sudo sh<br>service docker status<br>docker version<br>docker info</p>
+<h4 id="test_docker_works">test docker works</h4><p>docker run hello-world</p>
+<h4 id="search_and_pull">search and pull</h4><p>docker search ubuntu<br>docker pull ubuntu<br>docker pull java<br>docker pull tomcat<br>docker pull mysql<br>docker pull jplock/zookeeper:3.4.6<br>docker pull ches/kafka<br>docker pull sequenceiq/spark:1.6.0<br>docker pull dylanmei/zeppelin</p>
+<h4 id="basic">basic</h4><p>docker pull ubuntu<br>docker create ubuntu:16.04<br>docker run -i -t ubuntu:16.04 /bin/bash<br>df -h<br>docker run -i -t -d ubuntu:16.04 /bash/sh -c “while true;do echo hello world;sleep 1; done”    # -d run in background<br>docker ps    #show containers<br>docker logs {container_id}<br>docker exec -i -t {container_id} /bin/bash<br>docker stop {container_id}<br>docker start {container_id}<br>docker rm {container_id}<br>docker rm {container_id} -f</p>
+<h4 id="pull,_create,_show,_remove_image">pull, create, show, remove image</h4><p>docker pull ubuntu<br>docker create ubuntu:16.04<br>docker images    #show all images<br>docker rmi {image_name}    #delete specific image</p>
+<h4 id="references">references</h4><p><a href="https://docs.docker.com/engine/installation/linux/ubuntulinux/" target="_blank" rel="external">https://docs.docker.com/engine/installation/linux/ubuntulinux/</a><br><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04</a><br><a href="https://www.howtoforge.com/tutorial/docker-installation-and-usage-on-ubuntu-16.04/" target="_blank" rel="external">https://www.howtoforge.com/tutorial/docker-installation-and-usage-on-ubuntu-16.04/</a><br><a href="https://philipzheng.gitbooks.io/docker_practice/content/install/ubuntu.html" target="_blank" rel="external">https://philipzheng.gitbooks.io/docker_practice/content/install/ubuntu.html</a> #quiet old 2014</p>
+<h4 id="常用_official_images">常用 official images</h4><p>rabbitmq<br>memcached<br>radis<br>cassandra<br>nginx<br>httpd<br>haproxy<br>jenkins<br>kibana<br>elasticsearch<br>logstash<br>postgres<br>mariadb<br>java<br>tomcat<br>mysql<br>ubuntu<br>debian<br>centos<br>solr<br>maven<br>jetty</p>
+<h4 id="cAdvisor">cAdvisor</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">  --volume=/:/rootfs:ro \</span><br><span class="line">  --volume=/var/run:/var/run:rw \</span><br><span class="line">  --volume=/sys:/sys:ro \</span><br><span class="line">  --volume=/var/lib/docker/:/var/lib/docker:ro \</span><br><span class="line">  --publish=<span class="number">8080</span>:<span class="number">8080</span> \</span><br><span class="line">  --detach=<span class="literal">true</span> \</span><br><span class="line">  --name=cadvisor \</span><br><span class="line">  google/cadvisor:latest</span><br></pre></td></tr></table></figure>
+<p><a href="http://{container_ip}:8080" target="_blank" rel="external">http://{container_ip}:8080</a></p>
+<h3 id="install_docker-machine">install docker-machine</h3><p>@see <a href="https://github.com/docker/machine/releases" target="_blank" rel="external">https://github.com/docker/machine/releases</a><br>@see <a href="https://docs.docker.com/machine/install-machine/" target="_blank" rel="external">https://docs.docker.com/machine/install-machine/</a>  <a href="https://docs.docker.com/machine/get-started/" target="_blank" rel="external">https://docs.docker.com/machine/get-started/</a><br>@see <a href="https://www.digitalocean.com/community/tutorials/how-to-provision-and-manage-remote-docker-hosts-with-docker-machine-on-ubuntu-16-04" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-provision-and-manage-remote-docker-hosts-with-docker-machine-on-ubuntu-16-04</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~<span class="comment"># date</span></span><br><span class="line">Fri Aug <span class="number">26</span> <span class="number">02</span>:<span class="number">53</span>:<span class="number">41</span> PDT <span class="number">2016</span></span><br><span class="line">root@ubuntu:~<span class="comment"># curl -L https://github.com/docker/machine/releases/download/v0.8.1/docker-machine-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-machine &amp;&amp; chmod +x /usr/local/bin/docker-machine</span></span><br><span class="line">root@ubuntu:~<span class="comment"># docker-machine --version</span></span><br><span class="line">docker-machine version <span class="number">0.8</span>.<span class="number">1</span>, build <span class="number">41</span>b3b25</span><br><span class="line">root@ubuntu:~<span class="comment"># docker-compose --version</span></span><br><span class="line">docker-compose version <span class="number">1.5</span>.<span class="number">2</span>, build unknown</span><br><span class="line">root@ubuntu:~<span class="comment"># docker --version</span></span><br><span class="line">Docker version <span class="number">1.12</span>.<span class="number">1</span>, build <span class="number">23</span>cf638</span><br></pre></td></tr></table></figure></p>
+<h3 id="cheatscript">cheatscript</h3><h4 id="redis">redis</h4><p>docker run —name gitlab-redis -d \<br>    —volume /srv/docker/gitlab/redis:/var/lib/redis \<br>    sameersbn/redis:latest</p>
+<h4 id="postgresql_9-6">postgresql 9.6</h4><p>docker run —name gitlab-postgresql -d \<br>    —env ‘DB_NAME=gitlabhq_production’ \<br>    —env ‘DB_USER=gitlab’ —env ‘DB_PASS=password’ \<br>    —env ‘DB_EXTENSION=pg_trgm’ \<br>    —volume /srv/docker/gitlab/postgresql:/var/lib/postgresql \<br>    sameersbn/postgresql:9.6</p>
+<h4 id="msql">msql</h4><p>docker run —name mysql -d \<br>    -p 33306:3306 \<br>    -e MYSQL_ROOT_PASSWORD=password \<br>    -v /srv/docker/mysql/conf:/etc/mysql/conf.d \<br>    -v /srv/docker/mysql/data:/var/lib/mysql \<br>    mysql:5.7</p>
+<p>docker run —name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password mysql:5.7.10<br>docker exec mysql cat /etc/mysql/my.cnf</p>
+<h4 id="spark_1-6">spark 1.6</h4><p>docker run -i -t -h sandbox sequenceiq/spark:1.6.0 bash</p>
+<h4 id="zookeeper">zookeeper</h4><h4 id="kafka">kafka</h4>
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-ubuntu-change-locale" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/ubuntu-change-locale/">ubuntu change locale</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/14/ubuntu-change-locale/" class="article-date">
+  <time datetime="2016-08-14T04:32:24.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">locale</span><br><span class="line">sudo locale-gen en_US en_US.UTF-<span class="number">8</span></span><br><span class="line">sudo update-locale LANG=<span class="string">"en_US.UTF-8"</span> LANGUAGE=<span class="string">"en_US.UTF-8"</span></span><br><span class="line">sudo vi /etc/default/locale</span><br></pre></td></tr></table></figure>
+<p>#  File generated by update-locale<br>LANG=en_US.UTF-8<br>#LC_NUMERIC=”lzh_TW”<br>#LC_TIME=”lzh_TW”<br>#LC_MONETARY=”lzh_TW”<br>#LC_PAPER=”lzh_TW”<br>#LC_NAME=”lzh_TW”<br>#LC_ADDRESS=”lzh_TW”<br>#LC_TELEPHONE=”lzh_TW”<br>#LC_MEASUREMENT=”lzh_TW”<br>#LC_IDENTIFICATION=”lzh_TW”<br>LANGUAGE=en_US.UTF-8</p>
+<h4 id="改回繁體中文_zh_TW">改回繁體中文 zh_TW</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo locale-gen zh_TW </span><br><span class="line">sudo locale-gen zh_TW.UTF-<span class="number">8</span> </span><br><span class="line">sudo dpkg-reconfigure locales </span><br><span class="line">sudo update-locale LANG=<span class="string">"zh_TW.UTF-8"</span> LANGUAGE=<span class="string">"zh_TW"</span></span><br></pre></td></tr></table></figure>
+<p><strong> 改完重新登入後才有效果 </strong></p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-ubuntu16-boot-into-text-mode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/ubuntu16-boot-into-text-mode/">ubuntu16 boot into text mode</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/14/ubuntu16-boot-into-text-mode/" class="article-date">
+  <time datetime="2016-08-14T03:56:29.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="網路上找的不管用-1">網路上找的不管用-1</h4><p>sudo vi /etc/default/grub</p>
+<ol>
+<li>#GRUB_CMDLINE_LINUX_DEFAULT=”quite splash”</li>
+<li>GRUB_CMDLINE_LINUX=”text”</li>
+<li>GRUB_TERMINAL=console<br>sudo update-grub<br>sudo reboot</li>
+</ol>
+<p><strong> for system-enabled desktop only </strong><br>sudo systemctl set-default multi-user.target<br>sudo systemctl set-default graphical.target</p>
+<h4 id="網路上找的不管用-2">網路上找的不管用-2</h4><p>sudo apt-get install rcconf<br>>uncheck  x11-common</p>
+<h4 id="disable_xwindow_可能不是正確的做法。但是管用">disable xwindow 可能不是正確的做法。但是管用</h4><p>sudo service lightdm stop<br>sudo systemctl disable lightdm<br>sudo reboot</p>
+<h4 id="關掉螢幕保護">關掉螢幕保護</h4><p>setterm -blank 0 -powerdown 0 -powersave off<br>xset s off<br>xset -dpms </p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-basic-english" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/24/basic-english/">basic-english</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/07/24/basic-english/" class="article-date">
+  <time datetime="2016-07-24T06:22:35.000Z" itemprop="datePublished">2016-07-24</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Globish_全球化英文_-_IBM老總教你1500字溜英文">Globish 全球化英文 - IBM老總教你1500字溜英文</h4><p><strong> 詭弔的是若你如書中所說的花費時間精力，已經是可以學習標準英文的程度。 </strong><br><strong> 不過書中不斷強調/強化英語是工具、溝通重於正統的概念是不錯的。 </strong></p>
+<p><a href="http://www.basic-english.org/" target="_blank" rel="external">http://www.basic-english.org/</a><br>850單字 (600名詞 150形容詞 100動詞)</p>
+<p>a able about above accept account accuse achieve across act add admit adult advertisement advise affect afraid after again against age agency ago agree ahead aid aim air alive all allow ally almost alone along already also although always among amount and angle angry announce another answer any apologize appeal appear apple appoint approve area argue arm army around arrest arrive art as ask assist at attach attack attempt attend attention authority automatic autumn available average avoid awake award away baby back bad bag balance ball ballot ban bank bar barrier base basket battle be bear beat beauty because become bed beer before begin behind believe bell belong below bend best betray better between big bill bird birth bit bite black blade blame blank blanket bleed blind block blood blow blue board boat body bomb bone bonus book boot border born borrow boss both bottle bottom box boycott brain brake branch brave bread break breathe brick bridge brief bright bring broad broadcast brother brown brush budget build bullet burn burst bury business busy but butter button buy by cabinet call calm camera camp campaign can cancel capture car card care carriage carry case cash cat catch cause celebrate cell center century ceremony certain chain chair chairman challenge champion chance change channel character charge chart chase cheap check cheer cheese chemical chest chief child choose church circle citizen city civilian claim clash class clean clear climate climb clock close cloth cloud coal coast coat code cold colect college colony color combine come comfort command comment committee common communicate community company compare compete complete compromise computer concern condemn conference confirm congratulate congress connect consider contain continue control cook cool cooperate copy cork corn corner correct cost cotton count country course court cover cow crash create credit crew crime criminal crisis criticize crop cross crowd crush cry culture cup cure current custom cut damage dance danger dark date daughter day dead deaf deal dear debate debt decide declare decrease deep defeat defend define degree delay deliver demand demonstrate denounce deny departure depend deploy depression describe desert design desire destroy detail develop device die diet differ difficult dig dinner diplomat direct dirt disappear disarm discover discuss disease disk dismiss dispute distance divide do doctor document dog door doubt down drain draw dream dress drink drive drop drug dry during dust duty each ear early earn earth east easy eat edge education effect effort egg either elastic electricity element else embassy emergency emotion employ empty end enemy enforce engine enjoy enough enter entertain environment equal equate equipment erase escape especially establish estimate ethnic evaporate even event ever every evidence evil exact example except exchange excuse execute exercise exist exit expand expect expense experience experiment expert explain explode explore export express extend extra extreme eye face fact factory fail fair fall false family famous far fast fat father fear feather feed feel female fertile few field fierce fight figure file fill film final finance find fine finger finish fire firm first fish fist fit fix flag flat float floor flow flower fluid fly fog fold follow food fool foot for forbid force foreign forest forget forgive form former forward frame free freeze fresh friend frighten from front fruit fuel full fun future gain gallon game gang garden gas gather general gentle get gift girl give glass global go goal god gold good govern grammar grass great green gray ground group grow guarantee guard guess guide guilty gun guy hair half galt hand hang happen happy hard hat hate have he head heal health hear heart heat heavy help her here hers hide high hijack hill him hire his history hit hold hole holiday hollow holy home honest hope horrible horse hospital hostage hostile hot hour house how however huge human humor hunger hunt hurry hurt husband ice idea identify if ill imagine import important improve in inch incident include increase independent indicate individual industry infect influence inform inject injure innocent insane insect inspect innstead instrument insult insureance intelligence intense interest interfere international into invade invent invest investigate invite involve iron island issue it item its jacket jail jewel job join joint joke joy judge jump jury just keep key kick kid kill kind king kiss kit kitchen knife know labor lack lake land language large last late laugh law lay lead leak learn least leave left leg legal lend length less let latter level lie life lift light like limit line link lip liquid list listen little live load loan local locate lock log lone long look loose lose lot loud  love low luck mail main major make male man manufacture many map march mark market marry  master match material matter may mayor me meal mean measure meat media medicine meet member memory mental mercy message metal method middle might mile military milk mind mine minister minor miscellaneous miss mistake mix mob model moderate modern money month moon moral more morning most motion mother mountain mouth move movie much murder muscle music must my mystery name narrow nation native navy near necessary neck need neighber neither nerve neural never new news next nice night no noise noon normal norh nose not note nothing notice now nothere number obey object ovserve occupy occur of off offensive offer office officer often oil old on once only open operate opinion opportunity opposite oppress or order organize other ounce our ours oust out over owe own page pain paint pan pants paper parade parcel parent parliament part party pass passenger past paste path patient pattern pay peace pen pencil people percent perfect perform perhaps period permanent permit person physical pick picture piece pig pilot pint pipe place plain plan plane plant plastic plate play please plenty pocket point poison policy politics pollute poor popular port position possess possible postpone pound pour powder power practice praise pray pregnant present press pressure pretty prevent price print prison private prize probable problem process professor profit program progress project property propose protect protest  prove provide public publish pull punish purchase pure purpose push  put quality quart quarter queen question quick quiet quit quite race  radiation raid rail rain raise range rare rate rather ray reach react read ready real reason receive recongnize record recover red reduce refugee refuse regret regular reject relation release remain remember remove repair repeat report represent request require rescue research resign resist resolution resource respect responsible rest restrain result retire return revolt reward rice rich ride right ring riot rise risk river road rob rock rocket roll roof room root rope rough round row rob robber ruin rule run sad safe sail salt same sand satisfy save say scale scare school science script sea search season seat second secret section security see seed seek seem seize seldom self sell senate send sense sentence separate series serious serve set settle several severe sex shade shake shall shame shape share sharp she sheet shelf shell shelter shine ship shirt shock shoe shoot shop short should shout show shrink shut sick side sign signal silence silk silver similar simple since sing single sister sit situation size skill skin skirt sky slave sleep slide slip slow small smart smash smell smile smoke smooth snack snake sneeze snow so soap social society soft soil soldier solid solve some son song soon sorry sort soul sound south space speak special speech speed spell spend spirit spot spread spring spy square stairs stamp stand star start starve state station status stay steal steam steel step stick  still stomach ston stop store storm story straight strange stream street stretch strike string strong structure struggle student study  stupid subject substance substitute succeed such  sudden suffer sugar suggest suit summer sun supervise supply support suppose suppress sure surface surprise surround survive suspect suspend swallow swear sweet swim symbol sympathy system table tail take talk tall target task taste tax tea teach team tear technology tell term terrible territory terror test than thank that the theater their theirs them then theory there ehese they thick  thin thing think third this those though thought threaten through throw thus tie  tight time tin tiny tired title to today together tomorrow one  tongue tonight too tool tooth top total touch toward town track trade tradition traffic train transport travel treason treasure treat treaty tree trial tribe trick trip troop trouble truck true trust try tube turn twice trire under understand unit universe university unless until up upon urge urgent us use usual valley value vary vegetable vehicle version  very veto  vicious victim victory view village violate violence visit voice vote wage wait walk wall want war warm warn wash waste watch water wave way we weak wealth weapon wear weather week weight welcome well west wet what wheat wheel when where whether which while white  who whole why wide wife wild will win wind window wine window wine wing winter wire wise wish with withdraw without woman wonder wood wool word work world worry worse worth wound wreck write wrong yard yawn year yellow yes yesterday yet you young your yours </p>
+<p>101 verb<br>drive ride write break choose forget freeze speak steal begin drink run shrink sing spring swim mistake shake take blow fly frow know throw withdraw swear tear wear show be beat become bite com do eat fall forbid forgive give go hide lie see bleed feed lead meet read shoot sleep speed hear dig hang stick strike awake get shine win bend build lend lose send spend deal mean bring buy catch fight seek teach think find pay say stand understand feel hold keep leave sell tell have light make sit slide burst cost cut hit hurt put set shut spread </p>
+<p><strong> 這世界上有兩種得到。一種是花錢買到，另一種是要集中注意力動手學到。 </strong></p>
+
+      
+    </div>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-brainwash" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/10/brainwash/">brainwash</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/07/10/brainwash/" class="article-date">
+  <time datetime="2016-07-10T10:54:35.000Z" itemprop="datePublished">2016-07-10</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://www.youtube.com/watch?v=ALPb9CAHzdA" target="_blank" rel="external">https://www.youtube.com/watch?v=ALPb9CAHzdA</a><br>educational NLP 重塑行為架構<br>persuasive 古典制約<br>suggestive 當本性如此時，觸發的門檻不會太高，只需要推一把。</p>
+
+      
+    </div>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-scala-sbt" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/23/scala-sbt/">scala-sbt</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/06/23/scala-sbt/" class="article-date">
+  <time datetime="2016-06-23T08:30:40.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="SBT">SBT</h4><p><del><a href="https://code.google.com/archive/p/simple-build-tool/downloads" target="_blank" rel="external">https://code.google.com/archive/p/simple-build-tool/downloads</a></del><br><a href="http://www.scala-sbt.org/" target="_blank" rel="external">http://www.scala-sbt.org/</a><br><a href="http://www.scala-sbt.org/download.html" target="_blank" rel="external">http://www.scala-sbt.org/download.html</a><br><a href="http://www.scala-sbt.org/0.13/docs/Manual-Installation.html" target="_blank" rel="external">http://www.scala-sbt.org/0.13/docs/Manual-Installation.html</a><br><a href="http://www.scala-sbt.org/release/docs/Setup.html" target="_blank" rel="external">http://www.scala-sbt.org/release/docs/Setup.html</a><br><a href="http://www.scala-sbt.org/release/docs/Hello.html" target="_blank" rel="external">http://www.scala-sbt.org/release/docs/Hello.html</a></p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sbt/">sbt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scala/">scala</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-java8-lambda" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/11/java8-lambda/">java8 lambda</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/06/11/java8-lambda/" class="article-date">
+  <time datetime="2016-06-10T16:53:15.000Z" itemprop="datePublished">2016-06-11</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>list.stream().forEach(out::println)<br>filter(Predicate)<br>mapToInt(Employee::getAge)<br>map(Player::getName)<br>sum()<br>max()<br>average()<br>count<br>getAsInt()<br>getAsDouble()<br>findFirst()<br>reduce(0,lambda)<br>reduce(lambda)<br>reduce((total,value)-&gt;total+value)<br>collect(toList())<br>collect(arrayList::new,ArrayList::add,ArrayList::addAll)<br>flapMap</p>
+<p>steam() —————&gt; parallelStream()<br>collect(groupingBy(Person::getGender))<br>collect(groupingByConcurrent(Person::getGender))<br>forEach(out::println)<br>forEachOrdered(out::println)</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lambda/">lambda</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-scala" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/08/scala/">scala</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/06/08/scala/" class="article-date">
+  <time datetime="2016-06-08T02:53:53.000Z" itemprop="datePublished">2016-06-08</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="download_and_install_Scala">download and install Scala</h4><p><a href="http://www.scala-lang.org/download/" target="_blank" rel="external">http://www.scala-lang.org/download/</a><br>2016jun18 -  Scala 2.11.8</p>
+<h4 id="start_REPL">start REPL</h4><p>scala</p>
+<h4 id="try_it">try it</h4><p>println(“scala rocks!”)<br>for(i&lt;-1 to 11)println(i)</p>
+<h4 id="exit_REPL">exit REPL</h4><p>:q<br>:quit<br>ctrl-d</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scala/">scala</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-lamp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/31/lamp/">lamp</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/05/31/lamp/" class="article-date">
+  <time datetime="2016-05-30T19:32:54.000Z" itemprop="datePublished">2016-05-31</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="philips_天秤座_立燈_PLL36206_$2290_保固一年_已經用了四年有了吧">philips 天秤座 立燈 PLL36206  $2290 保固一年 已經用了四年有了吧</h4><p>燈管 philips PLL36W840 規格PL-L 36w 4P 緊密型燈管<br>燈管價格看到120元，最小110元。36瓦，效率80%，約2900流明。<br>拆開來看，它的原廠安定器是二線輸出的瞬亮式。<br>有點奇怪，它的安定器是直連插頭的，開關是接在安定器和燈管端之間。這樣會讓安定器的壽命比較長嗎？</p>
+<p>燈管表定使用壽命10k小時，實際用8k小時還在使用中，燈絲已經有點開始黑了。</p>
+<p>但電子安定器已經先壞了。先是茲茲聲，再來燈管也開始閃了。<br>找網拍pll36w用安定器160元。規格110v用，膠殼，無安規。四線輸出，但實測不像有是四線預熱式，應該也是瞬亮式的便宜貨。<br>看它可以撐多久吧。</p>
+<h4 id="同時有看到有人推薦_奇異_GE_愛迪生_銀河系T5雙臂檯燈_TF-3136_$3290_貴1k">同時有看到有人推薦 奇異 GE 愛迪生 銀河系T5雙臂檯燈 TF-3136 $3290 貴1k</h4><p>使用t5 14w燈管 效率較高有1200流明 (看照片感覺很亮，但數據還不及PLL36206的一半<br>燈管表定使用壽命12k小時<br>優點應該是雙臂加上燈頭好像可以三向轉動比較好橋不刺眼的角度。</p>
+
+      
+    </div>
+  
+  </div>
+  
+</article>
+
+
+    
+      <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      </nav>
+    </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhengda
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

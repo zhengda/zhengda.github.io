@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>coscup2016 - 夏日竹下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="司改會全民司法改革運動小市民權益保護99招
+搭配cassandra跟kafka這種底層用commitlog機制創造scale-out可能性的工具去理解萬事萬物皆是log
+
+
+
+這是曾在linkedin任職Principal Staff Engineer使用kafka建立以log為系統架構核心的Jay Kreps所推行，有別於lambda architecture的kappa architectur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="coscup2016">
+<meta property="og:url" content="http://zhengda.github.io/2016/08/21/coscup2016/index.html">
+<meta property="og:site_name" content="夏日竹下">
+<meta property="og:description" content="司改會全民司法改革運動小市民權益保護99招
+搭配cassandra跟kafka這種底層用commitlog機制創造scale-out可能性的工具去理解萬事萬物皆是log
+
+
+
+這是曾在linkedin任職Principal Staff Engineer使用kafka建立以log為系統架構核心的Jay Kreps所推行，有別於lambda architecture的kappa architectur">
+<meta property="og:updated_time" content="2016-08-27T13:28:43.032Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="coscup2016">
+<meta name="twitter:description" content="司改會全民司法改革運動小市民權益保護99招
+搭配cassandra跟kafka這種底層用commitlog機制創造scale-out可能性的工具去理解萬事萬物皆是log
+
+
+
+這是曾在linkedin任職Principal Staff Engineer使用kafka建立以log為系統架構核心的Jay Kreps所推行，有別於lambda architecture的kappa architectur">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-663898-12', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhengda.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-coscup2016" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      coscup2016
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/21/coscup2016/" class="article-date">
+  <time datetime="2016-08-21T10:41:25.000Z" itemprop="datePublished">2016-08-21</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="司改會">司改會</h4><p><a href="http://justice.care/" target="_blank" rel="external">全民司法改革運動</a><br><a href="https://www.gitbook.com/book/jrf-tw/citizen_defend_rights_99_steps/details" target="_blank" rel="external">小市民權益保護99招</a></p>
+<h4 id="搭配cassandra跟kafka這種底層用commitlog機制創造scale-out可能性的工具去理解">搭配cassandra跟kafka這種底層用commitlog機制創造scale-out可能性的工具去理解</h4><p><a href="https://medium.com/@poga/%E8%90%AC%E4%BA%8B%E8%90%AC%E7%89%A9%E7%9A%86%E6%98%AF-log-%E7%B3%BB%E7%B5%B1%E6%9E%B6%E6%A7%8B%E4%B9%9F%E4%BE%86%E9%BB%9E%E7%A7%91%E6%99%AE-caf3029359f8#.mym3zotqs" target="_blank" rel="external">萬事萬物皆是log</a></p>
+<p><script async class="speakerdeck-embed" data-id="c1a14ad8030b4d6db25dff56a1a4f964" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8sjHD2VFdG0" frameborder="0" allowfullscreen></iframe>
+
+<p><strong>這是曾在linkedin任職Principal Staff Engineer使用kafka建立以log為系統架構核心的Jay Kreps所推行，有別於lambda architecture的kappa architecture概念。</strong><br>more<br><a href="https://medium.com/@poga/萬事萬物皆是-log-參考資料-340737133a94" target="_blank" rel="external">https://medium.com/@poga/萬事萬物皆是-log-參考資料-340737133a94</a><br><a href="https://videlalvaro.github.io/2015/12/learning-about-distributed-systems.html" target="_blank" rel="external">https://videlalvaro.github.io/2015/12/learning-about-distributed-systems.html</a><br><a href="http://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/" target="_blank" rel="external">http://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/</a><br><a href="https://www.oreilly.com/ideas/questioning-the-lambda-architecture" target="_blank" rel="external">https://www.oreilly.com/ideas/questioning-the-lambda-architecture</a><br><a href="http://milinda.pathirage.org/kappa-architecture.com/" target="_blank" rel="external">http://milinda.pathirage.org/kappa-architecture.com/</a></p>
+<p><a href="https://loveforprogramming.quora.com/Distributed-Systems-Part-1-A-peek-into-consistent-hashing" target="_blank" rel="external">https://loveforprogramming.quora.com/Distributed-Systems-Part-1-A-peek-into-consistent-hashing</a><br><a href="https://loveforprogramming.quora.com/Distributed-Systems-Part-2-Consistency-versus-Availability-A-Pragmatic-Example" target="_blank" rel="external">https://loveforprogramming.quora.com/Distributed-Systems-Part-2-Consistency-versus-Availability-A-Pragmatic-Example</a><br><a href="https://loveforprogramming.quora.com/Distributed-Systems-Part-3-Managing-Anti-Entropy-using-Merkle-Trees" target="_blank" rel="external">https://loveforprogramming.quora.com/Distributed-Systems-Part-3-Managing-Anti-Entropy-using-Merkle-Trees</a></p>
+<h4 id="DevOps工具箱_介紹不少實用工具">DevOps工具箱 介紹不少實用工具</h4><p><a href="https://onedrive.live.com/view.aspx?resid=449602EB8FBEC303!2399&amp;ithint=file%2cpptx&amp;app=PowerPoint&amp;authkey=!ANC0p7Yoi51Wu9E" target="_blank" rel="external">OpenSource 的 DevOps工具箱</a><br><a href="https://coscup.hackpad.com/2016-day1-h1#2016-day1-h1" target="_blank" rel="external">hackpad</a></p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coscup/">coscup</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/24/jenkins-on-docker/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          jenkins on docker
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/19/kafka/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">kafka&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhengda
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

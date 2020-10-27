@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>夏日竹下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="夏日竹下">
+<meta property="og:url" content="http://zhengda.github.io/page/2/index.html">
+<meta property="og:site_name" content="夏日竹下">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="夏日竹下">
+<meta name="twitter:description">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-663898-12', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhengda.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer">
+      <article id="post-tor" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/27/tor/">tor</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2017/03/27/tor/" class="article-date">
+  <time datetime="2017-03-27T01:46:03.000Z" itemprop="datePublished">2017-03-27</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="prep">prep</h3><p>apt -y install tor deb.torproject.org-keyring<br>apt -y install torsocks<br>apt -y install socat<br>apt -y install expect</p>
+<h3 id="configuration">configuration</h3><p>/etc/tor/torrc #may not need to modify it.</p>
+<h3 id="service_up">service up</h3><p>service tor start</p>
+<h3 id="torsocks_:test">torsocks :test</h3><p>torsocks ssh bbsu@ptt.cc -p 22</p>
+<h3 id="socat_:test">socat :test</h3><p>socat TCP-LISTEN:4141 SOCKS4A:localhost:ptt.cc:22,socksport=9050 &amp;<br>netstat -antup|grep socat #上一行使用9050的tor在4141建立起socket導向到ptt.cc:22<br>ssh bbsu@localhost -p 4141<br>netstat -antup|grep socat #port4141用後即毀</p>
+<h3 id="expectPtt-sh">expectPtt.sh</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/expect</span></span><br><span class="line"><span class="built_in">set</span> BBS_ID <span class="string">"tabenyaki"</span></span><br><span class="line"><span class="built_in">set</span> BBS_PW <span class="string">"taroyaki"</span></span><br><span class="line"><span class="built_in">set</span> timeout <span class="number">60</span></span><br><span class="line"><span class="comment">#log_file -noappend $env(HOME)/expectPtt.log</span></span><br><span class="line"><span class="built_in">log</span>_file <span class="variable">$env</span>(HOME)/expectPtt.log</span><br><span class="line"><span class="comment">#spawn ssh -oBatchMode=no -oStrictHostKeyChecking=no bbsu@ptt.cc</span></span><br><span class="line">spawn ssh -oBatchMode=no -oStrictHostKeyChecking=no bbsu@localhost -p <span class="number">4141</span></span><br><span class="line">expect &#123;</span><br><span class="line">    <span class="string">"請輸入代號"</span> &#123; send <span class="string">"<span class="variable">$BBS_ID</span>\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"請輸入您的密碼"</span> &#123; send <span class="string">"<span class="variable">$BBS_PW</span>\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"您想刪除其他重複登入的連線嗎"</span> &#123; send <span class="string">"N\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"您要刪除以上錯誤嘗試的記錄嗎"</span> &#123; send <span class="string">"N\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"任意鍵繼續"</span> &#123; send <span class="string">"q\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"密碼不對喔"</span> &#123; <span class="built_in">exit</span> &#125;</span><br><span class="line">    <span class="string">"裡沒有這個人啦"</span> &#123; <span class="built_in">exit</span> &#125;</span><br><span class="line">    <span class="string">"請勿頻繁登入以免造成系統過度負荷"</span> &#123; send <span class="string">"\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"請按任意鍵繼續"</span> &#123; send <span class="string">"\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"oodbye"</span> &#123; interact &#125;</span><br><span class="line">    <span class="string">"批踢踢實業坊"</span> &#123;<span class="built_in">exit</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<h3 id="cron_and_log">cron and log</h3><p>socatPttDaily.sh<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/sh</span></span><br><span class="line">socat TCP-LISTEN:<span class="number">4141</span> SOCKS4A:localhost:ptt.cc:<span class="number">22</span>,socksport=<span class="number">9050</span> &amp;</span><br><span class="line">netstat -antup|grep socat</span><br><span class="line"><span class="comment">#ssh bbsu@localhost -p 4141</span></span><br><span class="line"><span class="comment">#netstat -antup|grep socat</span></span><br><span class="line">/home/tabenyaki/expectPtt.sh</span><br></pre></td></tr></table></figure></p>
+<p>crontab -e<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">*</span> <span class="keyword">*</span>/3 <span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span> /home/tabenyaki/socatPttDaily.sh</span><br></pre></td></tr></table></figure></p>
+<p>crontab -l<br>cat /var/spool/cron/crontabs/tabenyaki</p>
+<p><del>cat /var/log/cron.log</del><br>grep CRON /var/log/syslog</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tor/">tor</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-intellij-for-scala" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/22/intellij-for-scala/">intellij idea CE for scala</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/09/22/intellij-for-scala/" class="article-date">
+  <time datetime="2016-09-22T10:20:29.000Z" itemprop="datePublished">2016-09-22</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="downlad">downlad</h3><p><a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="external">https://www.jetbrains.com/idea/download/</a><br>version 2016.2.4<br><strong> Community Edition for free. Ultimate Edition 30 days trial </strong></p>
+<h3 id="tune_option">tune option</h3><p>C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2016.2.2\bin\idea.exe.vmoptions<br>or for x64<br>C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2016.2.2\bin\idea64.exe.vmoptions</p>
+<ol>
+<li>increase xms and xmx<br>-Xms1128m<br>-Xmx2750m</li>
+</ol>
+<h3 id="change_keymap">change keymap</h3><p>File&gt;Settings&gt; search keymap<br>Change it from Default to Eclipse if you like.</p>
+<h3 id="disable_folding">disable folding</h3><p>File&gt;Setting&gt; search fold<br>uncheck “Show code folding outline”</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/idea/">idea</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/intellij/">intellij</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scala/">scala</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-ubuntu-disable-ipv6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/16/ubuntu-disable-ipv6/">ubuntu disable ipv6, avahi-daemon</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/09/16/ubuntu-disable-ipv6/" class="article-date">
+  <time datetime="2016-09-16T10:49:49.000Z" itemprop="datePublished">2016-09-16</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>ipv6沒在用還開著可能使網路變慢</strong><br>sudo vi /etc/sysctl.conf<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net<span class="class">.ipv6</span><span class="class">.conf</span><span class="class">.all</span><span class="class">.disable_ipv6</span> = <span class="number">1</span></span><br><span class="line">net<span class="class">.ipv6</span><span class="class">.conf</span><span class="class">.default</span><span class="class">.disable_ipv6</span> = <span class="number">1</span></span><br><span class="line">net<span class="class">.ipv6</span><span class="class">.conf</span><span class="class">.lo</span><span class="class">.disable_ipv6</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>sudo sysctl -p #立即套用設定<br>reboot</p>
+<p>ip a | grep inet6 #沒內容就已經關閉ipv6了</p>
+<h3 id="disable_avahi-daemon">disable avahi-daemon</h3><p><strong>透過 Zeroconf 自動的分析與管理網路。 可以關閉他</strong><br>systemctl list-units —all | grep avahi-daemon<br>systemctl stop avahi-daemon.service<br>systemctl stop avahi-daemon.socket<br>systemctl disable avahi-daemon.service avahi-daemon.socket<br>netstat -atunp</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-zookeeper3-4-8-scala2-11-and-kafka0-10-0-1-on-ubuntu16-04-server-amd64" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/01/zookeeper3-4-8-scala2-11-and-kafka0-10-0-1-on-ubuntu16-04-server-amd64/">zookeeper3.4.8, scala2.11 and kafka0.10.0.1 on ubuntu16.04-server-amd64</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/09/01/zookeeper3-4-8-scala2-11-and-kafka0-10-0-1-on-ubuntu16-04-server-amd64/" class="article-date">
+  <time datetime="2016-09-01T01:54:14.000Z" itemprop="datePublished">2016-09-01</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="zookeeper_3-4,8">zookeeper 3.4,8</h3><p>#see <a href="http://zookeeper.apache.org/releases.html" target="_blank" rel="external">http://zookeeper.apache.org/releases.html</a><br>wget <a href="http://apache.stu.edu.tw/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz" target="_blank" rel="external">http://apache.stu.edu.tw/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz</a><br>tar zxvf zookeeper-3.4.8.tar.gz<br>mv zookeeper-3.4.8 /usr/local/zookeeper<br>cd /usr/local/zookeeper</p>
+<h5 id="configuration">configuration</h5><p>vi conf/zoo.cfg</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tickTime=<span class="number">2000</span></span><br><span class="line">dataDir=/usr/<span class="built_in">local</span>/zookeeper/data</span><br><span class="line">clientPort=<span class="number">2181</span></span><br><span class="line">initLimit=<span class="number">5</span></span><br><span class="line">syncLimit=<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h5 id="start_&amp;_status">start &amp; status</h5><p>bin/zkServer.sh start<br>bin/zkServer.sh status<br>netstat|grep 2181<br>jps</p>
+<h5 id="use">use</h5><p>bin/zkCli.sh</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ls</span> /</span><br><span class="line"><span class="keyword">quit</span></span><br></pre></td></tr></table></figure>
+<h5 id="stop">stop</h5><p>bin/zkServer.sh stop</p>
+<h3 id="scala_2-11">scala 2.11</h3><p>apt-get isntall scala #2.11.6-6<br>scala -version</p>
+<h3 id="kafka_0-10-0-1">kafka 0.10.0.1</h3><p>wget <a href="http://apache.stu.edu.tw/kafka/0.10.0.1/kafka_2.11-0.10.0.1.tgz" target="_blank" rel="external">http://apache.stu.edu.tw/kafka/0.10.0.1/kafka_2.11-0.10.0.1.tgz</a><br>tar zxvf kafka_2.11-0.10.0.1.tgz<br>mv kafka_2.11-0.10.0.1 /usr/local/kafka<br>cd /usr/local/kafka</p>
+<h5 id="start">start</h5><p>netstat|grep 2181<br>netstat|grep 9092<br>jps</p>
+<p>bin/zookeeper-server-start.sh config/zookeeper.properties #自帶zookeeper，可以不用自己裝。<br>bin/kafka-server-start.sh config/server.properties<br>netstat|grep 2181<br>netstat|grep 9092<br>jps<br>QuorumPeerMain<br>kafka<br>jps</p>
+<h5 id="use-1">use</h5><p>bin/kafka-topics.sh --zookeeper localhost:2181 --list #list all topics<br>bin/kafka-topics.sh --zookeeper localhost:2181 --create --replication-factor 1 --partitions 1 --topic hellokafka #create topic hellokafka<br>bin/kafka-topics.sh --zookeeper localhost:2181 --list #list all topics<br>bin/kafka-console-producer.sh --broker-list localhost:9092 -topic hellokafka #input some messages into topic hellokafka for test<br>bin/kafka-console-consumer.sh --zookeeper localhost:2181 -topic hellokafka --from-beginning #retrieve messages from topic hellokafka</p>
+<h5 id="stop-1">stop</h5><p>bin/zookeeper-server-stop.sh<br>bin/kafka-server-stop.sh</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kafka/">kafka</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scala/">scala</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zookeeper/">zookeeper</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-oracle-java8-hadoop2-6-4-hbase0-98-21-and-mysql5-7-on-ubuntu16-04-amd64" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/31/oracle-java8-hadoop2-6-4-hbase0-98-21-and-mysql5-7-on-ubuntu16-04-amd64/">oracle-java8, hadoop2.6.4, hbase0.98.21 and mysql5.7 on ubuntu16.04-amd64</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/31/oracle-java8-hadoop2-6-4-hbase0-98-21-and-mysql5-7-on-ubuntu16-04-amd64/" class="article-date">
+  <time datetime="2016-08-31T01:53:37.000Z" itemprop="datePublished">2016-08-31</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="oracle-java_8">oracle-java 8</h3><p>apt-get update<br>apt-get upgrade<br>#apt-get install default-jdk default-jre #openjdk-8*也可以</p>
+<p>apt-get install software-properties-common # if ubuntu16-server-amd64<br>add-apt-repository ppa:webupd8team/java<br>apt-get update<br>#apt-get install oracle-java6-installer<br>#apt-get install oracle-java7-installer<br>apt-get install oracle-java8-installer</p>
+<p>update-alternatives --config java<br>vi /etc/environment<br>JAVA_HOME=”/usr/lib/jvm/java-8-oracle”<br>source /etc/environment<br>echo $JAVA_HOME<br>java -version</p>
+<h3 id="prepare_hduser:group">prepare hduser:group</h3><p>addgroup hadoop<br>adduser --ingroup hadoop hduser<br>adduser hduser sudo #allow sudo<br>sudo su hduser<br>sudo apt-get install openssh-server ssh<br>ssh-keygen -t rsa<br>cat ~/.ssh/id-rsa.pub &gt;&gt; ~/.ssh/authorized_keys</p>
+<h3 id="hadoop_2-6-4">hadoop 2.6.4</h3><p>disable ipv6 #Hadoop doesn’t work on IPv6<br>wget <a href="http://apache.stu.edu.tw/hadoop/common/hadoop-2.6.4/hadoop-2.6.4.tar.gz" target="_blank" rel="external">http://apache.stu.edu.tw/hadoop/common/hadoop-2.6.4/hadoop-2.6.4.tar.gz</a><br>tar zxvf hadoop-2.6.4.tar.gz -C /usr/local<br>cd /usr/local<br>mv hadoop-2.6.4 hadoop<br>chown hduser:hadoop -R /usr/local/hadoop<br>cd /usr/local/hadoop<br>vi ~/.bashrc</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#HADOOP VARIABLES START</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-<span class="number">8</span>-oracle</span><br><span class="line"><span class="built_in">export</span> HADOOP_HOME=/usr/<span class="built_in">local</span>/hadoop</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP_HOME</span>/sbin</span><br><span class="line"><span class="built_in">export</span> HADOOP_MAPRED_HOME=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_COMMON_HOME=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_HDFS_HOME=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> YARN_HOME=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_COMMON_LIB_NATIVE_DIR=<span class="variable">$HADOOP_HOME</span>/lib/native</span><br><span class="line"><span class="built_in">export</span> HADOOP_OPTS=<span class="string">"-Djava.library.path=<span class="variable">$HADOOP_HOME</span>/lib"</span></span><br><span class="line"><span class="comment">#HADOOP VARIABLES END</span></span><br></pre></td></tr></table></figure>
+<p>source ~/.bashrc</p>
+<p>cd /usr/local/hadoop/etc/hadoop/</p>
+<p>vi /usr/local/hadoop/etc/hadoop/hadoop-env.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-<span class="number">8</span>-oracle</span><br></pre></td></tr></table></figure>
+<p>vi /usr/local/hadoop/etc/hadoop/core-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>fs.default.name<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>hdfs://localhost:9000<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>cp mapred-site.xml.template mapred-site.xml<br>vi /usr/local/hadoop/etc/hadoop/mapred-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>vi /usr/local/hadoop/etc/hadoop/hdfs-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>1<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.name.dir<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>file:///home/hduser/hadoopinfra/hdfs/namenode<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.data.dir<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>file:///home/hduser/hadoopinfra/hdfs/datanode<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>vi /usr/local/hadoop/etc/hadoop/yarn-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.nodemanager.aux-services.mapreduce.shuffle.class<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>org.apache.hadoop.mapred.ShuffleHandler<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="init">init</h5><p>bin/hdfs namenode -format</p>
+<h5 id="start">start</h5><p>sbin/start-dfs.sh<br>sbin/start-yarn.sh<br>bin/hadoop versions<br>jps<br>netstat -plten |grep java</p>
+<h5 id="use">use</h5><p>bin/hadoop fs -df<br>bin/hadoop fs -ls /<br>sudo -u hduser bin/hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.4.jar pi 2 5<br>#sudo -u hduser bin/hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.4.jar pi 16 10000000</p>
+<h5 id="web_ui">web ui</h5><p><a href="http://192.168.3.204:50070/" target="_blank" rel="external">http://192.168.3.204:50070/</a> #hadoop services<br><a href="http://192.168.3.204:8088/cluster" target="_blank" rel="external">http://192.168.3.204:8088/cluster</a> #hadoop applications</p>
+<h5 id="stop">stop</h5><p>sbin/stop-yarn.sh<br>sbin/stop-dfs.sh</p>
+<h3 id="hbase_0-98-21">hbase 0.98.21</h3><p>wget <a href="http://apache.stu.edu.tw/hbase/0.98.21/hbase-0.98.21-hadoop2-bin.tar.gz" target="_blank" rel="external">http://apache.stu.edu.tw/hbase/0.98.21/hbase-0.98.21-hadoop2-bin.tar.gz</a><br>tar zxvf hbase-0.98.21-hadoop2-bin.tar.gz -C /usr/local<br>cd /usr/local<br>mv hbase-0.98.21-hadoop2 hbase<br>chown hduser:hadoop -R /usr/local/hbase<br>cd /usr/local/hbase<br>vi conf/hbase-site.xml<br>hbase.rootdir=file:///home/hduser/hbase/hfiles or hdfs://localhost:9000/hbase<br>hbase.zookeeper.property.dataDir=/home/hduser/zookeeper<br>其它hbase.zookeeper相關改port什麼的就隨意</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>file:///home/hduser/hbase/hfiles<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--</span><br><span class="line">	 &lt;value&gt;hdfs://localhost:8030/hbase&lt;/value&gt;</span><br><span class="line">	--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>hbase.zookeeper.property.dataDir<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>/home/hduser/zookeeper<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>hbase.zookeeper.peerport<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>2889<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>hbase.zookeeper.leaderport<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>2889<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>hbase.zookeeper.property.clientPort<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>2182<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>vi /usr/local/hbase/conf/hbase-env.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-<span class="number">8</span>-oracle</span><br><span class="line"><span class="built_in">export</span> HBASE_HOME=/usr/<span class="built_in">local</span>/hbase</span><br></pre></td></tr></table></figure>
+<h5 id="start-1">start</h5><p>bin/start-hbase.sh #export HBASE_MANAGES_ZK=true #控制使用內建的zookeeper</p>
+<h5 id="use-1">use</h5><p>jps<br>bin/hbase shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">status</span><br><span class="line">list</span><br><span class="line">create <span class="string">'test'</span>,<span class="string">'cf'</span></span><br><span class="line">is_enabled <span class="string">'test'</span></span><br><span class="line">put <span class="string">'test'</span>,<span class="string">'rowkey1'</span>,<span class="string">'cf:name'</span>,<span class="string">'alex'</span></span><br><span class="line">put <span class="string">'test'</span>,<span class="string">'rowkey2'</span>,<span class="string">'cf:name'</span>,<span class="string">'banana'</span></span><br><span class="line">put <span class="string">'test'</span>,<span class="string">'rowke31'</span>,<span class="string">'cf:nickname'</span>,<span class="string">'charlie'</span></span><br><span class="line">scan <span class="string">'test'</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<h5 id="web_ui-1">web ui</h5><p><a href="http://192.168.3.204:60010/" target="_blank" rel="external">http://192.168.3.204:60010/</a></p>
+<h5 id="stop-1">stop</h5><p>bin/stop-hbase.sh</p>
+<h5 id="logs">logs</h5><p>tail logs/hbase-hduser-master-ubuntu.out<br>tail logs/hbase-hduser-zookeeper.ubuntu.out</p>
+<h3 id="mysql_5-7">mysql 5.7</h3><p>apt -y update<br>apt -y upgrade<br>apt -y install mysql-server mysql-client #mysql5.7<br>mysql_secure_installation<br>systemctl status mysql<br>service mysql status<br>mysql -u root -p #enter password</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">status</span><br><span class="line">create database <span class="built_in">test</span>;</span><br><span class="line">grant all on test.* to <span class="string">'leon'</span> identified by <span class="string">'Pw12345678'</span>;</span><br><span class="line">select * from mysql.user;</span><br><span class="line">use <span class="built_in">test</span>;</span><br><span class="line">show tables;</span><br><span class="line">show databases;</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+<p>vi /etc/mysql/mysql.conf.d/mysqld.cnf</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop/">hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hbase/">hbase</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-Package-Project-into-JAR-in-Eclipse" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/28/Package-Project-into-JAR-in-Eclipse/">Package Project into JAR in Eclipse</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/28/Package-Project-into-JAR-in-Eclipse/" class="article-date">
+  <time datetime="2016-08-28T11:45:50.000Z" itemprop="datePublished">2016-08-28</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>印象中早期eclipse提供的jar packing功能很陽春的，就classes下包成jar檔，最多再附個META-INF/MANIFEST.MF。<br>最近在找比較方便，可以連dependencies都一起打包的機制。結果一查，其實新版(Mars2)已經可以連dependencies一起打包了，不需要用上maven。</p>
+<p><strong>File/Export &gt; Runnable JAR file</strong></p>
+<h4 id="1-_Extract_required_libraries_into_genereated_JAR">1. Extract required libraries into genereated JAR</h4><p><strong>可能是最常見常用的打包方式。</strong><br>所有dependenies統統解開然後跟build出來的class檔，混在一起包成JAR檔。優點不用說就是狂，簡單粗暴。缺點是META-INF/路徑下混合了所有dependenies解開後的META-INF資料夾，相對混亂，也可能會造成重複檔案覆蓋的問題。</p>
+<h4 id="2-_Package_required_libraries_into_generated_JAR">2. Package required libraries into generated JAR</h4><p>這個跟下面的3有點像，但是把所有dependenies放在jar檔內的根目錄下。<br>可是jar in jar是無法被java classpath的預設機制使用到的，所以META-INF/MANIFEST.MF裡Main-Class會指定成eclipse提供的org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader及加上Rsrc*設定來載入jar檔並啟動main class。<br>雖然這是個人覺得比較漂亮的打包，但就像上面說的；多了一層eclipse客制的機制還是讓人覺得有點阿雜。</p>
+<h4 id="3-_Copy_required_libraries_into_sub-folder_next_to_generated_JAR">3. Copy required libraries into sub-folder next to generated JAR</h4><p>在包出來的JAR檔所在目錄下會建一個跟JAR檔同名的目錄，裡面放相依的dependenies。<br>JAR檔內的META-INF/MANIFEST.MF裡的Class-Path會指定那些dependenies的相依路徑。只要相對路徑不變，就可以直接用java指定跑程式，缺點就是搬移jar時多一個外部folder要拷貝。</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jar/">jar</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-windows-tips" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/26/windows-tips/">windows tips</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/26/windows-tips/" class="article-date">
+  <time datetime="2016-08-26T10:45:48.000Z" itemprop="datePublished">2016-08-26</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="uptime">uptime</h4><p>net statistics server<br>或是開windows task manager(工作管理員) &gt; perforamnce(效能) &gt; up time (存留時間)</p>
+<p><strong> linux </strong><br>uptime</p>
+<h4 id="installation_date">installation date</h4><p><del>systeminfo | find “Original”</del><br><del>systeminfo | find /i “Original”</del><br><del>systeminfo | find “System Boot Time:”</del><br><del>systeminfo | find /i “install date”</del><br>C:>wmic os get installdate<br>InstallDate<br>20141213185722.000000+480</p>
+<p><strong> linux </strong><br>root@ubuntu:~# ls -ld /var/log/installer<br>drwxr-xr-x 3 root root 4096 Aug 16 09:17 /var/log/installer</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tip/">tip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/">windows</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-jenkins-on-docker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/24/jenkins-on-docker/">jenkins on docker</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/24/jenkins-on-docker/" class="article-date">
+  <time datetime="2016-08-23T16:46:27.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>docker pull jenkins    #2016aug24 目前pull到的是2.7.2 LTS @see <a href="https://jenkins-ci.org" target="_blank" rel="external">https://jenkins-ci.org</a> <a href="https://jenkins.io" target="_blank" rel="external">https://jenkins.io</a></p>
+<h4 id="prepare">prepare</h4><p>mkdir /home/jenkins_dir<br>chown 1000:docker /home/jenkins_dir<br>docker run -d —name jenkins -p 8080:8080 -v /home/jenkins_dir:/var/jenkins_home jenkins</p>
+<h4 id="第一次啟動，使用initialAdminPassword">第一次啟動，使用initialAdminPassword</h4><p>cat /home/jenkins_dir/secrets/initialAdminPassword</p>
+<p>docker logs jenkins</p>
+<h4 id="web_ui">web ui</h4><p><a href="http://192.168.3.204:8080/" target="_blank" rel="external">http://192.168.3.204:8080/</a>    #第一次啟動使用initialAdminPassword後，會要你選要安裝的plugins</p>
+<p><strong> 裝完plugins後。建立user account </strong></p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jenkins/">jenkins</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-coscup2016" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/21/coscup2016/">coscup2016</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/21/coscup2016/" class="article-date">
+  <time datetime="2016-08-21T10:41:25.000Z" itemprop="datePublished">2016-08-21</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="司改會">司改會</h4><p><a href="http://justice.care/" target="_blank" rel="external">全民司法改革運動</a><br><a href="https://www.gitbook.com/book/jrf-tw/citizen_defend_rights_99_steps/details" target="_blank" rel="external">小市民權益保護99招</a></p>
+<h4 id="搭配cassandra跟kafka這種底層用commitlog機制創造scale-out可能性的工具去理解">搭配cassandra跟kafka這種底層用commitlog機制創造scale-out可能性的工具去理解</h4><p><a href="https://medium.com/@poga/%E8%90%AC%E4%BA%8B%E8%90%AC%E7%89%A9%E7%9A%86%E6%98%AF-log-%E7%B3%BB%E7%B5%B1%E6%9E%B6%E6%A7%8B%E4%B9%9F%E4%BE%86%E9%BB%9E%E7%A7%91%E6%99%AE-caf3029359f8#.mym3zotqs" target="_blank" rel="external">萬事萬物皆是log</a></p>
+<p><script async class="speakerdeck-embed" data-id="c1a14ad8030b4d6db25dff56a1a4f964" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8sjHD2VFdG0" frameborder="0" allowfullscreen></iframe>
+
+<p><strong>這是曾在linkedin任職Principal Staff Engineer使用kafka建立以log為系統架構核心的Jay Kreps所推行，有別於lambda architecture的kappa architecture概念。</strong><br>more<br><a href="https://medium.com/@poga/萬事萬物皆是-log-參考資料-340737133a94" target="_blank" rel="external">https://medium.com/@poga/萬事萬物皆是-log-參考資料-340737133a94</a><br><a href="https://videlalvaro.github.io/2015/12/learning-about-distributed-systems.html" target="_blank" rel="external">https://videlalvaro.github.io/2015/12/learning-about-distributed-systems.html</a><br><a href="http://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/" target="_blank" rel="external">http://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/</a><br><a href="https://www.oreilly.com/ideas/questioning-the-lambda-architecture" target="_blank" rel="external">https://www.oreilly.com/ideas/questioning-the-lambda-architecture</a><br><a href="http://milinda.pathirage.org/kappa-architecture.com/" target="_blank" rel="external">http://milinda.pathirage.org/kappa-architecture.com/</a></p>
+<p><a href="https://loveforprogramming.quora.com/Distributed-Systems-Part-1-A-peek-into-consistent-hashing" target="_blank" rel="external">https://loveforprogramming.quora.com/Distributed-Systems-Part-1-A-peek-into-consistent-hashing</a><br><a href="https://loveforprogramming.quora.com/Distributed-Systems-Part-2-Consistency-versus-Availability-A-Pragmatic-Example" target="_blank" rel="external">https://loveforprogramming.quora.com/Distributed-Systems-Part-2-Consistency-versus-Availability-A-Pragmatic-Example</a><br><a href="https://loveforprogramming.quora.com/Distributed-Systems-Part-3-Managing-Anti-Entropy-using-Merkle-Trees" target="_blank" rel="external">https://loveforprogramming.quora.com/Distributed-Systems-Part-3-Managing-Anti-Entropy-using-Merkle-Trees</a></p>
+<h4 id="DevOps工具箱_介紹不少實用工具">DevOps工具箱 介紹不少實用工具</h4><p><a href="https://onedrive.live.com/view.aspx?resid=449602EB8FBEC303!2399&amp;ithint=file%2cpptx&amp;app=PowerPoint&amp;authkey=!ANC0p7Yoi51Wu9E" target="_blank" rel="external">OpenSource 的 DevOps工具箱</a><br><a href="https://coscup.hackpad.com/2016-day1-h1#2016-day1-h1" target="_blank" rel="external">hackpad</a></p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coscup/">coscup</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-kafka" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/19/kafka/">kafka</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/19/kafka/" class="article-date">
+  <time datetime="2016-08-19T08:05:27.000Z" itemprop="datePublished">2016-08-19</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</a><br><a href="http://www.jasongj.com/2015/03/10/KafkaColumn1/" target="_blank" rel="external">http://www.jasongj.com/2015/03/10/KafkaColumn1/</a><br><a href="http://www.jasongj.com/2015/04/24/KafkaColumn2/" target="_blank" rel="external">http://www.jasongj.com/2015/04/24/KafkaColumn2/</a><br><a href="http://www.jasongj.com/2015/06/08/KafkaColumn3/" target="_blank" rel="external">http://www.jasongj.com/2015/06/08/KafkaColumn3/</a><br><a href="http://www.jasongj.com/2015/08/09/KafkaColumn4/" target="_blank" rel="external">http://www.jasongj.com/2015/08/09/KafkaColumn4/</a><br><a href="http://www.jasongj.com/2015/12/31/KafkaColumn5_kafka_benchmark/" target="_blank" rel="external">http://www.jasongj.com/2015/12/31/KafkaColumn5_kafka_benchmark/</a></p>
+<p><a href="http://lxw1234.com/archives/2015/11/571.htm" target="_blank" rel="external">http://lxw1234.com/archives/2015/11/571.htm</a><br><a href="http://my.oschina.net/itblog/blog/540918" target="_blank" rel="external">http://my.oschina.net/itblog/blog/540918</a></p>
+<p><a href="http://blog.cloudera.com/blog/2014/09/apache-kafka-for-beginners/" target="_blank" rel="external">http://blog.cloudera.com/blog/2014/09/apache-kafka-for-beginners/</a><br><a href="http://www.benniehaelen.com/hadoop/using-apache-kafka/" target="_blank" rel="external">http://www.benniehaelen.com/hadoop/using-apache-kafka/</a><br><a href="https://dzone.com/articles/kafka-clients-at-most-once-at-least-once-exactly-o" target="_blank" rel="external">https://dzone.com/articles/kafka-clients-at-most-once-at-least-once-exactly-o</a><br><a href="https://medium.com/@ajmalbabu/kafka-0-9-0-clients-db1f43257d30#.kimer9o9m" target="_blank" rel="external">https://medium.com/@ajmalbabu/kafka-0-9-0-clients-db1f43257d30#.kimer9o9m</a></p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kafka/">kafka</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
+      <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      </nav>
+    </section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhengda
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

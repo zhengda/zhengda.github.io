@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[夏日竹下]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://zhengda.github.io/"/>
+  <updated>2017-07-27T22:22:50.233Z</updated>
+  <id>http://zhengda.github.io/</id>
+  
+  <author>
+    <name><![CDATA[zhengda]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[basic mysql configuration on ubuntu16.04]]></title>
+    <link href="http://zhengda.github.io/2017/07/28/basic-mysql-configuration-on-ubuntu16-04/"/>
+    <id>http://zhengda.github.io/2017/07/28/basic-mysql-configuration-on-ubuntu16-04/</id>
+    <published>2017-07-27T22:21:05.000Z</published>
+    <updated>2017-07-27T22:22:50.233Z</updated>
+    <content type="html"><![CDATA[<h1 id="ubuntu16-04_default_mysql">ubuntu16.04 default mysql</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/mysql/mysql.conf.d/mysqld.cnf</span><br><span class="line">systemctl restart mysql</span><br></pre></td></tr></table></figure>
+<h3 id="准許外部連線">准許外部連線</h3><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#bind-address=<span class="number">127.0.0.1</span> #註解掉，許可外部連線。等同<span class="number">0.0.0.0</span></span><br></pre></td></tr></table></figure>
+<h3 id="grant_priviledges">grant priviledges</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> host,<span class="keyword">user</span> <span class="keyword">from</span> mysql.<span class="keyword">user</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'leon'</span>@<span class="string">'10.0.0.%'</span>    <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'asdfasdf;lkj'</span>    <span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'leon'</span>@<span class="string">'192.168.1.%'</span>    <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'asdfasdf;lkj'</span>    <span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'leon'</span>@<span class="string">'localhost'</span>    <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'asdfasdf;lkj'</span>    <span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'leon'</span>@<span class="string">'leon-%'</span>    <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'asdfasdf;lkj'</span>    <span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">delete</span> <span class="keyword">from</span> mysql.<span class="keyword">user</span> <span class="keyword">where</span> host=<span class="string">'::1'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">delete</span> <span class="keyword">from</span> mysql.<span class="keyword">user</span> <span class="keyword">where</span> host=<span class="string">'%'</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">commit</span>;</span> <span class="operator"><span class="keyword">flush</span> <span class="keyword">table</span> mysql.<span class="keyword">user</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</span></span><br><span class="line"><span class="operator"><span class="keyword">select</span> host,<span class="keyword">user</span> <span class="keyword">from</span> mysql.<span class="keyword">user</span>;</span></span><br></pre></td></tr></table></figure>
+<h3 id="import_sql">import sql</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">mysql</span> <span class="tag">-uleon</span> <span class="tag">-paaaaaaaa</span> <span class="tag">target_database_name</span> &lt; <span class="tag">db_dump</span><span class="class">.sql</span></span><br></pre></td></tr></table></figure>
+<h3 id="dump_sql">dump sql</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="comment">--verbose -uleon -paaaaaaaa target_database_name &gt; db_dump.sql</span></span><br><span class="line">mysqldump <span class="comment">--verbose -uleon -paaaaaaaa target_database_name specific_table &gt; table_dump.sql</span></span><br></pre></td></tr></table></figure>
+<h3 id="execute_single_sql">execute single sql</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql --verbose -uleon -paaaaaaaa target_database_name <span class="operator">-e</span> <span class="string">"drop table if exists db1.table1; "</span></span><br></pre></td></tr></table></figure>
+<h3 id="connect_remote_mysql_server">connect remote mysql server</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">mysql</span> <span class="tag">-uleon</span> <span class="tag">-paaaaaaaa</span> <span class="tag">-h</span> 10<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span></span><br></pre></td></tr></table></figure>
+<h3 id="取消mysql大小寫敏感">取消mysql大小寫敏感</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[mysqld]</span></span><br><span class="line"><span class="setting">lower_case_table_names = <span class="value"><span class="number">1</span></span></span></span><br></pre></td></tr></table></figure>
+<h3 id="utf8_-&gt;_utf8mb4">utf8 -&gt; utf8mb4</h3><p>show variables like ‘character%’;<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-<span class="operator"><span class="keyword">set</span> = utf8mb4</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line"><span class="keyword">default</span>-<span class="built_in">character</span>-<span class="keyword">set</span> = utf8mb4</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line"><span class="built_in">character</span>-<span class="keyword">set</span>-client-handshake = <span class="literal">FALSE</span></span><br><span class="line"><span class="built_in">character</span>-<span class="keyword">set</span>-<span class="keyword">server</span> = utf8mb4</span><br><span class="line"><span class="keyword">collation</span>-<span class="keyword">server</span> = utf8mb4_unicode_ci</span><br><span class="line">init_connect=<span class="string">'SET NAMES utf8mb4'</span></span></span><br></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="ubuntu16-04_default_mysql">ubuntu16.04 default mysql</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class]]>
+    </summary>
+    
+      <category term="mysql" scheme="http://zhengda.github.io/tags/mysql/"/>
+    
+      <category term="ubuntu" scheme="http://zhengda.github.io/tags/ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[docker installation (updated)]]></title>
+    <link href="http://zhengda.github.io/2017/07/24/docker-installation-updated/"/>
+    <id>http://zhengda.github.io/2017/07/24/docker-installation-updated/</id>
+    <published>2017-07-24T09:25:22.000Z</published>
+    <updated>2017-09-12T12:37:06.732Z</updated>
+    <content type="html"><![CDATA[<h1 id="Past">Past</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="operator">-s</span>SL https://get.docker.com/ | sudo sh</span><br></pre></td></tr></table></figure>
+<p>還是可以用，但官方文件沒有推薦這種做法。</p>
+<h1 id="Present_https://docs-docker-com/engine/installation/linux/docker-ce/ubuntu/">Present <a href="https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/" target="_blank" rel="external">https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/</a></h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y remove docker docker-engine docker.io docker-ce</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt -y install apt-transport-https ca-certificates curl software-properties-common</span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line">sudo apt-key fingerprint <span class="number">0</span>EBFCD88 \<span class="comment">#9dc8 5822 9fc7 dd38 854a e2d8 8d81 803c 0ebf CD88</span></span><br><span class="line">sudo add-apt-repository \</span><br><span class="line">    <span class="string">"deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span><br><span class="line">    <span class="variable">$(lsb_release -cs)</span> \</span><br><span class="line">    stable"</span></span><br><span class="line">sudo apt-get update <span class="number">1</span>&gt; /dev/null</span><br><span class="line">sudo apt -y install  install docker-ce</span><br><span class="line"></span><br><span class="line">apt-cache madison docker-ce</span><br><span class="line">sudo systemctl docker status</span><br><span class="line">docker run hello-world</span><br><span class="line">docker version</span><br><span class="line">docker info</span><br></pre></td></tr></table></figure>
+<h4 id="stable/edge/test">stable/edge/test</h4><p>依release的穩定度可以有三種選擇。</p>
+<h2 id="Uninstall">Uninstall</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge docker-ce</span><br><span class="line">sudo rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
+<h2 id="EE_https://docs-docker-com/engine/installation/linux/docker-ee/ubuntu/">EE <a href="https://docs.docker.com/engine/installation/linux/docker-ee/ubuntu/" target="_blank" rel="external">https://docs.docker.com/engine/installation/linux/docker-ee/ubuntu/</a></h2><h3 id="建立_Docker_用戶組">建立 Docker 用戶組</h3><p>默認情況下，docker 命令會使用 Unix socket 與 Docker 引擎通訊。而只有 root 用戶和 docker 組的用戶才可以訪問 Docker 引擎的 Unix socket。因此，將需要使用 docker 的用戶加入 docker 用戶組。</p>
+<p>建立 docker 用戶組：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">sudo</span> groupadd docker</span><br></pre></td></tr></table></figure></p>
+<p>將當前用戶加入 docker 組：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod <span class="operator">-a</span>G docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="測試">測試</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="command">run</span> hello_world</span><br></pre></td></tr></table></figure>
+<h2 id="Docker_Compose_https://docs-docker-com/compose/install/">Docker Compose <a href="https://docs.docker.com/compose/install/" target="_blank" rel="external">https://docs.docker.com/compose/install/</a></h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/<span class="variable">$dockerComposeVersion</span>/docker-compose-`uname <span class="operator">-s</span>`-`uname -m` &gt; /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+<h3 id="alternative">alternative</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -L --fail https://github.com/docker/compose/releases/download/<span class="number">1.14</span>.<span class="number">0</span>/run.sh &gt; /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">docker-compose version</span><br></pre></td></tr></table></figure>
+<h3 id="Uninstall_Docker_Compose">Uninstall Docker Compose</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">\<span class="comment">#sudo rm $(which docker-compose)</span></span><br></pre></td></tr></table></figure>
+<h2 id="Docker_Machine_https://docs-docker-com/machine/install-machine/">Docker Machine <a href="https://docs.docker.com/machine/install-machine/" target="_blank" rel="external">https://docs.docker.com/machine/install-machine/</a></h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://github.com/docker/machine/releases/download/v0.<span class="number">12.1</span>/docker-machine-`uname <span class="operator">-s</span>`-`uname -m` &gt;/usr/<span class="built_in">local</span>/bin/docker-machine</span><br><span class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/docker-machine</span><br><span class="line">docker-machine version</span><br></pre></td></tr></table></figure>
+<h3 id="Uninstall_Docker_Machine">Uninstall Docker Machine</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-machine rm <span class="operator">-f</span> $(docker-machine ls -q)</span><br><span class="line">sudo rm $(<span class="built_in">which</span> docker-machine)</span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="Past">Past</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="]]>
+    </summary>
+    
+      <category term="docker" scheme="http://zhengda.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[gist backup]]></title>
+    <link href="http://zhengda.github.io/2017/07/22/gist-backup/"/>
+    <id>http://zhengda.github.io/2017/07/22/gist-backup/</id>
+    <published>2017-07-22T11:43:45.000Z</published>
+    <updated>2017-07-22T12:33:00.606Z</updated>
+    <content type="html"><![CDATA[<p>github官方並沒有提供gist的備份方式，不過提供了功能充份的API，目前已經到了v3。<br><a href="https://developer.github.com/v3/guides/getting-started/" target="_blank" rel="external">https://developer.github.com/v3/guides/getting-started/</a><br><a href="https://developer.github.com/v3/auth/" target="_blank" rel="external">https://developer.github.com/v3/auth/</a></p>
+<h2 id="backup_public_gists">backup public gists</h2><p>這裡使用v1版的API即可，v1當時也沒有功能能備份private gists。<br>但也就是說你只要知道github帳號就可以備份任意人的public gists。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># @see https://stackoverflow.com/questions/6724490/pull-all-gists-from-github</span></span><br><span class="line"><span class="comment"># Clone or update all a user's gists</span></span><br><span class="line"><span class="comment"># curl -ks https://gist.githubusercontent.com/fedir/5466075/raw/gist-backup.py | USER=fedir python</span></span><br><span class="line"><span class="comment"># USER=fedir python gist-backup.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> call</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> urlopen</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line">USER = os.environ[<span class="string">'USER'</span>]</span><br><span class="line"></span><br><span class="line">perpage=<span class="number">30.0</span></span><br><span class="line">userurl = urlopen(<span class="string">'https://api.github.com/users/'</span> + USER)</span><br><span class="line">public_gists = json.load(userurl)</span><br><span class="line">gistcount = public_gists[<span class="string">'public_gists'</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Found gists : "</span> + str(gistcount)</span><br><span class="line">pages = int(math.ceil(float(gistcount)/perpage))</span><br><span class="line"><span class="keyword">print</span> <span class="string">"Found pages : "</span> + str(pages)</span><br><span class="line"></span><br><span class="line">f=open(<span class="string">'./contents.txt'</span>, <span class="string">'w+'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> page <span class="keyword">in</span> range(pages):</span><br><span class="line">	pageNumber = str(page + <span class="number">1</span>)</span><br><span class="line">	<span class="keyword">print</span> <span class="string">"Processing page number "</span> + pageNumber</span><br><span class="line">	pageUrl = <span class="string">'https://api.github.com/users/'</span> + USER  + <span class="string">'/gists?page='</span> + pageNumber + <span class="string">'&amp;per_page='</span> + str(int(perpage))</span><br><span class="line">	u = urlopen (pageUrl)</span><br><span class="line">	gists = json.load(u)</span><br><span class="line">	startd = os.getcwd()</span><br><span class="line">	<span class="keyword">for</span> gist <span class="keyword">in</span> gists:</span><br><span class="line">		gistd = gist[<span class="string">'id'</span>]</span><br><span class="line">		gistUrl = <span class="string">'git://gist.github.com/'</span> + gistd + <span class="string">'.git'</span>	</span><br><span class="line">		<span class="keyword">if</span> os.path.isdir(gistd):</span><br><span class="line">			os.chdir(gistd)</span><br><span class="line">			call([<span class="string">'git'</span>, <span class="string">'pull'</span>, gistUrl])</span><br><span class="line">			os.chdir(startd)</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			call([<span class="string">'git'</span>, <span class="string">'clone'</span>, gistUrl])</span><br><span class="line">		<span class="keyword">if</span> gist[<span class="string">'description'</span>] == <span class="keyword">None</span>:</span><br><span class="line">			description = <span class="string">''</span></span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			description = gist[<span class="string">'description'</span>].encode(<span class="string">'utf8'</span>).replace(<span class="string">"\r"</span>,<span class="string">' '</span>).replace(<span class="string">"\n"</span>,<span class="string">' '</span>)</span><br><span class="line">		<span class="keyword">print</span> &gt;&gt; f, gist[<span class="string">'id'</span>], gistUrl, description</span><br></pre></td></tr></table></figure>
+<h2 id="backup_private_and_public_gists">backup private and public gists</h2><p>在備份個人gist資料時，當然是希望pirvate和public都可以一起備份。這個就比較複雜點，必需要使用v3的API走過OAuth來取得授權TOKEN。</p>
+<p><a href="https://github.com/aprescott/gist-backup/blob/master/gist-backup" target="_blank" rel="external">https://github.com/aprescott/gist-backup/blob/master/gist-backup</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/usr/bin/env bash</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># gist-backup</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Backs up all your public and private gists</span></span><br><span class="line"><span class="comment"># to the given directory.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Example:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   gist-backup ~/gist-backups</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># In addition to your own gists you can also backup your starred gists</span></span><br><span class="line"><span class="comment"># or (public) gists of a defined user by putting the gists url in an </span></span><br><span class="line"><span class="comment"># environment variable.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Example:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#   GIST_URL=https://api.github.com/gists/starred gist-backup ~/gist-backups/starred</span></span><br><span class="line"><span class="comment">#   GIST_URL=https://api.github.com/users/aprescott/gists gist-backup ~/gist-backups/aprescott</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line">token=$(git config --get github.gist.oauth.token)</span><br><span class="line">url=<span class="variable">$&#123;GIST_URL:-https://api.github.com/gists&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">usage</span></span>() &#123;</span><br><span class="line">cat &lt;&lt;END_USAGE</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"></span><br><span class="line">  gist-backup DIRECTORY</span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line"></span><br><span class="line">  gist-backup ~/gist-backups</span><br><span class="line"></span><br><span class="line">END_USAGE</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="variable">$token</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"></span><br><span class="line">cat &lt;&lt;END_USAGE_NOTE</span><br><span class="line">NOTE:</span><br><span class="line"></span><br><span class="line">  In order <span class="keyword">for</span> this to work, you<span class="string">'re going to need</span><br><span class="line">  an OAuth token set in your git config under</span><br><span class="line">  </span><br><span class="line">    github.gist.oauth.token</span><br><span class="line">  </span><br><span class="line">  This is because the API token for your account</span><br><span class="line">  cannot be used as authentication/authorization</span><br><span class="line">  in version 3 of GitHub'</span>s API.</span><br><span class="line"></span><br><span class="line">END_USAGE_NOTE</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="variable">$token</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"No OAuth token found in github.gist.oauth.token git config."</span></span><br><span class="line">  <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># if no backup directory has been given</span></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$1</span>"</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"No backup directory given."</span></span><br><span class="line">  usage</span><br><span class="line">  <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># if the given directory doesn't exist, create it</span></span><br><span class="line"><span class="keyword">if</span> [ ! <span class="operator">-e</span> <span class="string">"<span class="variable">$1</span>"</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">  mkdir -p <span class="variable">$1</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># go into the given backup directory</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># if we failed to cd for some reason, abort</span></span><br><span class="line"><span class="keyword">if</span> [ $? <span class="operator">-gt</span> <span class="number">0</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">  <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Take's a git remote URI and clones it into</span></span><br><span class="line"><span class="comment"># the backup directory. If that directory</span></span><br><span class="line"><span class="comment"># exists already, cd's into it and does a</span></span><br><span class="line"><span class="comment"># git pull.</span></span><br><span class="line"><span class="function"><span class="title">backup</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Backing up <span class="variable">$1</span>"</span></span><br><span class="line">  <span class="built_in">local</span> dir=$(<span class="built_in">echo</span> <span class="string">"<span class="variable">$1</span>"</span> | cut <span class="operator">-d</span> / <span class="operator">-f</span> <span class="number">4</span> | cut <span class="operator">-d</span> . <span class="operator">-f</span> <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [ <span class="operator">-e</span> <span class="variable">$dir</span> ]</span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"  Already cloned at <span class="variable">$PWD</span>/<span class="variable">$dir</span>. Pulling."</span></span><br><span class="line">    <span class="built_in">cd</span> <span class="variable">$dir</span></span><br><span class="line">    git pull -q</span><br><span class="line">    <span class="built_in">cd</span> <span class="variable">$OLDPWD</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    git <span class="built_in">clone</span> -q <span class="variable">$1</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">page=<span class="number">1</span></span><br><span class="line">retries=<span class="number">0</span></span><br><span class="line">MAX_RETRIES=<span class="number">5</span></span><br><span class="line"><span class="keyword">while</span> [ <span class="variable">$retries</span> <span class="operator">-lt</span> <span class="variable">$MAX_RETRIES</span> ]</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Requesting Gist page: <span class="variable">$page</span> from <span class="variable">$url</span>"</span></span><br><span class="line"></span><br><span class="line">  gists=$(</span><br><span class="line">  curl <span class="operator">-s</span> -H <span class="string">"Authorization: token <span class="variable">$token</span>"</span> <span class="operator">-d</span> <span class="string">"page=<span class="variable">$page</span>"</span> -G <span class="variable">$url</span> |</span><br><span class="line">  sed -n <span class="string">'s/.*git_pull_url": "\(.*\)",/\1/p'</span></span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$gists</span>"</span> ]</span><br><span class="line">  <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"No gists found on this page. Trying again."</span></span><br><span class="line">    retries=$(( retries + <span class="number">1</span> ))</span><br><span class="line">    <span class="built_in">continue</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> gist <span class="keyword">in</span> <span class="variable">$gists</span></span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">    backup <span class="variable">$gist</span></span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  page=$(( page + <span class="number">1</span> ))</span><br><span class="line">  retries=<span class="number">0</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"No gists found (anymore). Not trying again."</span></span><br><span class="line"><span class="built_in">exit</span> <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p>script部份使用aprescott寫的gist-backup，但在之前要先得到Token塞到git設定裡。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ curl -u github-user-name:github-password \</span><br><span class="line">  -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  -X POST \</span><br><span class="line">  <span class="operator">-d</span> <span class="string">'&#123;"scopes":["gist"], "note": "gist backup"&#125;'</span> \</span><br><span class="line">  https://api.github.com/authorizations</span><br></pre></td></tr></table></figure></p>
+<h3 id="OTP">OTP</h3><p>如果你的github帳號有設定較安全的2FA，這時光靠username和password是不夠的，github會要你再提供2FA的OTP。<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">message</span>": <span class="value"><span class="string">"Must specify two-factor authentication OTP code."</span></span>,</span><br><span class="line">  "<span class="attribute">documentation_url</span>": <span class="value"><span class="string">"https://developer.github.com/v3/auth#working-with-two-factor-authentication"</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>就照文件說明在header裡多塞一個X-GitHub-OTP<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ curl -u github-user-name:github-password \</span><br><span class="line">  -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  -H <span class="string">"X-GitHub-OTP:012345"</span> \</span><br><span class="line">  -X POST \</span><br><span class="line">  <span class="operator">-d</span> <span class="string">'&#123;"scopes":["gist"], "note": "gist backup"&#125;'</span> \</span><br><span class="line">  https://api.github.com/authorizations</span><br></pre></td></tr></table></figure></p>
+<p>一切正常，則返回的一串json裡會有個叫token的欄位，把該欄位的資料複製下<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global github.gist.oauth.token TOKEN</span><br></pre></td></tr></table></figure></p>
+<p>進到 <a href="https://github.com/settings/tokens/" target="_blank" rel="external">https://github.com/settings/tokens/</a> 也可以看到有產生一個授權存取gist資料的personal access token。<br><img src="/img/2017-07-22_200323.png" alt=""><br><img src="/img/2017-07-22_200408.png" alt=""></p>
+<p>全部準備完了，就可以直接跑gist-backup sciript把全部資料都爬下來。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/aprescott/gist-backup/master/gist-backup</span><br><span class="line">chmod <span class="number">755</span> gist-backup</span><br><span class="line">mkdir gist-backup-folder</span><br><span class="line">./gist-backup ./gist-backup-folder</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>github官方並沒有提供gist的備份方式，不過提供了功能充份的API，目前已經到了v3。<br><a href="https://developer.github.com/v3/guides/getting-started/" target="_blank" rel="]]>
+    </summary>
+    
+      <category term="gist" scheme="http://zhengda.github.io/tags/gist/"/>
+    
+      <category term="github" scheme="http://zhengda.github.io/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[thunderbird experiences]]></title>
+    <link href="http://zhengda.github.io/2017/07/21/thunderbird-experiences/"/>
+    <id>http://zhengda.github.io/2017/07/21/thunderbird-experiences/</id>
+    <published>2017-07-21T12:16:56.000Z</published>
+    <updated>2017-07-21T13:02:08.088Z</updated>
+    <content type="html"><![CDATA[<h2 id="從microsoft_office_2003轉移到thunderbird">從microsoft office 2003轉移到thunderbird</h2><p>試了很多轉檔工具，不是卡授權就是卡轉檔數量。MailStoreHome是最後找到無限制又運作良好的工具。</p>
+<h3 id="MailStoreHome">MailStoreHome</h3><ol>
+<li>存檔電子郵件 指定outlook2003內的pst檔</li>
+<li>導出EML格式文件到指定目錄</li>
+<li>thunderbird安裝importexporttools add-ons</li>
+<li>thunderbird內開一目錄後，右鍵使用ImportExportTools&gt;import all messages from a directory 指定匯入EML格式文件目錄</li>
+</ol>
+<h2 id="PST、EML或mBox">PST、EML或mBox</h2><p>PST是office使用的文件格式，幾乎thunderbird在匯入office時都會有各種問題而失敗。只好使用第三方工具進行轉檔。<br>thunderbird使用mBox格式儲放email，但可以裝add-on ImportExportTools來整批匯入EML/mBox格式。<br>EML格式是每個email都為獨立檔案；用檔案目錄來整理歸類。mBox是單一檔案裡放許多email。<br><a href="http://www.pcvita.com/faqs/import-eml-into-thunderbird" target="_blank" rel="external">http://www.pcvita.com/faqs/import-eml-into-thunderbird</a></p>
+<h2 id="thunderbird的email_account_setting">thunderbird的email account setting</h2><p>輸入gmail或yahoo的帳號時會自動填pop/smtp server name/port，很方便。<br>gmail security較嚴格的帳號要從google account裡申請新的”應用程式密碼” : 我的帳戶&gt;登入與安全性&gt;應用程式密碼</p>
+<h2 id="Add-ons">Add-ons</h2><p>ImportExportTools<br>Manually sort folders</p>
+<h2 id="hotkeys">hotkeys</h2><p>shift-f5    get all messages<br>ctrl-n    write new message<br>ctrl-shift-f    search messages</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="從microsoft_office_2003轉移到thunderbird">從microsoft office 2003轉移到thunderbird</h2><p>試了很多轉檔工具，不是卡授權就是卡轉檔數量。MailStoreHome是最後找到無限制又運作良好的工]]>
+    </summary>
+    
+      <category term="email" scheme="http://zhengda.github.io/tags/email/"/>
+    
+      <category term="office" scheme="http://zhengda.github.io/tags/office/"/>
+    
+      <category term="thunderbird" scheme="http://zhengda.github.io/tags/thunderbird/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[dayi 大易輸入法 in ubuntu 16.04 ibus]]></title>
+    <link href="http://zhengda.github.io/2017/07/08/dayi-%E5%A4%A7%E6%98%93%E8%BC%B8%E5%85%A5%E6%B3%95-in-ubuntu-16-04-ibus/"/>
+    <id>http://zhengda.github.io/2017/07/08/dayi-大易輸入法-in-ubuntu-16-04-ibus/</id>
+    <published>2017-07-07T17:30:42.000Z</published>
+    <updated>2017-07-21T12:18:54.817Z</updated>
+    <content type="html"><![CDATA[<p>ibus-table-createdb -s dayi3_ibus.txt -n dayi3.db<br>ibus-table-createdb -s dayi4-ibus1.cin -n dayi4.db<br>cp dayi*.db /usr/share/ibus-table/tables/<br>ibus restart<br>ibus-setup</p>
+<p>Setting&gt;LanguageSupport下指定Keyboard input method system: IBus<br>Setting&gt;TextEntry下加入新的input source: Chinese (Dayi4) (IBus)</p>
+<p>※選字要用ctrl+數字鍵，再補上空白鍵完成選字。比較不順手。<br>※dayi4-ibus1.cin做出的db檔會缺字…<br>※dayi3_ibus.txt做出的db檔含蓋四碼的內容，其實還蠻好用的。</p>
+<h3 id="其它ibus輸入法">其它ibus輸入法</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ibus-table-cangjie3 <span class="comment">#第三代倉頡輸入法</span></span><br><span class="line">sudo apt-get install ibus-table-cangjie-big <span class="comment">#倉頡輸入法，不過第三代和第五代一起裝</span></span><br><span class="line">sudo apt-get install ibus-table-wubi <span class="comment">#五筆輸入法</span></span><br><span class="line">sudo apt-get install ibus-table-cantonese <span class="comment">#廣東話輸入法</span></span><br><span class="line">sudo apt-get install ibus-table-emoji <span class="comment">#表情符號輸入法</span></span><br><span class="line">sudo apt-get install ibus-table-quick <span class="comment">#速成輸入法</span></span><br><span class="line">sudo apt-get install ibus-table-stroke5 <span class="comment">#筆劃輸入法</span></span><br><span class="line">sudo apt-get install ibus-zhuyin <span class="comment">#注音輸入法</span></span><br><span class="line">sudo apt-get install ibus-pinyin <span class="comment">#拼音輸入法</span></span><br><span class="line">sudo apt-get install ibus-chewing <span class="comment">#新酷音輸入法</span></span><br><span class="line">ibus restart</span><br><span class="line"><span class="comment">#ibus-setup</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://www.ubuntu-tw.org/modules/newbb/viewtopic.php?post_id=319858" target="_blank" rel="external">https://www.ubuntu-tw.org/modules/newbb/viewtopic.php?post_id=319858</a><br><a href="https://www.ubuntu-tw.org/modules/newbb/viewtopic.php?topic_id=58116" target="_blank" rel="external">https://www.ubuntu-tw.org/modules/newbb/viewtopic.php?topic_id=58116</a><br><a href="https://hochin.wordpress.com/2014/07/23/%E5%9C%A8ibus%E4%B8%AD%E5%8A%A0%E5%85%A5%E5%A4%A7%E6%98%93%E8%BC%B8%E5%85%A5%E6%B3%95/" target="_blank" rel="external">https://hochin.wordpress.com/2014/07/23/%E5%9C%A8ibus%E4%B8%AD%E5%8A%A0%E5%85%A5%E5%A4%A7%E6%98%93%E8%BC%B8%E5%85%A5%E6%B3%95/</a></p>
+<hr>
+<ol>
+<li>取得大易輸入法對照檔，編碼格式需為UTF-8。以下是我的dayi3.cin的內容：</li>
+</ol>
+<p>%gen<em>inp<br>%ename dayi<br>%cname 大易<br>%selkey ‘[]-\”{}</em>|<br>%keyname begin<br>= ＝<br>` 巷<br>, 力<br>. 點<br>/ 竹<br>0 金<br>1 言<br>2 牛<br>3 目<br>4 四<br>5 王<br>6 門<br>7 田<br>8 米<br>9 足<br>; 虫<br>A 人<br>B 馬<br>C 七<br>D 日<br>E 一<br>F 土<br>G 手<br>H 鳥<br>I 木<br>J 月<br>K 立<br>L 女<br>M 雨<br>N 魚<br>O 口<br>P 耳<br>Q 石<br>R 工<br>S 革<br>T 糸<br>U 艸<br>V 禾<br>W 山<br>X 水<br>Y 火<br>Z 心<br>%keyname end<br>%chardef begin</p>
+<p>` 巷<br>, 力<br>, ，<br>. 方<br>. 舟<br>. 。<br>/ 竹<br>0 金<br>1 言<br>2 牛<br>3 目<br>4 四<br>5 王<br>6 車<br>7 田<br>8 八<br>9 止<br>; 虫</p>
+<p>（略）</p>
+<p>%chardef end</p>
+<p>2.利用底下的指令取得字根表，並且將字根表的空白改為tab，並且加上權重，然後將所有的大寫字母改為小寫字母<br>awk ‘/\%chardef begin/{f=1;next}/\%chardef end/{exit}f’ dayi3.cin | awk ‘{count[$1]++}{print $1”\t”$2”\t”101-count[$1]}’ | tr ‘[A-Z]’ ‘[a-z]’ &gt; dayi3.txt</p>
+<p>得到如下內容如下：</p>
+<p>` 巷 100<br>, 力 100<br>, ， 99<br>. 方 100<br>. 舟 99<br>. 。 98<br>/ 竹 100</p>
+<p>（略）</p>
+<p>3.將/usr/share/ibus-table/table/    空白範例表，拷貝到家目錄<br>cp /usr/share/ibus-table/tables/template.txt ~/.</p>
+<p>4.準備修改template.txt表頭資料，加上大易的相關資料，有修改的地方如下</p>
+<h3 id="利用_uuidgen_指令產生一組UUID後貼到這裡-">利用 uuidgen 指令產生一組UUID後貼到這裡.</h3><p>UUID = 730a0da0-20e9-45d9-befa-cbe59375be2d</p>
+<h3 id="可直接使用日期簡單省事">可直接使用日期簡單省事</h3><p>SERIAL_NUMBER = 20121010</p>
+<h3 id="出現的圖示，這裡直接使用內建的圖型，可自己另行設計">出現的圖示，這裡直接使用內建的圖型，可自己另行設計</h3><p>ICON = cb-mode.svg</p>
+<h3 id="The_local_names_of_this_table,_this_is_optional">The local names of this table, this is optional</h3><p>NAME.zh_CN = 大易<br>NAME.zh_HK = 大易<br>NAME.zh_TW = 大易</p>
+<h3 id="the_gettext_tools_in_runtime_as_中-">the gettext tools in runtime as 中.</h3><p>STATUS_PROMPT = 易</p>
+<h3 id="Valid_input_chars-">Valid input chars.</h3><p>VALID_INPUT_CHARS = ,./;`=1234567890abcdefghijklmnopqrstuvwxyz</p>
+<p>BEGIN_TABLE</p>
+<p>END_TABlE</p>
+<h3 id="把最後三行加上三個#號，表示註解，也就是不要用它啦">把最後三行加上三個#號，表示註解，也就是不要用它啦</h3><h3 id="BEGIN_GOUCI">BEGIN_GOUCI</h3><h3 id="character_1_goucima_1">character_1    goucima_1</h3><h3 id="character_1_goucima_2">character_1    goucima_2</h3><h3 id="END_GOUCI">END_GOUCI</h3><ol>
+<li>將第2項做出來的檔案資料dayi3.txt的所有內容，複製貼上拷貝到template.txt中的BEGIN_TABLE和END_TABLE之間。 做好之後假設存檔命名為dayi3_ibus.txt。<br>6.利用下列指令做出dayi3.db表格檔<br>ibus-table-createdb -s dayi3_ibus.txt -n dayi3.db<br>7.做出來的dayi3.db拷貝到/usr/share/ibus-table/tables底下<br>sudo cp dayi3.db /usr/share/ibus-table/tables/dayi3.db<br>8.從ibus偏好設定中，增加大易輸入法即可</li>
+</ol>
+<hr>
+<p>Step 1. 視需求下載大易字根檔 (四碼或三碼)<br>$ wget <a href="http://opensource.nchc.org.tw/odp/others/OXIM/cin_tables/dayi4.cin.gz" target="_blank" rel="external">http://opensource.nchc.org.tw/odp/others/OXIM/cin_tables/dayi4.cin.gz</a><br>$ wget <a href="https://raw.github.com/lukhnos/openvanilla/master/Source/Mac/MacDataTables/dayi3.cin" target="_blank" rel="external">https://raw.github.com/lukhnos/openvanilla/master/Source/Mac/MacDataTables/dayi3.cin</a><br>Step 2. 本篇以大易四碼為例, 解包後產生 Tab 間隔的字碼表<br>$ gunzip dayi4.cin.gz<br>$ awk ‘/\%chardef begin/{f=1;next}/\%chardef end/{exit}f’ dayi4.cin | awk ‘{count[$1]++}{print $1”\t”$2”\t”101-count[$1]}’ | tr ‘[A-Z]’ ‘[a-z]’ &gt; dayi4.txt<br>Step 3. 編輯樣板檔案<br>$ cp /usr/share/ibus-table/tables/template.txt ./ (此檔案包含在 ibus-table 套件中)<br>$ uuidgen<br>01124167-1c32-472d-ad5f-29c9c7458420<br>$ vi template.txt<br>UUID = 01124167-1c32-472d-ad5f-29c9c7458420<br>SERIAL_NUMBER = 20131230<br>ICON = dayi3.png<br>NAME.zh_CN = 大易<br>NAME.zh_HK = 大易<br>NAME.zh_TW = 大易<br>STATUS_PROMPT = 易<br>VALID_INPUT_CHARS = ,./;`=1234567890abcdefghijklmnopqrstuvwxyz</p>
+<h3 id="BEGIN_GOUCI-1">BEGIN_GOUCI</h3><h3 id="character_1_goucima_1-1">character_1 goucima_1</h3><h3 id="character_1_goucima_2-1">character_1 goucima_2</h3><h3 id="END_GOUCI-1">END_GOUCI</h3><p>Step 4. 將 dayi4.txt 內容插入 template.txt 的 BEGIN_TABLE 與 END_TABLE 之間<br>Step 5. 產生輸入法資料庫檔案<br>$ sudo vi /usr/share/ibus-table/engine/tabcreatedb.py<br>約 210 列的地方<br>    try:<br>        attr,val = unicode (l,”utf-8”).strip().split (‘=’, 1)<br>    except:<br>        attr,val = unicode (l,”utf-8”).strip().split (‘==’, 1)<br>$ ibus-table-createdb -s template.txt -n dayi4.db<br>$ sudo cp dayi4.db /usr/share/ibus-table/tables/<br>Step 6. 取得大易輸入法圖示<br>$ wget <a href="https://raw.github.com/hime-ime/hime/master/icons/blue/dayi3.png" target="_blank" rel="external">https://raw.github.com/hime-ime/hime/master/icons/blue/dayi3.png</a><br>$ sudo cp dayi3.png /usr/share/ibus-table/icons/<br>Step 7. 於 iBus 設定介面新增大易輸入法<br>$ ibus-daemon -x -r -d (重新啟動 iBus Daemon)<br>$ ibus-setup</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>ibus-table-createdb -s dayi3_ibus.txt -n dayi3.db<br>ibus-table-createdb -s dayi4-ibus1.cin -n dayi4.db<br>cp dayi*.db /usr/share/ibus-ta]]>
+    </summary>
+    
+      <category term="dayi" scheme="http://zhengda.github.io/tags/dayi/"/>
+    
+      <category term="ibus" scheme="http://zhengda.github.io/tags/ibus/"/>
+    
+      <category term="ubuntu" scheme="http://zhengda.github.io/tags/ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[maven3 and sbt0.13 on ubuntu]]></title>
+    <link href="http://zhengda.github.io/2017/07/07/maven3-and-sbt0-13-on-ubuntu/"/>
+    <id>http://zhengda.github.io/2017/07/07/maven3-and-sbt0-13-on-ubuntu/</id>
+    <published>2017-07-07T11:27:48.000Z</published>
+    <updated>2017-07-07T11:34:25.286Z</updated>
+    <content type="html"><![CDATA[<p>ubuntu 16.04.2</p>
+<h3 id="maven_3-3-9">maven 3.3.9</h3><p>sudo apt install maven<br>mvn -version</p>
+<h3 id="sbt_0-13-15-3">sbt 0.13.15.3</h3><p>#see <a href="http://www.scala-sbt.org/0.13/docs/zh-cn/Installing-sbt-on-Linux.html" target="_blank" rel="external">http://www.scala-sbt.org/0.13/docs/zh-cn/Installing-sbt-on-Linux.html</a><br>echo “deb <a href="https://dl.bintray.com/sbt/debian" target="_blank" rel="external">https://dl.bintray.com/sbt/debian</a> /“ | sudo tee -a /etc/apt/sources.list.d/sbt.list<br>sudo apt-key adv —keyserver hkp://keyserver.ubuntu.com:80 —recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823<br>sudo apt-get update<br>sudo apt install sbt<br>sbt about<br>sbt sbtVersion<br>sbt ‘inspect sbtVersion’</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>ubuntu 16.04.2</p>
+<h3 id="maven_3-3-9">maven 3.3.9</h3><p>sudo apt install maven<br>mvn -version</p>
+<h3 id="sbt_0-13-15-3">sbt 0.13.15.]]>
+    </summary>
+    
+      <category term="maven" scheme="http://zhengda.github.io/tags/maven/"/>
+    
+      <category term="sbt" scheme="http://zhengda.github.io/tags/sbt/"/>
+    
+      <category term="ubuntu" scheme="http://zhengda.github.io/tags/ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[compress and tar commands]]></title>
+    <link href="http://zhengda.github.io/2017/07/07/compress-and-tar-commands/"/>
+    <id>http://zhengda.github.io/2017/07/07/compress-and-tar-commands/</id>
+    <published>2017-07-07T10:40:09.000Z</published>
+    <updated>2017-07-07T10:40:54.357Z</updated>
+    <content type="html"><![CDATA[<h3 id="-tar_(僅打包，無壓縮)">.tar (僅打包，無壓縮)</h3><p>套件名稱：tar。<br>打包：<br>[ jonny@linux ~ ]<br>$ tar cvf FileName.tar DirName<br>解包：<br>[ jonny@linux ~ ]<br>$ tar xvf FileName.tar</p>
+<h3 id="-gz">.gz</h3><p>套件名稱：gzip。<br>壓縮<br>[ jonny@linux ~ ]<br>$ gzip FileName<br>解壓縮 1：<br>[ jonny@linux ~ ]<br>$ gunzip FileName.gz<br>解壓縮 2：<br>[ jonny@linux ~ ]<br>$ gzip -d FileName.gz</p>
+<h3 id="-tar-gz">.tar.gz</h3><p>套件名稱：gzip。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ tar zcvf FileName.tar.gz DirName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar zxvf FileName.tar.gz</p>
+<p>bz<br>壓縮：unkown。<br>解壓縮 1：<br>[ jonny@linux ~ ]<br>$ bzip2 -d FileName.bz<br>解壓縮 2：<br>[ jonny@linux ~ ]<br>$ bunzip2 FileName.bz</p>
+<h3 id="-tar-bz">.tar.bz</h3><p>壓縮：unkown。<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar jxvf FileName.tar.bz</p>
+<h3 id="-bz2">.bz2</h3><p>套件名稱：bzip2。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ bzip2 -z FileName<br>解壓縮 1：<br>[ jonny@linux ~ ]<br>$ bzip2 -d FileName.bz2<br>解壓縮 2：<br>[ jonny@linux ~ ]<br>$ bunzip2 FileName.bz2</p>
+<h3 id="-tar-bz2">.tar.bz2</h3><p>套件名稱：bzip2。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ tar jcvf FileName.tar.bz2 DirName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar jxvf FileName.tar.bz2</p>
+<h3 id="-xz">.xz</h3><p>套件名稱：xz-utils。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ xz -z FileName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ xz -d FileName.xz</p>
+<h3 id="-tar-xz">.tar.xz</h3><p>套件名稱：xz-utils。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ tar Jcvf FileName.tar.xz DirName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar Jxvf FileName.tar.xz</p>
+<h3 id="-Z">.Z</h3><p>壓縮：compress FileName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ uncompress FileName.Z</p>
+<h3 id="-tar-Z">.tar.Z</h3><p>壓縮：<br>[ jonny@linux ~ ]<br>$ tar Zcvf FileName.tar.Z DirName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar Zxvf FileName.tar.Z</p>
+<h3 id="-tgz">.tgz</h3><p>套件名稱：gzip。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ tar zcvf FileName.tgz FileName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar zxvf FileName.tgz</p>
+<h3 id="-tar-tgz">.tar.tgz</h3><p>套件名稱：gzip。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ tar zcvf FileName.tar.tgz FileName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ tar zxvf FileName.tar.tgz</p>
+<h3 id="-7z">.7z</h3><p>套件名稱：p7zip-full。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ 7z a FileName.7z FileName<br>使用密碼 (PASSWORD) 壓縮：<br>[ jonny@linux ~ ]<br>$ 7z a FileName.7z FileName -pPASSWORD<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ 7z x FileName.7z</p>
+<h3 id="-zip">.zip</h3><p>套件名稱：zip。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ zip FileName.zip DirName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ unzip FileName.zip</p>
+<h3 id="-rar">.rar</h3><p>套件名稱：rar, unrar。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ rar a FileName.rar DirName<br>解壓縮 1：<br>[ jonny@linux ~ ]<br>$ rar e FileName.rar<br>解壓縮 2：<br>[ jonny@linux ~ ]<br>$ unrar e FileName.rar<br>解壓縮 3：在指定目錄內解壓縮。<br>[ jonny@linux ~ ]<br>$ rar x FileName.rar DirName</p>
+<h3 id="-lha">.lha</h3><p>套件名稱：lha。<br>壓縮：<br>[ jonny@linux ~ ]<br>$ lha -a FileName.lha FileName<br>解壓縮：<br>[ jonny@linux ~ ]<br>$ lha -e FileName.lha</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="-tar_(僅打包，無壓縮)">.tar (僅打包，無壓縮)</h3><p>套件名稱：tar。<br>打包：<br>[ jonny@linux ~ ]<br>$ tar cvf FileName.tar DirName<br>解包：<br>[ jonny@linu]]>
+    </summary>
+    
+      <category term="linux" scheme="http://zhengda.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[install eclipse on ubuntu]]></title>
+    <link href="http://zhengda.github.io/2017/07/07/install-eclipse-on-ubuntu/"/>
+    <id>http://zhengda.github.io/2017/07/07/install-eclipse-on-ubuntu/</id>
+    <published>2017-07-07T10:39:42.000Z</published>
+    <updated>2017-07-07T11:44:13.819Z</updated>
+    <content type="html"><![CDATA[<h3 id="install">install</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#download eclipse-jee-oxygen-R-linux-gtk-x86_64.tar.gz from www.eclipse.org</span></span><br><span class="line">tar zxvf eclipse-jee-oxygen-R-linux-gtk-x86_64.tar.gz</span><br><span class="line">mv eclipse /opt</span><br><span class="line">/opt/eclipse/eclipse</span><br></pre></td></tr></table></figure>
+<h3 id="create_desktop_configuration">create desktop configuration</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/share/applications/eclipse.desktop</span><br><span class="line"></span><br><span class="line">Name=Eclipse <span class="number">4</span></span><br><span class="line">Type=Application</span><br><span class="line">Exec=/opt/eclipse/eclipse</span><br><span class="line">Terminal=<span class="literal">false</span></span><br><span class="line">Icon=/opt/eclipse/icon.xpm</span><br><span class="line">Comment=Integrated Development Environment</span><br><span class="line">NoDisplay=<span class="literal">false</span></span><br><span class="line">Categories=Development;IDE;</span><br><span class="line">Name[en]=Eclipse</span><br></pre></td></tr></table></figure>]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="install">install</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="l]]>
+    </summary>
+    
+      <category term="eclipse" scheme="http://zhengda.github.io/tags/eclipse/"/>
+    
+      <category term="linux" scheme="http://zhengda.github.io/tags/linux/"/>
+    
+      <category term="ubuntu" scheme="http://zhengda.github.io/tags/ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[spring-boot]]></title>
+    <link href="http://zhengda.github.io/2017/04/18/spring-boot/"/>
+    <id>http://zhengda.github.io/2017/04/18/spring-boot/</id>
+    <published>2017-04-18T09:07:42.000Z</published>
+    <updated>2017-04-22T18:48:50.121Z</updated>
+    <content type="html"><![CDATA[<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">mkdir spring-boot</span><br><span class="line"><span class="built_in">cd</span> spring-boot</span><br><span class="line"></span><br><span class="line"><span class="comment"># http://repo.spring.io/release/org/springframework/boot/spring-boot-cli/</span></span><br><span class="line">wget http://repo.spring.io/release/org/springframework/boot/spring-boot-cli/<span class="number">1.5</span>.<span class="number">2</span>.RELEASE/spring-boot-cli-<span class="number">1.5</span>.<span class="number">2</span>.RELEASE-bin.zip</span><br><span class="line">unzip spring-boot-cli-<span class="number">1.5</span>.<span class="number">2</span>.RELEASE-bin.zip</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> path=%path%;C:\Users\leon\spring-boot\spring-<span class="number">1.5</span>.<span class="number">2</span>.RELEASE\bin</span><br><span class="line">spring --version</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-<span class="number">8</span> -Dinput.encoding=UTF-<span class="number">8</span> -Duser.language=en -Xverify:none -Duser.timezone=Asia/Taipei -XX:+UseStringDeduplication</span><br><span class="line"><span class="built_in">set</span> SERVER_PORT=<span class="number">8099</span></span><br><span class="line">spring init --dependencies web,jpa,jdbc rest-cli</span><br><span class="line"><span class="built_in">cd</span> rest-cli</span><br><span class="line">mvn clean compile</span><br><span class="line">mvn package</span><br><span class="line">mvn <span class="built_in">test</span></span><br><span class="line">~~mvn deploy~~</span><br><span class="line">mvn spring-boot:run -Dserver.port=<span class="number">8099</span></span><br><span class="line">	run</span><br><span class="line">	repackage</span><br><span class="line">	start</span><br><span class="line">	stop</span><br><span class="line">	build-info</span><br><span class="line">java -jar target\rest-cli-<span class="number">0.0</span>.<span class="number">1</span>-SNAPSHOT.jar </span><br><span class="line">mvn <span class="built_in">exec</span>:java -Dexec.mainClass=com.example.DemoApplication</span><br></pre></td></tr></table></figure>
+<pre><code><span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
+<span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
+<span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
+<span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="title">scope</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">version</span>&gt;</span>5.1.38<span class="tag">&lt;/<span class="title">version</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>    
+
+<span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.hsqldb<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hsqldb<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>    
+
+<span class="tag">&lt;<span class="title">dependency</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>com.h2database<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>h2<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">version</span>&gt;</span>${h2.version}<span class="tag">&lt;/<span class="title">version</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">dependency</span>&gt;</span>
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="annotation">@SpringBootApplication</span></span><br><span class="line"><span class="annotation">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="annotation">@RequestMapping</span>(<span class="string">"/greet"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"Hello REST!!!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="application-properties:">application.properties:</h3><p># @see <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html" target="_blank" rel="external">https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html</a><br>server.port = 8099<br>java.version=1.7</p>
+<p>#mysql<br>spring.datasource.url=jdbc:mysql://localhost/test<br>spring.datasource.username=dbuser<br>spring.datasource.password=dbpass<br>spring.datasource.driver-class-name=com.mysql.jdbc.Driver</p>
+<p>#h2<br>#spring.datasource.url = jdbc:h2:mem:app_db;DB_CLOSE_ON_EXIT=FALSE<br>#spring.datasource.url = jdbc:h2:file:~/h2/app_db;DB_CLOSE_ON_EXIT=FALSE<br>spring.datasource.username = sa<br>spring.datasource.password =<br>spring.datasource.driverClassName = org.h2.Driver<br>spring.datasource.url=jdbc:h2:mem:testdb;Mode=Oracle<br>spring.datasource.platform=h2<br>spring.datasource.continue-on-error=true</p>
+<h1 id="spring-jpa-hibernate-ddl-auto=update">spring.jpa.hibernate.ddl-auto=update</h1><p>spring.jpa.hibernate.ddl-auto=none<br>spring.profiles.active=h2</p>
+<h3 id="example">example</h3><p><a href="http://mycuteblog.com/h2-database-example-hibernate-spring-boot/" target="_blank" rel="external">http://mycuteblog.com/h2-database-example-hibernate-spring-boot/</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="l]]>
+    </summary>
+    
+      <category term="java" scheme="http://zhengda.github.io/tags/java/"/>
+    
+      <category term="spring" scheme="http://zhengda.github.io/tags/spring/"/>
+    
+      <category term="spring-boot" scheme="http://zhengda.github.io/tags/spring-boot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[nmap scan]]></title>
+    <link href="http://zhengda.github.io/2017/03/28/nmap-scan/"/>
+    <id>http://zhengda.github.io/2017/03/28/nmap-scan/</id>
+    <published>2017-03-27T19:25:55.000Z</published>
+    <updated>2017-03-31T08:22:59.359Z</updated>
+    <content type="html"><![CDATA[<h3 id="掃同網段有那些_IP_(用_ping_的)">掃同網段有那些 IP (用 ping 的)</h3><p>nmap -sP 192.168.1.0/24<br>nmap -sP 192.168.1.1-254</p>
+<h3 id="OS">OS</h3><p>nmap -O 192.168.1.1</p>
+<h3 id="Port">Port</h3><p>nmap 192.168.1.1 -p21</p>
+<h3 id="全面掃描">全面掃描</h3><p>nmap -A -T4 192.168.1.1</p>
+<h3 id="只列出網段清單">只列出網段清單</h3><p>nmap -sL 192.168.0/24</p>
+<h3 id="TCP_SYN">TCP SYN</h3><p>nmap -sS 192.168.1.1</p>
+<h3 id="TCP_connect">TCP connect</h3><p>nmap -sT 192.168.1.1</p>
+<h3 id="UDP">UDP</h3><p>nmap -sU 192.168.1.1</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="掃同網段有那些_IP_(用_ping_的)">掃同網段有那些 IP (用 ping 的)</h3><p>nmap -sP 192.168.1.0/24<br>nmap -sP 192.168.1.1-254</p>
+<h3 id="OS">OS</h3><p>nm]]>
+    </summary>
+    
+      <category term="linux" scheme="http://zhengda.github.io/tags/linux/"/>
+    
+      <category term="nmap" scheme="http://zhengda.github.io/tags/nmap/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[tor]]></title>
+    <link href="http://zhengda.github.io/2017/03/27/tor/"/>
+    <id>http://zhengda.github.io/2017/03/27/tor/</id>
+    <published>2017-03-27T01:46:03.000Z</published>
+    <updated>2017-04-26T07:09:59.034Z</updated>
+    <content type="html"><![CDATA[<h3 id="prep">prep</h3><p>apt -y install tor deb.torproject.org-keyring<br>apt -y install torsocks<br>apt -y install socat<br>apt -y install expect</p>
+<h3 id="configuration">configuration</h3><p>/etc/tor/torrc #may not need to modify it.</p>
+<h3 id="service_up">service up</h3><p>service tor start</p>
+<h3 id="torsocks_:test">torsocks :test</h3><p>torsocks ssh bbsu@ptt.cc -p 22</p>
+<h3 id="socat_:test">socat :test</h3><p>socat TCP-LISTEN:4141 SOCKS4A:localhost:ptt.cc:22,socksport=9050 &amp;<br>netstat -antup|grep socat #上一行使用9050的tor在4141建立起socket導向到ptt.cc:22<br>ssh bbsu@localhost -p 4141<br>netstat -antup|grep socat #port4141用後即毀</p>
+<h3 id="expectPtt-sh">expectPtt.sh</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/expect</span></span><br><span class="line"><span class="built_in">set</span> BBS_ID <span class="string">"tabenyaki"</span></span><br><span class="line"><span class="built_in">set</span> BBS_PW <span class="string">"taroyaki"</span></span><br><span class="line"><span class="built_in">set</span> timeout <span class="number">60</span></span><br><span class="line"><span class="comment">#log_file -noappend $env(HOME)/expectPtt.log</span></span><br><span class="line"><span class="built_in">log</span>_file <span class="variable">$env</span>(HOME)/expectPtt.log</span><br><span class="line"><span class="comment">#spawn ssh -oBatchMode=no -oStrictHostKeyChecking=no bbsu@ptt.cc</span></span><br><span class="line">spawn ssh -oBatchMode=no -oStrictHostKeyChecking=no bbsu@localhost -p <span class="number">4141</span></span><br><span class="line">expect &#123;</span><br><span class="line">    <span class="string">"請輸入代號"</span> &#123; send <span class="string">"<span class="variable">$BBS_ID</span>\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"請輸入您的密碼"</span> &#123; send <span class="string">"<span class="variable">$BBS_PW</span>\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"您想刪除其他重複登入的連線嗎"</span> &#123; send <span class="string">"N\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"您要刪除以上錯誤嘗試的記錄嗎"</span> &#123; send <span class="string">"N\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"任意鍵繼續"</span> &#123; send <span class="string">"q\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"密碼不對喔"</span> &#123; <span class="built_in">exit</span> &#125;</span><br><span class="line">    <span class="string">"裡沒有這個人啦"</span> &#123; <span class="built_in">exit</span> &#125;</span><br><span class="line">    <span class="string">"請勿頻繁登入以免造成系統過度負荷"</span> &#123; send <span class="string">"\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"請按任意鍵繼續"</span> &#123; send <span class="string">"\r"</span> ; exp_<span class="built_in">continue</span> &#125;</span><br><span class="line">    <span class="string">"oodbye"</span> &#123; interact &#125;</span><br><span class="line">    <span class="string">"批踢踢實業坊"</span> &#123;<span class="built_in">exit</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<h3 id="cron_and_log">cron and log</h3><p>socatPttDaily.sh<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/sh</span></span><br><span class="line">socat TCP-LISTEN:<span class="number">4141</span> SOCKS4A:localhost:ptt.cc:<span class="number">22</span>,socksport=<span class="number">9050</span> &amp;</span><br><span class="line">netstat -antup|grep socat</span><br><span class="line"><span class="comment">#ssh bbsu@localhost -p 4141</span></span><br><span class="line"><span class="comment">#netstat -antup|grep socat</span></span><br><span class="line">/home/tabenyaki/expectPtt.sh</span><br></pre></td></tr></table></figure></p>
+<p>crontab -e<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">*</span> <span class="keyword">*</span>/3 <span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span> /home/tabenyaki/socatPttDaily.sh</span><br></pre></td></tr></table></figure></p>
+<p>crontab -l<br>cat /var/spool/cron/crontabs/tabenyaki</p>
+<p><del>cat /var/log/cron.log</del><br>grep CRON /var/log/syslog</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="prep">prep</h3><p>apt -y install tor deb.torproject.org-keyring<br>apt -y install torsocks<br>apt -y install socat<br>apt -y install]]>
+    </summary>
+    
+      <category term="linux" scheme="http://zhengda.github.io/tags/linux/"/>
+    
+      <category term="tor" scheme="http://zhengda.github.io/tags/tor/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[intellij idea CE for scala]]></title>
+    <link href="http://zhengda.github.io/2016/09/22/intellij-for-scala/"/>
+    <id>http://zhengda.github.io/2016/09/22/intellij-for-scala/</id>
+    <published>2016-09-22T10:20:29.000Z</published>
+    <updated>2016-09-22T11:51:11.459Z</updated>
+    <content type="html"><![CDATA[<h3 id="downlad">downlad</h3><p><a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="external">https://www.jetbrains.com/idea/download/</a><br>version 2016.2.4<br><strong> Community Edition for free. Ultimate Edition 30 days trial </strong></p>
+<h3 id="tune_option">tune option</h3><p>C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2016.2.2\bin\idea.exe.vmoptions<br>or for x64<br>C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2016.2.2\bin\idea64.exe.vmoptions</p>
+<ol>
+<li>increase xms and xmx<br>-Xms1128m<br>-Xmx2750m</li>
+</ol>
+<h3 id="change_keymap">change keymap</h3><p>File&gt;Settings&gt; search keymap<br>Change it from Default to Eclipse if you like.</p>
+<h3 id="disable_folding">disable folding</h3><p>File&gt;Setting&gt; search fold<br>uncheck “Show code folding outline”</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="downlad">downlad</h3><p><a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="external">https://www.jetbrains.com/]]>
+    </summary>
+    
+      <category term="idea" scheme="http://zhengda.github.io/tags/idea/"/>
+    
+      <category term="intellij" scheme="http://zhengda.github.io/tags/intellij/"/>
+    
+      <category term="scala" scheme="http://zhengda.github.io/tags/scala/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ubuntu disable ipv6, avahi-daemon]]></title>
+    <link href="http://zhengda.github.io/2016/09/16/ubuntu-disable-ipv6/"/>
+    <id>http://zhengda.github.io/2016/09/16/ubuntu-disable-ipv6/</id>
+    <published>2016-09-16T10:49:49.000Z</published>
+    <updated>2016-09-16T11:01:24.653Z</updated>
+    <content type="html"><![CDATA[<p><strong>ipv6沒在用還開著可能使網路變慢</strong><br>sudo vi /etc/sysctl.conf<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net<span class="class">.ipv6</span><span class="class">.conf</span><span class="class">.all</span><span class="class">.disable_ipv6</span> = <span class="number">1</span></span><br><span class="line">net<span class="class">.ipv6</span><span class="class">.conf</span><span class="class">.default</span><span class="class">.disable_ipv6</span> = <span class="number">1</span></span><br><span class="line">net<span class="class">.ipv6</span><span class="class">.conf</span><span class="class">.lo</span><span class="class">.disable_ipv6</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>sudo sysctl -p #立即套用設定<br>reboot</p>
+<p>ip a | grep inet6 #沒內容就已經關閉ipv6了</p>
+<h3 id="disable_avahi-daemon">disable avahi-daemon</h3><p><strong>透過 Zeroconf 自動的分析與管理網路。 可以關閉他</strong><br>systemctl list-units —all | grep avahi-daemon<br>systemctl stop avahi-daemon.service<br>systemctl stop avahi-daemon.socket<br>systemctl disable avahi-daemon.service avahi-daemon.socket<br>netstat -atunp</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong>ipv6沒在用還開著可能使網路變慢</strong><br>sudo vi /etc/sysctl.conf<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><sp]]>
+    </summary>
+    
+      <category term="ubuntu" scheme="http://zhengda.github.io/tags/ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[zookeeper3.4.8, scala2.11 and kafka0.10.0.1 on ubuntu16.04-server-amd64]]></title>
+    <link href="http://zhengda.github.io/2016/09/01/zookeeper3-4-8-scala2-11-and-kafka0-10-0-1-on-ubuntu16-04-server-amd64/"/>
+    <id>http://zhengda.github.io/2016/09/01/zookeeper3-4-8-scala2-11-and-kafka0-10-0-1-on-ubuntu16-04-server-amd64/</id>
+    <published>2016-09-01T01:54:14.000Z</published>
+    <updated>2016-09-04T02:14:15.897Z</updated>
+    <content type="html"><![CDATA[<h3 id="zookeeper_3-4,8">zookeeper 3.4,8</h3><p>#see <a href="http://zookeeper.apache.org/releases.html" target="_blank" rel="external">http://zookeeper.apache.org/releases.html</a><br>wget <a href="http://apache.stu.edu.tw/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz" target="_blank" rel="external">http://apache.stu.edu.tw/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz</a><br>tar zxvf zookeeper-3.4.8.tar.gz<br>mv zookeeper-3.4.8 /usr/local/zookeeper<br>cd /usr/local/zookeeper</p>
+<h5 id="configuration">configuration</h5><p>vi conf/zoo.cfg</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tickTime=<span class="number">2000</span></span><br><span class="line">dataDir=/usr/<span class="built_in">local</span>/zookeeper/data</span><br><span class="line">clientPort=<span class="number">2181</span></span><br><span class="line">initLimit=<span class="number">5</span></span><br><span class="line">syncLimit=<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h5 id="start_&amp;_status">start &amp; status</h5><p>bin/zkServer.sh start<br>bin/zkServer.sh status<br>netstat|grep 2181<br>jps</p>
+<h5 id="use">use</h5><p>bin/zkCli.sh</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ls</span> /</span><br><span class="line"><span class="keyword">quit</span></span><br></pre></td></tr></table></figure>
+<h5 id="stop">stop</h5><p>bin/zkServer.sh stop</p>
+<h3 id="scala_2-11">scala 2.11</h3><p>apt-get isntall scala #2.11.6-6<br>scala -version</p>
+<h3 id="kafka_0-10-0-1">kafka 0.10.0.1</h3><p>wget <a href="http://apache.stu.edu.tw/kafka/0.10.0.1/kafka_2.11-0.10.0.1.tgz" target="_blank" rel="external">http://apache.stu.edu.tw/kafka/0.10.0.1/kafka_2.11-0.10.0.1.tgz</a><br>tar zxvf kafka_2.11-0.10.0.1.tgz<br>mv kafka_2.11-0.10.0.1 /usr/local/kafka<br>cd /usr/local/kafka</p>
+<h5 id="start">start</h5><p>netstat|grep 2181<br>netstat|grep 9092<br>jps</p>
+<p>bin/zookeeper-server-start.sh config/zookeeper.properties #自帶zookeeper，可以不用自己裝。<br>bin/kafka-server-start.sh config/server.properties<br>netstat|grep 2181<br>netstat|grep 9092<br>jps<br>QuorumPeerMain<br>kafka<br>jps</p>
+<h5 id="use-1">use</h5><p>bin/kafka-topics.sh --zookeeper localhost:2181 --list #list all topics<br>bin/kafka-topics.sh --zookeeper localhost:2181 --create --replication-factor 1 --partitions 1 --topic hellokafka #create topic hellokafka<br>bin/kafka-topics.sh --zookeeper localhost:2181 --list #list all topics<br>bin/kafka-console-producer.sh --broker-list localhost:9092 -topic hellokafka #input some messages into topic hellokafka for test<br>bin/kafka-console-consumer.sh --zookeeper localhost:2181 -topic hellokafka --from-beginning #retrieve messages from topic hellokafka</p>
+<h5 id="stop-1">stop</h5><p>bin/zookeeper-server-stop.sh<br>bin/kafka-server-stop.sh</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="zookeeper_3-4,8">zookeeper 3.4,8</h3><p>#see <a href="http://zookeeper.apache.org/releases.html" target="_blank" rel="external">http]]>
+    </summary>
+    
+      <category term="kafka" scheme="http://zhengda.github.io/tags/kafka/"/>
+    
+      <category term="scala" scheme="http://zhengda.github.io/tags/scala/"/>
+    
+      <category term="zookeeper" scheme="http://zhengda.github.io/tags/zookeeper/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[oracle-java8, hadoop2.6.4, hbase0.98.21 and mysql5.7 on ubuntu16.04-amd64]]></title>
+    <link href="http://zhengda.github.io/2016/08/31/oracle-java8-hadoop2-6-4-hbase0-98-21-and-mysql5-7-on-ubuntu16-04-amd64/"/>
+    <id>http://zhengda.github.io/2016/08/31/oracle-java8-hadoop2-6-4-hbase0-98-21-and-mysql5-7-on-ubuntu16-04-amd64/</id>
+    <published>2016-08-31T01:53:37.000Z</published>
+    <updated>2017-07-07T08:32:21.244Z</updated>
+    <content type="html"><![CDATA[<h3 id="oracle-java_8">oracle-java 8</h3><p>apt-get update<br>apt-get upgrade<br>#apt-get install default-jdk default-jre #openjdk-8*也可以</p>
+<p>apt-get install software-properties-common # if ubuntu16-server-amd64<br>add-apt-repository ppa:webupd8team/java<br>apt-get update<br>#apt-get install oracle-java6-installer<br>#apt-get install oracle-java7-installer<br>apt-get install oracle-java8-installer</p>
+<p>update-alternatives --config java<br>vi /etc/environment<br>JAVA_HOME=”/usr/lib/jvm/java-8-oracle”<br>source /etc/environment<br>echo $JAVA_HOME<br>java -version</p>
+<h3 id="prepare_hduser:group">prepare hduser:group</h3><p>addgroup hadoop<br>adduser --ingroup hadoop hduser<br>adduser hduser sudo #allow sudo<br>sudo su hduser<br>sudo apt-get install openssh-server ssh<br>ssh-keygen -t rsa<br>cat ~/.ssh/id-rsa.pub &gt;&gt; ~/.ssh/authorized_keys</p>
+<h3 id="hadoop_2-6-4">hadoop 2.6.4</h3><p>disable ipv6 #Hadoop doesn’t work on IPv6<br>wget <a href="http://apache.stu.edu.tw/hadoop/common/hadoop-2.6.4/hadoop-2.6.4.tar.gz" target="_blank" rel="external">http://apache.stu.edu.tw/hadoop/common/hadoop-2.6.4/hadoop-2.6.4.tar.gz</a><br>tar zxvf hadoop-2.6.4.tar.gz -C /usr/local<br>cd /usr/local<br>mv hadoop-2.6.4 hadoop<br>chown hduser:hadoop -R /usr/local/hadoop<br>cd /usr/local/hadoop<br>vi ~/.bashrc</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#HADOOP VARIABLES START</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-<span class="number">8</span>-oracle</span><br><span class="line"><span class="built_in">export</span> HADOOP_HOME=/usr/<span class="built_in">local</span>/hadoop</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP_HOME</span>/sbin</span><br><span class="line"><span class="built_in">export</span> HADOOP_MAPRED_HOME=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_COMMON_HOME=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_HDFS_HOME=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> YARN_HOME=<span class="variable">$HADOOP_HOME</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_COMMON_LIB_NATIVE_DIR=<span class="variable">$HADOOP_HOME</span>/lib/native</span><br><span class="line"><span class="built_in">export</span> HADOOP_OPTS=<span class="string">"-Djava.library.path=<span class="variable">$HADOOP_HOME</span>/lib"</span></span><br><span class="line"><span class="comment">#HADOOP VARIABLES END</span></span><br></pre></td></tr></table></figure>
+<p>source ~/.bashrc</p>
+<p>cd /usr/local/hadoop/etc/hadoop/</p>
+<p>vi /usr/local/hadoop/etc/hadoop/hadoop-env.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-<span class="number">8</span>-oracle</span><br></pre></td></tr></table></figure>
+<p>vi /usr/local/hadoop/etc/hadoop/core-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>fs.default.name<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>hdfs://localhost:9000<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>cp mapred-site.xml.template mapred-site.xml<br>vi /usr/local/hadoop/etc/hadoop/mapred-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>vi /usr/local/hadoop/etc/hadoop/hdfs-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>1<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.name.dir<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>file:///home/hduser/hadoopinfra/hdfs/namenode<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.data.dir<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>file:///home/hduser/hadoopinfra/hdfs/datanode<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>vi /usr/local/hadoop/etc/hadoop/yarn-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>yarn.nodemanager.aux-services.mapreduce.shuffle.class<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>org.apache.hadoop.mapred.ShuffleHandler<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="init">init</h5><p>bin/hdfs namenode -format</p>
+<h5 id="start">start</h5><p>sbin/start-dfs.sh<br>sbin/start-yarn.sh<br>bin/hadoop versions<br>jps<br>netstat -plten |grep java</p>
+<h5 id="use">use</h5><p>bin/hadoop fs -df<br>bin/hadoop fs -ls /<br>sudo -u hduser bin/hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.4.jar pi 2 5<br>#sudo -u hduser bin/hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.4.jar pi 16 10000000</p>
+<h5 id="web_ui">web ui</h5><p><a href="http://192.168.3.204:50070/" target="_blank" rel="external">http://192.168.3.204:50070/</a> #hadoop services<br><a href="http://192.168.3.204:8088/cluster" target="_blank" rel="external">http://192.168.3.204:8088/cluster</a> #hadoop applications</p>
+<h5 id="stop">stop</h5><p>sbin/stop-yarn.sh<br>sbin/stop-dfs.sh</p>
+<h3 id="hbase_0-98-21">hbase 0.98.21</h3><p>wget <a href="http://apache.stu.edu.tw/hbase/0.98.21/hbase-0.98.21-hadoop2-bin.tar.gz" target="_blank" rel="external">http://apache.stu.edu.tw/hbase/0.98.21/hbase-0.98.21-hadoop2-bin.tar.gz</a><br>tar zxvf hbase-0.98.21-hadoop2-bin.tar.gz -C /usr/local<br>cd /usr/local<br>mv hbase-0.98.21-hadoop2 hbase<br>chown hduser:hadoop -R /usr/local/hbase<br>cd /usr/local/hbase<br>vi conf/hbase-site.xml<br>hbase.rootdir=file:///home/hduser/hbase/hfiles or hdfs://localhost:9000/hbase<br>hbase.zookeeper.property.dataDir=/home/hduser/zookeeper<br>其它hbase.zookeeper相關改port什麼的就隨意</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>file:///home/hduser/hbase/hfiles<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--</span><br><span class="line">	 &lt;value&gt;hdfs://localhost:8030/hbase&lt;/value&gt;</span><br><span class="line">	--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>hbase.zookeeper.property.dataDir<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>/home/hduser/zookeeper<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>hbase.zookeeper.peerport<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>2889<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>hbase.zookeeper.leaderport<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>2889<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">name</span>&gt;</span>hbase.zookeeper.property.clientPort<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">value</span>&gt;</span>2182<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>vi /usr/local/hbase/conf/hbase-env.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-<span class="number">8</span>-oracle</span><br><span class="line"><span class="built_in">export</span> HBASE_HOME=/usr/<span class="built_in">local</span>/hbase</span><br></pre></td></tr></table></figure>
+<h5 id="start-1">start</h5><p>bin/start-hbase.sh #export HBASE_MANAGES_ZK=true #控制使用內建的zookeeper</p>
+<h5 id="use-1">use</h5><p>jps<br>bin/hbase shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">status</span><br><span class="line">list</span><br><span class="line">create <span class="string">'test'</span>,<span class="string">'cf'</span></span><br><span class="line">is_enabled <span class="string">'test'</span></span><br><span class="line">put <span class="string">'test'</span>,<span class="string">'rowkey1'</span>,<span class="string">'cf:name'</span>,<span class="string">'alex'</span></span><br><span class="line">put <span class="string">'test'</span>,<span class="string">'rowkey2'</span>,<span class="string">'cf:name'</span>,<span class="string">'banana'</span></span><br><span class="line">put <span class="string">'test'</span>,<span class="string">'rowke31'</span>,<span class="string">'cf:nickname'</span>,<span class="string">'charlie'</span></span><br><span class="line">scan <span class="string">'test'</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<h5 id="web_ui-1">web ui</h5><p><a href="http://192.168.3.204:60010/" target="_blank" rel="external">http://192.168.3.204:60010/</a></p>
+<h5 id="stop-1">stop</h5><p>bin/stop-hbase.sh</p>
+<h5 id="logs">logs</h5><p>tail logs/hbase-hduser-master-ubuntu.out<br>tail logs/hbase-hduser-zookeeper.ubuntu.out</p>
+<h3 id="mysql_5-7">mysql 5.7</h3><p>apt -y update<br>apt -y upgrade<br>apt -y install mysql-server mysql-client #mysql5.7<br>mysql_secure_installation<br>systemctl status mysql<br>service mysql status<br>mysql -u root -p #enter password</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">status</span><br><span class="line">create database <span class="built_in">test</span>;</span><br><span class="line">grant all on test.* to <span class="string">'leon'</span> identified by <span class="string">'Pw12345678'</span>;</span><br><span class="line">select * from mysql.user;</span><br><span class="line">use <span class="built_in">test</span>;</span><br><span class="line">show tables;</span><br><span class="line">show databases;</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+<p>vi /etc/mysql/mysql.conf.d/mysqld.cnf</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h3 id="oracle-java_8">oracle-java 8</h3><p>apt-get update<br>apt-get upgrade<br>#apt-get install default-jdk default-jre #openjdk-8*也可以</p>]]>
+    </summary>
+    
+      <category term="hadoop" scheme="http://zhengda.github.io/tags/hadoop/"/>
+    
+      <category term="hbase" scheme="http://zhengda.github.io/tags/hbase/"/>
+    
+      <category term="java" scheme="http://zhengda.github.io/tags/java/"/>
+    
+      <category term="mysql" scheme="http://zhengda.github.io/tags/mysql/"/>
+    
+      <category term="ubuntu" scheme="http://zhengda.github.io/tags/ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Package Project into JAR in Eclipse]]></title>
+    <link href="http://zhengda.github.io/2016/08/28/Package-Project-into-JAR-in-Eclipse/"/>
+    <id>http://zhengda.github.io/2016/08/28/Package-Project-into-JAR-in-Eclipse/</id>
+    <published>2016-08-28T11:45:50.000Z</published>
+    <updated>2016-08-28T12:28:48.193Z</updated>
+    <content type="html"><![CDATA[<p>印象中早期eclipse提供的jar packing功能很陽春的，就classes下包成jar檔，最多再附個META-INF/MANIFEST.MF。<br>最近在找比較方便，可以連dependencies都一起打包的機制。結果一查，其實新版(Mars2)已經可以連dependencies一起打包了，不需要用上maven。</p>
+<p><strong>File/Export &gt; Runnable JAR file</strong></p>
+<h4 id="1-_Extract_required_libraries_into_genereated_JAR">1. Extract required libraries into genereated JAR</h4><p><strong>可能是最常見常用的打包方式。</strong><br>所有dependenies統統解開然後跟build出來的class檔，混在一起包成JAR檔。優點不用說就是狂，簡單粗暴。缺點是META-INF/路徑下混合了所有dependenies解開後的META-INF資料夾，相對混亂，也可能會造成重複檔案覆蓋的問題。</p>
+<h4 id="2-_Package_required_libraries_into_generated_JAR">2. Package required libraries into generated JAR</h4><p>這個跟下面的3有點像，但是把所有dependenies放在jar檔內的根目錄下。<br>可是jar in jar是無法被java classpath的預設機制使用到的，所以META-INF/MANIFEST.MF裡Main-Class會指定成eclipse提供的org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader及加上Rsrc*設定來載入jar檔並啟動main class。<br>雖然這是個人覺得比較漂亮的打包，但就像上面說的；多了一層eclipse客制的機制還是讓人覺得有點阿雜。</p>
+<h4 id="3-_Copy_required_libraries_into_sub-folder_next_to_generated_JAR">3. Copy required libraries into sub-folder next to generated JAR</h4><p>在包出來的JAR檔所在目錄下會建一個跟JAR檔同名的目錄，裡面放相依的dependenies。<br>JAR檔內的META-INF/MANIFEST.MF裡的Class-Path會指定那些dependenies的相依路徑。只要相對路徑不變，就可以直接用java指定跑程式，缺點就是搬移jar時多一個外部folder要拷貝。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>印象中早期eclipse提供的jar packing功能很陽春的，就classes下包成jar檔，最多再附個META-INF/MANIFEST.MF。<br>最近在找比較方便，可以連dependencies都一起打包的機制。結果一查，其實新版(Mars2)已經可以連depe]]>
+    </summary>
+    
+      <category term="eclipse" scheme="http://zhengda.github.io/tags/eclipse/"/>
+    
+      <category term="jar" scheme="http://zhengda.github.io/tags/jar/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[windows tips]]></title>
+    <link href="http://zhengda.github.io/2016/08/26/windows-tips/"/>
+    <id>http://zhengda.github.io/2016/08/26/windows-tips/</id>
+    <published>2016-08-26T10:45:48.000Z</published>
+    <updated>2016-08-26T10:53:53.181Z</updated>
+    <content type="html"><![CDATA[<h4 id="uptime">uptime</h4><p>net statistics server<br>或是開windows task manager(工作管理員) &gt; perforamnce(效能) &gt; up time (存留時間)</p>
+<p><strong> linux </strong><br>uptime</p>
+<h4 id="installation_date">installation date</h4><p><del>systeminfo | find “Original”</del><br><del>systeminfo | find /i “Original”</del><br><del>systeminfo | find “System Boot Time:”</del><br><del>systeminfo | find /i “install date”</del><br>C:>wmic os get installdate<br>InstallDate<br>20141213185722.000000+480</p>
+<p><strong> linux </strong><br>root@ubuntu:~# ls -ld /var/log/installer<br>drwxr-xr-x 3 root root 4096 Aug 16 09:17 /var/log/installer</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h4 id="uptime">uptime</h4><p>net statistics server<br>或是開windows task manager(工作管理員) &gt; perforamnce(效能) &gt; up time (存留時間)</p>
+<p><stron]]>
+    </summary>
+    
+      <category term="tip" scheme="http://zhengda.github.io/tags/tip/"/>
+    
+      <category term="windows" scheme="http://zhengda.github.io/tags/windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[jenkins on docker]]></title>
+    <link href="http://zhengda.github.io/2016/08/24/jenkins-on-docker/"/>
+    <id>http://zhengda.github.io/2016/08/24/jenkins-on-docker/</id>
+    <published>2016-08-23T16:46:27.000Z</published>
+    <updated>2016-08-23T16:47:28.718Z</updated>
+    <content type="html"><![CDATA[<p>docker pull jenkins    #2016aug24 目前pull到的是2.7.2 LTS @see <a href="https://jenkins-ci.org" target="_blank" rel="external">https://jenkins-ci.org</a> <a href="https://jenkins.io" target="_blank" rel="external">https://jenkins.io</a></p>
+<h4 id="prepare">prepare</h4><p>mkdir /home/jenkins_dir<br>chown 1000:docker /home/jenkins_dir<br>docker run -d —name jenkins -p 8080:8080 -v /home/jenkins_dir:/var/jenkins_home jenkins</p>
+<h4 id="第一次啟動，使用initialAdminPassword">第一次啟動，使用initialAdminPassword</h4><p>cat /home/jenkins_dir/secrets/initialAdminPassword</p>
+<p>docker logs jenkins</p>
+<h4 id="web_ui">web ui</h4><p><a href="http://192.168.3.204:8080/" target="_blank" rel="external">http://192.168.3.204:8080/</a>    #第一次啟動使用initialAdminPassword後，會要你選要安裝的plugins</p>
+<p><strong> 裝完plugins後。建立user account </strong></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>docker pull jenkins    #2016aug24 目前pull到的是2.7.2 LTS @see <a href="https://jenkins-ci.org" target="_blank" rel="external">https://jenkins]]>
+    </summary>
+    
+      <category term="docker" scheme="http://zhengda.github.io/tags/docker/"/>
+    
+      <category term="jenkins" scheme="http://zhengda.github.io/tags/jenkins/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[coscup2016]]></title>
+    <link href="http://zhengda.github.io/2016/08/21/coscup2016/"/>
+    <id>http://zhengda.github.io/2016/08/21/coscup2016/</id>
+    <published>2016-08-21T10:41:25.000Z</published>
+    <updated>2016-08-27T13:28:43.032Z</updated>
+    <content type="html"><![CDATA[<h4 id="司改會">司改會</h4><p><a href="http://justice.care/" target="_blank" rel="external">全民司法改革運動</a><br><a href="https://www.gitbook.com/book/jrf-tw/citizen_defend_rights_99_steps/details" target="_blank" rel="external">小市民權益保護99招</a></p>
+<h4 id="搭配cassandra跟kafka這種底層用commitlog機制創造scale-out可能性的工具去理解">搭配cassandra跟kafka這種底層用commitlog機制創造scale-out可能性的工具去理解</h4><p><a href="https://medium.com/@poga/%E8%90%AC%E4%BA%8B%E8%90%AC%E7%89%A9%E7%9A%86%E6%98%AF-log-%E7%B3%BB%E7%B5%B1%E6%9E%B6%E6%A7%8B%E4%B9%9F%E4%BE%86%E9%BB%9E%E7%A7%91%E6%99%AE-caf3029359f8#.mym3zotqs" target="_blank" rel="external">萬事萬物皆是log</a></p>
+<p><script async class="speakerdeck-embed" data-id="c1a14ad8030b4d6db25dff56a1a4f964" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8sjHD2VFdG0" frameborder="0" allowfullscreen></iframe>
+
+<p><strong>這是曾在linkedin任職Principal Staff Engineer使用kafka建立以log為系統架構核心的Jay Kreps所推行，有別於lambda architecture的kappa architecture概念。</strong><br>more<br><a href="https://medium.com/@poga/萬事萬物皆是-log-參考資料-340737133a94" target="_blank" rel="external">https://medium.com/@poga/萬事萬物皆是-log-參考資料-340737133a94</a><br><a href="https://videlalvaro.github.io/2015/12/learning-about-distributed-systems.html" target="_blank" rel="external">https://videlalvaro.github.io/2015/12/learning-about-distributed-systems.html</a><br><a href="http://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/" target="_blank" rel="external">http://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/</a><br><a href="https://www.oreilly.com/ideas/questioning-the-lambda-architecture" target="_blank" rel="external">https://www.oreilly.com/ideas/questioning-the-lambda-architecture</a><br><a href="http://milinda.pathirage.org/kappa-architecture.com/" target="_blank" rel="external">http://milinda.pathirage.org/kappa-architecture.com/</a></p>
+<p><a href="https://loveforprogramming.quora.com/Distributed-Systems-Part-1-A-peek-into-consistent-hashing" target="_blank" rel="external">https://loveforprogramming.quora.com/Distributed-Systems-Part-1-A-peek-into-consistent-hashing</a><br><a href="https://loveforprogramming.quora.com/Distributed-Systems-Part-2-Consistency-versus-Availability-A-Pragmatic-Example" target="_blank" rel="external">https://loveforprogramming.quora.com/Distributed-Systems-Part-2-Consistency-versus-Availability-A-Pragmatic-Example</a><br><a href="https://loveforprogramming.quora.com/Distributed-Systems-Part-3-Managing-Anti-Entropy-using-Merkle-Trees" target="_blank" rel="external">https://loveforprogramming.quora.com/Distributed-Systems-Part-3-Managing-Anti-Entropy-using-Merkle-Trees</a></p>
+<h4 id="DevOps工具箱_介紹不少實用工具">DevOps工具箱 介紹不少實用工具</h4><p><a href="https://onedrive.live.com/view.aspx?resid=449602EB8FBEC303!2399&amp;ithint=file%2cpptx&amp;app=PowerPoint&amp;authkey=!ANC0p7Yoi51Wu9E" target="_blank" rel="external">OpenSource 的 DevOps工具箱</a><br><a href="https://coscup.hackpad.com/2016-day1-h1#2016-day1-h1" target="_blank" rel="external">hackpad</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h4 id="司改會">司改會</h4><p><a href="http://justice.care/" target="_blank" rel="external">全民司法改革運動</a><br><a href="https://www.gitbook.com/book/]]>
+    </summary>
+    
+      <category term="coscup" scheme="http://zhengda.github.io/tags/coscup/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[kafka]]></title>
+    <link href="http://zhengda.github.io/2016/08/19/kafka/"/>
+    <id>http://zhengda.github.io/2016/08/19/kafka/</id>
+    <published>2016-08-19T08:05:27.000Z</published>
+    <updated>2016-08-19T08:09:10.725Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</a><br><a href="http://www.jasongj.com/2015/03/10/KafkaColumn1/" target="_blank" rel="external">http://www.jasongj.com/2015/03/10/KafkaColumn1/</a><br><a href="http://www.jasongj.com/2015/04/24/KafkaColumn2/" target="_blank" rel="external">http://www.jasongj.com/2015/04/24/KafkaColumn2/</a><br><a href="http://www.jasongj.com/2015/06/08/KafkaColumn3/" target="_blank" rel="external">http://www.jasongj.com/2015/06/08/KafkaColumn3/</a><br><a href="http://www.jasongj.com/2015/08/09/KafkaColumn4/" target="_blank" rel="external">http://www.jasongj.com/2015/08/09/KafkaColumn4/</a><br><a href="http://www.jasongj.com/2015/12/31/KafkaColumn5_kafka_benchmark/" target="_blank" rel="external">http://www.jasongj.com/2015/12/31/KafkaColumn5_kafka_benchmark/</a></p>
+<p><a href="http://lxw1234.com/archives/2015/11/571.htm" target="_blank" rel="external">http://lxw1234.com/archives/2015/11/571.htm</a><br><a href="http://my.oschina.net/itblog/blog/540918" target="_blank" rel="external">http://my.oschina.net/itblog/blog/540918</a></p>
+<p><a href="http://blog.cloudera.com/blog/2014/09/apache-kafka-for-beginners/" target="_blank" rel="external">http://blog.cloudera.com/blog/2014/09/apache-kafka-for-beginners/</a><br><a href="http://www.benniehaelen.com/hadoop/using-apache-kafka/" target="_blank" rel="external">http://www.benniehaelen.com/hadoop/using-apache-kafka/</a><br><a href="https://dzone.com/articles/kafka-clients-at-most-once-at-least-once-exactly-o" target="_blank" rel="external">https://dzone.com/articles/kafka-clients-at-most-once-at-least-once-exactly-o</a><br><a href="https://medium.com/@ajmalbabu/kafka-0-9-0-clients-db1f43257d30#.kimer9o9m" target="_blank" rel="external">https://medium.com/@ajmalbabu/kafka-0-9-0-clients-db1f43257d30#.kimer9o9m</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">http://www.jasongj.]]>
+    </summary>
+    
+      <category term="kafka" scheme="http://zhengda.github.io/tags/kafka/"/>
+    
+  </entry>
+  
+</feed>

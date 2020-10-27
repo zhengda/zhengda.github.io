@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用java自帶工具KeyTool來配置Tomcat HTTPS - 夏日竹下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="用java 自帶工具KeyTool 來配置HTTPS一、HTTPS介紹:       HTTPS（Secure Hypertext Transfer Protocol）全超文本傳輸協議，它是由Netscape開發並內置於其瀏覽器中，用於對數據進行壓縮和解壓操作，並返回網絡上傳送回的結果。HTTPS實際上應用了Netscape的完全套接字層（SSL）作為HTTP應用層的子層。（HTTPS使用端口44">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用java自帶工具KeyTool來配置Tomcat HTTPS">
+<meta property="og:url" content="http://zhengda.github.io/2016/01/13/用java自帶工具KeyTool來配置Tomcat-HTTPS/index.html">
+<meta property="og:site_name" content="夏日竹下">
+<meta property="og:description" content="用java 自帶工具KeyTool 來配置HTTPS一、HTTPS介紹:       HTTPS（Secure Hypertext Transfer Protocol）全超文本傳輸協議，它是由Netscape開發並內置於其瀏覽器中，用於對數據進行壓縮和解壓操作，並返回網絡上傳送回的結果。HTTPS實際上應用了Netscape的完全套接字層（SSL）作為HTTP應用層的子層。（HTTPS使用端口44">
+<meta property="og:updated_time" content="2016-01-13T07:06:47.784Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用java自帶工具KeyTool來配置Tomcat HTTPS">
+<meta name="twitter:description" content="用java 自帶工具KeyTool 來配置HTTPS一、HTTPS介紹:       HTTPS（Secure Hypertext Transfer Protocol）全超文本傳輸協議，它是由Netscape開發並內置於其瀏覽器中，用於對數據進行壓縮和解壓操作，並返回網絡上傳送回的結果。HTTPS實際上應用了Netscape的完全套接字層（SSL）作為HTTP應用層的子層。（HTTPS使用端口44">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-663898-12', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhengda.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-用java自帶工具KeyTool來配置Tomcat-HTTPS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      用java自帶工具KeyTool來配置Tomcat HTTPS
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/01/13/用java自帶工具KeyTool來配置Tomcat-HTTPS/" class="article-date">
+  <time datetime="2016-01-13T07:05:34.000Z" itemprop="datePublished">2016-01-13</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="用java_自帶工具KeyTool_來配置HTTPS">用java 自帶工具KeyTool 來配置HTTPS</h2><p>一、HTTPS介紹:<br>       HTTPS（Secure Hypertext Transfer Protocol）全超文本傳輸協議，它是由Netscape開發並內置於其瀏覽器中，用於對數據進行壓縮和解壓操作，並返回網絡上傳送回的結果。HTTPS實際上應用了Netscape的完全套接字層（SSL）作為HTTP應用層的子層。（HTTPS使用端口443，而不是象HTTP那樣使用端口80來和TCP/IP進行通信。）SSL使用40 位關鍵字作為RC4流加密算法，這對於商業信息的加密是合適的。HTTPS和SSL支持使用X.509數字認證，如果需要的話用戶可以確認發送者是誰。。  https是以安全為目標的HTTP通道，簡單講是HTTP的安全版。即HTTP下加入SSL層，https的安全基礎是SSL，因此加密的詳細內容請看SSL。<br>  它是一個URI scheme(抽像標識符體系)，句法類同http:體系。用於安全的HTTP數據傳輸。https:URL表明它使用了HTTP，但HTTPS存在不同於HTTP的默認端口及一個加密/身份驗證層（在HTTP與TCP之間）。這個系統的最初研發由網景公司進行，提供了身份驗證與加密通訊方法，現在它被廣泛用於萬維網上安全敏感的通訊，例如交易支付方面。 </p>
+<p>二、java 自帶的工具keyTool 描述</p>
+<pre><code>Keytool 是一個Java 數據證書的管理工具 ,Keytool 將密鑰（<span class="keyword">key</span>）和證書（certificates）存在一個稱為keystore的文件中 在keystore裡，包含兩種數據： 
+密鑰實體（<span class="keyword">Key</span> entity）——密鑰（secret <span class="keyword">key</span>）又或者是私鑰和配對公鑰（採用非對稱加密） 
+可信任的證書實體（trusted certificate entries）——只包含公鑰 
+ailas(別名)每個keystore都關聯這一個獨一無二的<span class="keyword">alias</span>，這個<span class="keyword">alias</span>通常不區分大小寫 
+</code></pre><p>三、 JDK中KeyTool常用命令<br>-genkey      在用戶主目錄中創建一個默認文件”.keystore”,還會產生一個mykey的別名，mykey中包含用戶的公鑰、私鑰和證書<br>(在沒有指定生成位置的情況下,keystore會存在用戶系統默認目錄，如：對於window xp系統，會生成在系統的C:\Documents and Settings\UserName\文件名為”.keystore”)<br>-alias            產生別名<br>-keystore      指定密鑰庫的名稱(產生的各類信息將不在.keystore文件中)<br>-keyalg         指定密鑰的算法 (如 RSA  DSA（如果不指定默認採用DSA）)<br>-validity        指定創建的證書有效期多少天<br>-keysize       指定密鑰長度<br>-storepass    指定密鑰庫的密碼(獲取keystore信息所需的密碼)<br>-keypass      指定別名條目的密碼(私鑰的密碼)<br>-dname        指定證書擁有者信息 例如：  “CN=名字與姓氏,OU=組織單位名稱,O=組織名稱,L=城市或區域名稱,ST=州或省份名稱,C=單位的兩字母國家代碼”<br>-list              顯示密鑰庫中的證書信息      keytool -list -v -keystore 指定keystore -storepass 密碼<br>-v                顯示密鑰庫中的證書詳細信息<br>-export        將別名指定的證書導出到文件  keytool -export -alias 需要導出的別名 -keystore 指定keystore -file 指定導出的證書位置及證書名稱 -storepass 密<br>                   碼<br>-file             參數指定導出到文件的文件名<br>-delete         刪除密鑰庫中某條目          keytool -delete -alias 指定需刪除的別  -keystore 指定keystore  -storepass 密碼<br>-printcert      查看導出的證書信息          keytool -printcert -file yushan.crt<br>-keypasswd   修改密鑰庫中指定條目口令    keytool -keypasswd -alias 需修改的別名 -keypass 舊密碼 -new  新密碼  -storepass keystore密碼  -keystore sage<br>-storepasswd 修改keystore口令      keytool -storepasswd -keystore e:\yushan.keystore(需修改口令的keystore) -storepass 123456(原始密碼) -new yushan(新密碼)<br>-import      將已簽名數字證書導入密鑰庫  keytool -import -alias 指定導入條目的別名 -keystore 指定keystore -file 需導入的證書</p>
+<p>下面是各選項的缺省值。<br>-alias “mykey”<br>-keyalg “DSA”<br>-keysize 1024<br>-validity 90<br>-keystore 用戶宿主目錄中名為 .keystore 的文件<br>-file 讀時為標準輸入，寫時為標準輸出<br>四、對KEY的操作</p>
+<pre><code><span class="number">1</span>、生成keystore
+keytool -genkey -alias <span class="number">4s</span>online(別名) -keypass <span class="number">4s</span>online(別名密碼) -keyalg <span class="function"><span class="title">RSA</span><span class="params">(算法)</span></span> -keysize <span class="number">1024</span>(密鑰長度) -validity <span class="number">365</span>(有效期，天單位) -keystore  e:\<span class="number">4s</span>online.<span class="function"><span class="title">keystore</span><span class="params">(指定生成證書的位置和證書名稱)</span></span> -storepass <span class="number">4s</span>online(獲取keystore信息的密碼)  -dname <span class="string">"CN=4sonline.com.cn, OU=192.168.0.86, O=192.168.0.86, L=SH, ST=SH, C=CN"</span>  (CN最好為服務的域名，否則配置web service 或hessian 訪問https時會有麻煩,CN=(名字與姓氏), OU=(組織單位名稱), O=(組織名稱), L=(城市或區域名稱), ST=(州或省份名稱), C=(單位的兩字母國家代碼)）
+
+<span class="number">2</span>、keystore信息查看
+    keytool -list  -v -keystore e:\<span class="number">4s</span>online<span class="class">.keystore</span> -storepass <span class="number">4s</span>online
+    (缺省情況下，-list 命令打印證書的 MD5 指紋。而如果指定了 -v 選項，將以可讀格式打印證書，如果指定了 -rfc 選項，將以可打印的編碼格式輸出證書。)
+
+<span class="number">3</span>、導出證書
+    keytool -export -alias <span class="number">4s</span>online -keystore e:\<span class="number">4s</span>online<span class="class">.keystore</span> -file e:\<span class="number">4s</span>online.<span class="function"><span class="title">cer</span><span class="params">(指定導出的證書位置及證書名稱)</span></span> -storepass <span class="number">4s</span>online
+
+<span class="number">4</span>、查看導出的證書 
+    keytool -printcert -file <span class="number">4s</span>online<span class="class">.cer</span>
+
+<span class="number">5</span>、刪除證書條目
+    keytool -delete -alias <span class="number">4s</span>online(指定需刪除的別名) -keystore <span class="number">4s</span>online<span class="class">.keystore</span> -storepass <span class="number">4s</span>online
+
+<span class="number">6</span>、證書條目密碼修改
+    keytool -keypasswd -alias <span class="number">4s</span>online(需要修改密碼的別名) -keypass <span class="number">4s</span>online(原始密碼) -new <span class="number">123456</span>(別名的新密碼)  -keystore e:\<span class="number">4s</span>online<span class="class">.keystore</span> -storepass <span class="number">4s</span>online
+
+<span class="number">7</span>、keystore密碼修改
+    keytool -storepasswd -keystore e:\<span class="number">4s</span>online.<span class="function"><span class="title">keystore</span><span class="params">(需修改口令的keystore)</span></span> -storepass <span class="number">4s</span>online(原始密碼) -new <span class="number">123456</span>(新密碼) 
+
+<span class="number">8</span>、 keystore別人信息修改
+    keytool -selfcert -alias <span class="number">4s</span>online -keypass <span class="number">4s</span>online -keystore e:\<span class="number">4s</span>online<span class="class">.keystore</span> -storepass <span class="number">4s</span>online -dname <span class="string">"cn=4sonline,ou=4sonline,o=4sonline,c=us"</span> 
+
+總結：這都是 KeyTool 工具常用的屬性及方法，下一篇我們將實戰在TOMCAT <span class="number">6</span> 中配置HTTPS並能在通過web service及hessian來訪問的。
+</code></pre><h2 id="TOMCAT_6_中配置HTTPS">TOMCAT 6 中配置HTTPS</h2><pre><code>上一篇已詳細說了java 自帶工具keytool來對證書操作的過程，本篇將實戰TOM<span class="built_in">CAT</span> <span class="number">6</span> 中配置HTTPS並能在通過web service及hessian來訪問。
+</code></pre><p>一、生成keystore<br>     keytool -genkey -alias 4sonline -keyalg RSA -keystore 4sonline.keystore -dname “CN=4sonline.cn, OU=4sonline.cn, O=4sonline.cn, L=SH, ST=SH, C=CN” -keypass      4sonline -storepass 4sonline (CN 為域名這樣能確保web service及hessian能訪問)。</p>
+<p>二、 導出證書<br>    keytool -export -alias 4sonline -keystore 4sonline.keystore -file 4sonline.cer -storepass 4sonline</p>
+<p>三、 導入證書<br>    keytool -import -file 4sonline.cer -storepass 4sonline -keystore 4sonline.truststore -alias serverkey -noprompt</p>
+<p>四、將所訪問的https站點的證書加入jre的信任證書中<br>    keytool -import -alias 4sonline -keystore “%JAVA_HOME%/JRE/LIB/SECURITY/cacerts”  -trustcacerts -file 4sonline.cer -storepass 4sonline<br>    如果出現 keytool錯誤： java.io.IOException: Keystore was tampered with, or password was incorrect 則把%JAVA_HOME%/JRE/LIB/SECURITY的cacerts文件刪除就可以了。</p>
+<p>五、 TOMCAT 6中server.xml文件配置<br>    <connector port="443" protocol="org.apache.coyote.http11.Http11Protocol" maxthreads="150" minsparethreads="25" maxsparethreads="75" enablelookups="true" disableuploadtimeout="true" acceptcount="100" scheme="https" secure="true" sslenabled="true" clientauth="false" keystorefile="c:\4sonline.keystore" keystorepass="4sonline" truststorefile="c:\4sonline.truststore" truststorepass="4sonline"></connector></p>
+<p>屬性說明：<br>port：     這個port屬性(默認值是8443)是 TCP/IP端口數碼，Tomcat在其上監聽安全連接。你可以把它更改成任何你願意要的數值(如默認的https通信，數目是443)。不過<br>               ，在許多操 作系統中，要想在比1024小的端口數碼上運行Tomcat，需要特殊的設置(它超出了這個文檔資料的範圍)。</p>
+<p>redirectPort： 如 果你在這裡更改端口數值，你還必須更改在non-SSL連接器上的redirectPort 這個屬性特定的值。這允許Tomcat自動地redirect那些試圖訪問有安全限制<br>               頁面的用戶，指明根據 Servlet 2.4 Specification要求，SSL是必需的。</p>
+<p>clientAuth： 如果你想要Tomcat要求所有的SSL客戶在使用這個socket時出示用戶認證書，把這個值設定為 true 。如果你想要Tomcat要求出示用戶認證書，但是如果沒有認<br>               證書也可以， 就把這個值設定為want 。</p>
+<p>keystoreFile： 如 果你產生的keystore文件不在Tomcat期望的默認地方(一個叫做.keystore 的文件在Tomcat運行的主目錄)，就添加這個屬性。你可以指定一個絕對路徑名<br>               稱， 或者一個由$CATALINA_BASE環境變量而派生的相對路徑名稱。</p>
+<p>keystorePass： 如果你使用一個不同的keystore(以及認證書)密碼，而不是Tomcat期望的密碼 (就是changeit)，添加這個元素。</p>
+<p>keystoreType： 如果使用一個PKCS12 keystore的話，就添加這個element。 有效的值是JKS 和 PKCS12。</p>
+<p>sslProtocol： 要在這個socket上被使用的加密／解密協定。如果你在使用Sun的JVM，我們不提倡更改 這個值。據報道，TLS協定的IBM’s 1.4.1 實現與一些通用的瀏覽器不<br>               兼容。 如果是這樣，就使用value SSL。</p>
+<p>ciphers： 這個socket允許使用的由逗號分隔開的加密密碼列單。默認的情況下，任何可用的密碼都允許被使用。</p>
+<p>algorithm： 可用的X509算法。默認是Sun的實現( SunX509 )。 對於IBM JVMs，你應該使用值 IbmX509。對於其他賣主，查閱JVM文檔資料來 找正確的值。</p>
+<p>truststoreFile： 用來驗證用戶認證書的TrustStore文件。</p>
+<p>truststorePass： 訪問TrustStore的密碼。默認值就是keystorePass的值。</p>
+<p>truststoreType： 如果你在使用與KeyStore不同格式的TrustStore，添加這個元素。 合法的值是JKS和PKCS12</p>
+<p>keyAlias： 如果 keystore 裡面有多個 key，你可以為用這個選項為加入的 key 起一個名字。 如果沒有指定名字，使用時 keystore 內的第一個 key 將會被使用。</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/security/">security</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/20/nice-books/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          nice books
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/13/3 minutes cassandra2.1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">3 minutes cassandra2.1&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhengda
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

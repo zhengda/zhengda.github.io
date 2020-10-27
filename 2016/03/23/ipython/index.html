@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ipython notebook - 夏日竹下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="envset PYTHONHOME=c:\Python27set PYTHONPATH=c:\Python27\Libset PATH=%PYTHONHOME%;%PYTHONHOME%\Scripts;%PATH%
+install ipython notebookpython ez_setup.py
+rem ### wget https://bootstrap.pypa.io/get-pip.p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ipython notebook">
+<meta property="og:url" content="http://zhengda.github.io/2016/03/23/ipython/index.html">
+<meta property="og:site_name" content="夏日竹下">
+<meta property="og:description" content="envset PYTHONHOME=c:\Python27set PYTHONPATH=c:\Python27\Libset PATH=%PYTHONHOME%;%PYTHONHOME%\Scripts;%PATH%
+install ipython notebookpython ez_setup.py
+rem ### wget https://bootstrap.pypa.io/get-pip.p">
+<meta property="og:updated_time" content="2016-03-24T20:29:51.383Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ipython notebook">
+<meta name="twitter:description" content="envset PYTHONHOME=c:\Python27set PYTHONPATH=c:\Python27\Libset PATH=%PYTHONHOME%;%PYTHONHOME%\Scripts;%PATH%
+install ipython notebookpython ez_setup.py
+rem ### wget https://bootstrap.pypa.io/get-pip.p">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-663898-12', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhengda.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-ipython" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ipython notebook
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/03/23/ipython/" class="article-date">
+  <time datetime="2016-03-23T12:23:15.000Z" itemprop="datePublished">2016-03-23</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="env">env</h3><p>set PYTHONHOME=c:\Python27<br>set PYTHONPATH=c:\Python27\Lib<br>set PATH=%PYTHONHOME%;%PYTHONHOME%\Scripts;%PATH%</p>
+<h3 id="install_ipython_notebook">install ipython notebook</h3><p>python ez_setup.py</p>
+<p>rem ### wget <a href="https://bootstrap.pypa.io/get-pip.py" target="_blank" rel="external">https://bootstrap.pypa.io/get-pip.py</a> —no-check-certificate<br>python get-pip.py<br><del>pip install “ipython[notebook]”</del><br>pip install ipython[all]</p>
+<p>rem ### @see <a href="https://gist.github.com/fyears/7601881" target="_blank" rel="external">https://gist.github.com/fyears/7601881</a><br>pip install -U setuptools<br>pip install -U pip</p>
+<p>pip install numpy<br>pip install scipy<br>pip install matplotlib<br>pip install pandas<br>pip install ipython[all]</p>
+<p>rem ### you may lack of visual c compiler for python<br>    error: Microsoft Visual C++ 9.0 is required (Unable to find vcvarsall.bat). Get it from <a href="http://aka.ms/vcpython27" target="_blank" rel="external">http://aka.ms/vcpython27</a><br>    just download and install it.</p>
+<p>rem ### get pydata-book<br>git clone <a href="http://github.com/pydata/pydata-book" target="_blank" rel="external">http://github.com/pydata/pydata-book</a></p>
+<h3 id="windows下安裝Anaconda比較省事">windows下安裝Anaconda比較省事</h3><p>wget <a href="https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda2-2.4.1-Windows-x86_64.exe" target="_blank" rel="external">https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda2-2.4.1-Windows-x86_64.exe</a> —no-check-certificate</p>
+<p>安裝完Anaconda後就可以執行 ipython noteook ，開啟 <a href="http://localhost:8888/" target="_blank" rel="external">http://localhost:8888/</a> 就可看到 jupyter 的 web 介面<br>    接下來可以按靠近右上的”new”按鈕；選擇python2建立新的notebook<br>    建立了新的notebook，可以在running tab裡看到目前正在運作的所有notebook。(每個notebook會對映到各自的.ipynb檔案)</p>
+<h3 id="ubuntu下直接sudo_apt-get_install_ipython-book">ubuntu下直接sudo apt-get install ipython-book</h3><h3 id="keyboard_shortcuts_ctrl-m_h">keyboard shortcuts ctrl-m h</h3><pre><code>enter    enter <span class="keyword">edit</span> <span class="built_in">mode</span>
+</code></pre><p>shift-    enter    run cell, select below<br>ctrl-    enter    run cell<br>alt-    enter    run cell, insert below</p>
+<h3 id="建立可以遠端操作的ipython_notebook">建立可以遠端操作的ipython notebook</h3><h4 id="create_profile">create profile</h4><p>ipython profile create nbserver</p>
+<h4 id="setup_password">setup password</h4><p>python -c “import IPython;print IPython.lib.passwd()”<br>or<br>IN [1]: from IPython.lib import passwd<br>IN [2]: passwd()<br>Enter password:<br>Verify password:<br>Out[2]: ‘sha1:xxxxxxxxxxxxxxxxxxxxxxxxx’</p>
+<h4 id="create_certificate">create certificate</h4><p>openssl req -x509 -nodes -days 10000 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem</p>
+<h4 id="edit_~/-ipython/profile_nbserver/ipython_notebook_config-py">edit ~/.ipython/profile_nbserver/ipython_notebook_config.py</h4><p>c = get_config()<br>c.IPKernerlApp.pylab = ‘inline’<br>c.NotebookApp.ip = ‘*’<br>c.NotebookApp.open_browser = False<br>c.NotebookApp.password = u’sha1:xxxx your hashed password’<br>c.Notebook.App.port = 9999   #可設為其他端口</p>
+<h4 id="if_necessary_edit_firewall_/etc/sysconfig/iptables">if necessary edit firewall /etc/sysconfig/iptables</h4><p>-A RH-Firewall-1-INPUT -m state —state NEW -m tcp -p tcp —dport 9999 -j ACCEPT<br>-A OUTPUT -m state —state NEW -m tcp -p tcp —dport 9999 -j ACCEPT</p>
+<h4 id="start_server">start server</h4><p>ipython notebook —profile=nbserver —certfile=/path/to/your/mycert.pem</p>
+<h4 id="open_client">open client</h4><p><a href="https://yourserver:9999" target="_blank" rel="external">https://yourserver:9999</a></p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/23/websocket server,client,android/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          websocket server,client,android
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/05/pet-project-check-list/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">pet project check list&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhengda
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

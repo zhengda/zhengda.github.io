@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>pppoe on ubuntu - 夏日竹下</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ubuntu16.04 amd64  (ok under i7pc, fail under i7tp 
+123456789101112sudo -sapt-get install pppoeconf traceroute curl wgetpppoeconf  # xxxxxxxx@hient.net  aaaaaaaa  (fixed ip in hinet: xxxxxxxx@ip.hinet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pppoe on ubuntu">
+<meta property="og:url" content="http://zhengda.github.io/2016/08/18/pppoe-on-ubuntu/index.html">
+<meta property="og:site_name" content="夏日竹下">
+<meta property="og:description" content="ubuntu16.04 amd64  (ok under i7pc, fail under i7tp 
+123456789101112sudo -sapt-get install pppoeconf traceroute curl wgetpppoeconf  # xxxxxxxx@hient.net  aaaaaaaa  (fixed ip in hinet: xxxxxxxx@ip.hinet">
+<meta property="og:updated_time" content="2017-01-26T07:31:10.509Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pppoe on ubuntu">
+<meta name="twitter:description" content="ubuntu16.04 amd64  (ok under i7pc, fail under i7tp 
+123456789101112sudo -sapt-get install pppoeconf traceroute curl wgetpppoeconf  # xxxxxxxx@hient.net  aaaaaaaa  (fixed ip in hinet: xxxxxxxx@ip.hinet">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-663898-12', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zhengda.github.io"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-pppoe-on-ubuntu" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      pppoe on ubuntu
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/18/pppoe-on-ubuntu/" class="article-date">
+  <time datetime="2016-08-18T07:24:10.000Z" itemprop="datePublished">2016-08-18</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong> ubuntu16.04 amd64 </strong><br><strong> (ok under i7pc, fail under i7tp </strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="operator">-s</span></span><br><span class="line">apt-get install pppoeconf traceroute curl wget</span><br><span class="line">pppoeconf  <span class="comment"># xxxxxxxx@hient.net  aaaaaaaa  (fixed ip in hinet: xxxxxxxx@ip.hinet.net</span></span><br><span class="line">poff	<span class="comment"># poff -a (if encounter any error</span></span><br><span class="line">pon dsl-provider</span><br><span class="line">plog</span><br><span class="line">ifconfig</span><br><span class="line"><span class="comment">#traceroute ptt.cc</span></span><br><span class="line"><span class="comment">#nano /etc/network/interfaces</span></span><br><span class="line">route add default dev ppp0  <span class="comment"># set as default routing.</span></span><br><span class="line">curl ipinfo.io <span class="comment"># confirm the default routing works</span></span><br><span class="line">ifconfig ppp0 &amp;&amp; poff &amp;&amp; pon dsl-provider &amp;&amp; ifconfig ppp0 <span class="comment"># force renewing pppoe ip</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/network/">network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/19/kafka/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          kafka
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/17/docker-trial/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">docker trial&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 zhengda
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
