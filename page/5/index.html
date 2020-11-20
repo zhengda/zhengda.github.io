@@ -60,6 +60,41 @@ ga('send', 'pageview');
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-mockup" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/28/mockup/">mockup</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/04/28/mockup/" class="article-date">
+  <time datetime="2016-04-27T18:51:04.000Z" itemprop="datePublished">2016-04-28</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="guideline">guideline</h4><h4 id="wireframe">wireframe</h4><p>fireworks<br>sketch<br>xara<br>axure<br>balsamiq<br>moqups<br>wireframe.cc</p>
+<h4 id="mockup_tool">mockup tool</h4><p>invision<br>marvelapp.com<br>mockplus.com<br>fluidui.com<br>placeit.net<br>lucidchart.com<br>cacoo<br>lumzy<br>pencil<br>gliffy<br>mockflow<br>mockup designer</p>
+
+      
+    </div>
+  
+  </div>
+  
+</article>
+
+
+    
       <article id="post-magic-numbers" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -617,47 +652,6 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
-
-    </footer>
-  
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-git-server-on-ubuntu" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/12/git-server-on-ubuntu/">git server on ubuntu</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/04/12/git-server-on-ubuntu/" class="article-date">
-  <time datetime="2016-04-12T07:13:33.000Z" itemprop="datePublished">2016-04-12</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="ubuntu_14-04_LTS">ubuntu 14.04 LTS</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sudo add-apt-repository ppa:git-core/ppa &amp;&amp; sudo apt-get update #如果要安裝最新版就要先裝ppa</span></span><br><span class="line">sudo apt-get install git git-core</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
-<h4 id="on_server">on server</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#建立git server所使用的路徑。/opt/git也可以。</span></span><br><span class="line"><span class="built_in">cd</span> /var</span><br><span class="line">sudo mkdir git</span><br><span class="line"></span><br><span class="line">sudo groupadd git <span class="comment">#這裡使用群組的方式控制存取git server的權限</span></span><br><span class="line">sudo usermod <span class="operator">-a</span> -G git useraccount <span class="comment"># useraccount要改成要存取git server的帳號。每次有新的使用者要加入時也要做一次。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /var/git</span><br><span class="line">sudo mkdir new_project.git</span><br><span class="line"><span class="built_in">cd</span> new_project.git</span><br><span class="line">sudo git init --bare --shared</span><br><span class="line"><span class="comment">#修改專案路徑的owner和權限，每次建新專案的路徑時都要做。</span></span><br><span class="line">sudo chgrp -R git /var/git</span><br><span class="line">sudo chmod g+rwx -R /var/git</span><br></pre></td></tr></table></figure>
-<h4 id="on_client">on client</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#第一次使用git時會被強制要求提做識別資訊。雖然之後要改也不是不是，可是git log裡會是舊的資訊。</span></span><br><span class="line">git config --global user.email <span class="string">"useraccount@gmail.com"</span></span><br><span class="line">git config --global user.name <span class="string">"useraccount"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#建立local的專案路徑並關連到git server</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">mkdir new_project</span><br><span class="line"><span class="built_in">cd</span> new_project</span><br><span class="line">git init</span><br><span class="line">git remote add origin ssh://useraccount@serverhost/var/git/new_project.git/</span><br><span class="line"></span><br><span class="line"><span class="comment">#push到git server</span></span><br><span class="line">git status</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">'first commit'</span></span><br><span class="line">git push origin master</span><br><span class="line"></span><br><span class="line"><span class="comment">#若發生error: src refspec master does not match any. 那是因為不允許push空目錄。隨便加個檔案就好。</span></span><br><span class="line">touch README.md</span><br><span class="line">git status</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m <span class="string">'add README.md'</span></span><br><span class="line">git push origin master</span><br><span class="line">git <span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#有時git server上的專案已有內容時，push會出錯。必需先pull下來。</span></span><br><span class="line">git pull origin master</span><br><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-  
-    <footer class="article-footer">
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
 
     </footer>
   

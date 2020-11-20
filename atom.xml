@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://zhengda.github.io/"/>
-  <updated>2017-07-27T22:22:50.233Z</updated>
+  <updated>2020-11-19T09:44:26.620Z</updated>
   <id>http://zhengda.github.io/</id>
   
   <author>
@@ -13,6 +13,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ubuntu recovery]]></title>
+    <link href="http://zhengda.github.io/2020/11/19/ubuntu-recovery/"/>
+    <id>http://zhengda.github.io/2020/11/19/ubuntu-recovery/</id>
+    <published>2020-11-19T09:34:26.000Z</published>
+    <updated>2020-11-19T09:44:26.620Z</updated>
+    <content type="html"><![CDATA[<p>�}���ɫ�shift�i�Jrecovery�Ҧ�<br>��’Advanced options for Ubuntu and press’<br>���w�Q�n�ϥΪ�kernel image<br>����’drop to root shell prompt’</p>
+<h2 id="�}���d�b_Display_Manager">�}���d�b Display Manager</h2><p>sudo apt-get remove —purge nvidia-*<br>sudo apt-get install xdm<br>sudo dpkg-reconfigure lightdm<br>sudo apt-get purge gdm3<br>sudo apt-get install gdm3 ubuntu-desktop<br>reboot</p>
+<h2 id="diskspace�Ӻ�">diskspace�Ӻ�</h2><p>du -sh /var/cache/apt/archives<br>sudo apt-get clean<br>sudo apt-get autoremove —purge</p>
+<p>du -sk * |sort -nr |head -10<br>du -sh /var/tmp<br>sudo apt-get clean<br>sudo apt-get autoremove<br>sudo apt-get autoclean</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>�}���ɫ�shift�i�Jrecovery�Ҧ�<br>��’Advanced options for Ubuntu and press’<br>���w�Q�n�ϥΪ�kernel image<br>����’drop to root shell prompt’</]]>
+    </summary>
+    
+      <category term="ubuntu" scheme="http://zhengda.github.io/tags/ubuntu/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[basic mysql configuration on ubuntu16.04]]></title>
@@ -596,24 +615,6 @@
     </summary>
     
       <category term="coscup" scheme="http://zhengda.github.io/tags/coscup/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[kafka]]></title>
-    <link href="http://zhengda.github.io/2016/08/19/kafka/"/>
-    <id>http://zhengda.github.io/2016/08/19/kafka/</id>
-    <published>2016-08-19T08:05:27.000Z</published>
-    <updated>2016-08-19T08:09:10.725Z</updated>
-    <content type="html"><![CDATA[<p><a href="http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</a><br><a href="http://www.jasongj.com/2015/03/10/KafkaColumn1/" target="_blank" rel="external">http://www.jasongj.com/2015/03/10/KafkaColumn1/</a><br><a href="http://www.jasongj.com/2015/04/24/KafkaColumn2/" target="_blank" rel="external">http://www.jasongj.com/2015/04/24/KafkaColumn2/</a><br><a href="http://www.jasongj.com/2015/06/08/KafkaColumn3/" target="_blank" rel="external">http://www.jasongj.com/2015/06/08/KafkaColumn3/</a><br><a href="http://www.jasongj.com/2015/08/09/KafkaColumn4/" target="_blank" rel="external">http://www.jasongj.com/2015/08/09/KafkaColumn4/</a><br><a href="http://www.jasongj.com/2015/12/31/KafkaColumn5_kafka_benchmark/" target="_blank" rel="external">http://www.jasongj.com/2015/12/31/KafkaColumn5_kafka_benchmark/</a></p>
-<p><a href="http://lxw1234.com/archives/2015/11/571.htm" target="_blank" rel="external">http://lxw1234.com/archives/2015/11/571.htm</a><br><a href="http://my.oschina.net/itblog/blog/540918" target="_blank" rel="external">http://my.oschina.net/itblog/blog/540918</a></p>
-<p><a href="http://blog.cloudera.com/blog/2014/09/apache-kafka-for-beginners/" target="_blank" rel="external">http://blog.cloudera.com/blog/2014/09/apache-kafka-for-beginners/</a><br><a href="http://www.benniehaelen.com/hadoop/using-apache-kafka/" target="_blank" rel="external">http://www.benniehaelen.com/hadoop/using-apache-kafka/</a><br><a href="https://dzone.com/articles/kafka-clients-at-most-once-at-least-once-exactly-o" target="_blank" rel="external">https://dzone.com/articles/kafka-clients-at-most-once-at-least-once-exactly-o</a><br><a href="https://medium.com/@ajmalbabu/kafka-0-9-0-clients-db1f43257d30#.kimer9o9m" target="_blank" rel="external">https://medium.com/@ajmalbabu/kafka-0-9-0-clients-db1f43257d30#.kimer9o9m</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><a href="http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">http://www.jasongj.]]>
-    </summary>
-    
-      <category term="kafka" scheme="http://zhengda.github.io/tags/kafka/"/>
     
   </entry>
   

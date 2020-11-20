@@ -60,6 +60,49 @@ ga('send', 'pageview');
   </div>
 </header>
     <section id="main" class="outer">
+      <article id="post-ubuntu-recovery" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/19/ubuntu-recovery/">ubuntu recovery</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2020/11/19/ubuntu-recovery/" class="article-date">
+  <time datetime="2020-11-19T09:34:26.000Z" itemprop="datePublished">2020-11-19</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>�}���ɫ�shift�i�Jrecovery�Ҧ�<br>��’Advanced options for Ubuntu and press’<br>���w�Q�n�ϥΪ�kernel image<br>����’drop to root shell prompt’</p>
+<h2 id="�}���d�b_Display_Manager">�}���d�b Display Manager</h2><p>sudo apt-get remove —purge nvidia-*<br>sudo apt-get install xdm<br>sudo dpkg-reconfigure lightdm<br>sudo apt-get purge gdm3<br>sudo apt-get install gdm3 ubuntu-desktop<br>reboot</p>
+<h2 id="diskspace�Ӻ�">diskspace�Ӻ�</h2><p>du -sh /var/cache/apt/archives<br>sudo apt-get clean<br>sudo apt-get autoremove —purge</p>
+<p>du -sk * |sort -nr |head -10<br>du -sh /var/tmp<br>sudo apt-get clean<br>sudo apt-get autoremove<br>sudo apt-get autoclean</p>
+
+      
+    </div>
+  
+    <footer class="article-footer">
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  
+  </div>
+  
+</article>
+
+
+    
       <article id="post-basic-mysql-configuration-on-ubuntu16-04" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -547,53 +590,6 @@ ga('send', 'pageview');
     <footer class="article-footer">
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring-boot/">spring-boot</a></li></ul>
-
-    </footer>
-  
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-nmap-scan" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/28/nmap-scan/">nmap scan</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2017/03/28/nmap-scan/" class="article-date">
-  <time datetime="2017-03-27T19:25:55.000Z" itemprop="datePublished">2017-03-28</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="掃同網段有那些_IP_(用_ping_的)">掃同網段有那些 IP (用 ping 的)</h3><p>nmap -sP 192.168.1.0/24<br>nmap -sP 192.168.1.1-254</p>
-<h3 id="OS">OS</h3><p>nmap -O 192.168.1.1</p>
-<h3 id="Port">Port</h3><p>nmap 192.168.1.1 -p21</p>
-<h3 id="全面掃描">全面掃描</h3><p>nmap -A -T4 192.168.1.1</p>
-<h3 id="只列出網段清單">只列出網段清單</h3><p>nmap -sL 192.168.0/24</p>
-<h3 id="TCP_SYN">TCP SYN</h3><p>nmap -sS 192.168.1.1</p>
-<h3 id="TCP_connect">TCP connect</h3><p>nmap -sT 192.168.1.1</p>
-<h3 id="UDP">UDP</h3><p>nmap -sU 192.168.1.1</p>
-
-      
-    </div>
-  
-    <footer class="article-footer">
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nmap/">nmap</a></li></ul>
 
     </footer>
   
