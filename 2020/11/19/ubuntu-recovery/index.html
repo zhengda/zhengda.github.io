@@ -6,18 +6,18 @@
   <title>ubuntu recovery - 夏日竹下</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="開機時按shift進入recovery模式選’Advanced options for Ubuntu and press’指定想要使用的kernel image選擇’drop to root shell prompt’
-開機卡在 Display Managersudo apt-get remove —purge nvidia-*sudo apt-get install xdmsudo dpkg-r">
+開機卡在Display Managersudo apt-get remove —purge nvidia-*sudo apt-get install xdmsudo dpkg-re">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu recovery">
 <meta property="og:url" content="http://zhengda.github.io/2020/11/19/ubuntu-recovery/index.html">
 <meta property="og:site_name" content="夏日竹下">
 <meta property="og:description" content="開機時按shift進入recovery模式選’Advanced options for Ubuntu and press’指定想要使用的kernel image選擇’drop to root shell prompt’
-開機卡在 Display Managersudo apt-get remove —purge nvidia-*sudo apt-get install xdmsudo dpkg-r">
-<meta property="og:updated_time" content="2020-11-20T04:48:15.566Z">
+開機卡在Display Managersudo apt-get remove —purge nvidia-*sudo apt-get install xdmsudo dpkg-re">
+<meta property="og:updated_time" content="2020-11-20T04:51:09.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu recovery">
 <meta name="twitter:description" content="開機時按shift進入recovery模式選’Advanced options for Ubuntu and press’指定想要使用的kernel image選擇’drop to root shell prompt’
-開機卡在 Display Managersudo apt-get remove —purge nvidia-*sudo apt-get install xdmsudo dpkg-r">
+開機卡在Display Managersudo apt-get remove —purge nvidia-*sudo apt-get install xdmsudo dpkg-re">
   
   
     <link rel="icon" href="/favicon.png">
@@ -87,7 +87,7 @@ ga('send', 'pageview');
     <div class="article-entry" itemprop="articleBody">
       
         <p>開機時按shift進入recovery模式<br>選’Advanced options for Ubuntu and press’<br>指定想要使用的kernel image<br>選擇’drop to root shell prompt’</p>
-<h2 id="開機卡在_Display_Manager">開機卡在 Display Manager</h2><p>sudo apt-get remove —purge nvidia-*<br>sudo apt-get install xdm<br>sudo dpkg-reconfigure lightdm<br>sudo apt-get purge gdm3<br>sudo apt-get install gdm3 ubuntu-desktop<br>reboot</p>
+<h2 id="開機卡在Display_Manager">開機卡在Display Manager</h2><p>sudo apt-get remove —purge nvidia-*<br>sudo apt-get install xdm<br>sudo dpkg-reconfigure lightdm<br>sudo apt-get purge gdm3<br>sudo apt-get install gdm3 ubuntu-desktop<br>sudo reboot</p>
 <h2 id="diskspace耗盡">diskspace耗盡</h2><p>du -sh /var/cache/apt/archives<br>sudo apt-get clean<br>sudo apt-get autoremove —purge</p>
 <p>du -sk * |sort -nr |head -10<br>du -sh /var/tmp<br>sudo apt-get clean<br>sudo apt-get autoremove<br>sudo apt-get autoclean</p>
 
