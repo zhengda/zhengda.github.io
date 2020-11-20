@@ -83,9 +83,9 @@ ga('send', 'pageview');
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>�}���ɫ�shift�i�Jrecovery�Ҧ�<br>��’Advanced options for Ubuntu and press’<br>���w�Q�n�ϥΪ�kernel image<br>����’drop to root shell prompt’</p>
-<h2 id="�}���d�b_Display_Manager">�}���d�b Display Manager</h2><p>sudo apt-get remove —purge nvidia-*<br>sudo apt-get install xdm<br>sudo dpkg-reconfigure lightdm<br>sudo apt-get purge gdm3<br>sudo apt-get install gdm3 ubuntu-desktop<br>reboot</p>
-<h2 id="diskspace�Ӻ�">diskspace�Ӻ�</h2><p>du -sh /var/cache/apt/archives<br>sudo apt-get clean<br>sudo apt-get autoremove —purge</p>
+        <p>開機時按shift進入recovery模式<br>選’Advanced options for Ubuntu and press’<br>指定想要使用的kernel image<br>選擇’drop to root shell prompt’</p>
+<h2 id="開機卡在_Display_Manager">開機卡在 Display Manager</h2><p>sudo apt-get remove —purge nvidia-*<br>sudo apt-get install xdm<br>sudo dpkg-reconfigure lightdm<br>sudo apt-get purge gdm3<br>sudo apt-get install gdm3 ubuntu-desktop<br>reboot</p>
+<h2 id="diskspace耗盡">diskspace耗盡</h2><p>du -sh /var/cache/apt/archives<br>sudo apt-get clean<br>sudo apt-get autoremove —purge</p>
 <p>du -sk * |sort -nr |head -10<br>du -sh /var/tmp<br>sudo apt-get clean<br>sudo apt-get autoremove<br>sudo apt-get autoclean</p>
 
       
